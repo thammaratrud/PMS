@@ -1,0 +1,271 @@
+<md-dialog class="compose-dialog" aria-label="New Message">
+    <md-toolbar class="md-accent md-hue-2">
+        <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+            <span class="title" translate="PROJECT.NEW_PROJECT">New Project</span>
+            <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog" tranlate translate-aria-label="PROJECT.CLOSE_DIALOG">
+                <md-icon md-font-icon="icon-close"></md-icon>
+            </md-button>
+        </div>
+    </md-toolbar>
+    <ms-form-wizard flex>
+        <md-tabs md-dynamic-height md-selected="msWizard.selectedIndex" md-center-tabs="true">
+            <md-tab>
+                <md-tab-label>
+                    <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg"
+                                      ng-if="wizardStep1.$invalid">1</span>
+                    <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep1.$valid">
+                                    <i class="icon-check s16"></i>
+                                </span>
+                    <span class="ms-form-wizard-step-text" translate="PROJECT.PROJECT_INFORMATION">Project Information</span>
+                    </span>
+                </md-tab-label>
+                <md-tab-body>
+                    <form name="wizardStep1" class="md-inline-form" ms-form-wizard-form novalidate>
+                        <div layout-gt-xs="row" flex>
+                            <md-input-container flex="100" class="input-project">
+                                <label translate="PROJECT.PROJECT_NAME">Project Name</label>
+                                <input type="text" name="project_name" ng-model="vm.formWizard.project_name" required>
+                                <div ng-messages="wizardStep1.project_name.$error" role="alert">
+                                    <div ng-message="required">
+                                        <span translate="PROJECT.PROJECT_NAME_ERR">Project Name field is required.</span>
+                                    </div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                        <div layout-gt-xs="row" flex>
+                            <md-input-container flex="70" class="input-project">
+                                <label translate="PROJECT.PROJECT_CODE">Project Code</label>
+                                <input type="text" name="project_code" ng-model="vm.formWizard.project_code" required>
+                                <div ng-messages="wizardStep1.project_code.$error" role="alert">
+                                    <div ng-message="required">
+                                        <span translate="PROJECT.PROJECT_CODE_ERR">Project Code field is required.</span>
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container flex="30" class="input-project">
+                                <label translate="PROJECT.DURATION">Duration</label>
+                                <input type="number" name="duration" ng-model="vm.formWizard.duration">
+                            </md-input-container>
+                        </div>
+                        <div class="table-title attention-title">
+                            <strong translate="PROJECT.CLIENT">Client</strong>
+                        </div>
+                        <div layout="row" layout-wrap>
+                            <div flex="100">
+                                <md-input-container class="md-block input-project">
+                                    <label translate="PROJECT.CLIENT_COMPANY">Client Company</label>
+                                    <input type="text" name="client" ng-model="vm.formWizard.client">
+                                </md-input-container>
+                            </div>
+                        </div>
+                        <md-input-container class="md-block input-project">
+                            <label translate="PROJECT.COMPANY_ADDRESS">Company Address</label>
+                            <textarea name="company_address" ng-model="vm.formWizard.company_address"></textarea>
+                        </md-input-container>
+                    </form>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="wizardStep1.$invalid">
+                <md-tab-label>
+                    <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg"
+                                      ng-if="wizardStep2.$invalid">2</span>
+                    <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep2.$valid">
+                                    <i class="icon-check s16"></i>
+                                </span>
+                    <span class="ms-form-wizard-step-text" translate="PROJECT.ATTENTION">Attention</span>
+                    </span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div layout="column" layout-gt-xs="row">
+                        <div flex="100" class="text-right">
+                            <md-button class="add-file-button md-fab md-warn" ng-click="addAttention()">
+                                <md-icon md-font-icon="icon-plus"></md-icon>
+                            </md-button>
+                        </div>
+                    </div>
+                    <form name="wizardStep2" class="form-wizardStep" ms-form-wizard-form novalidate>
+                        <div layout="column" layout-gt-xs="row" ng-show="addAttenStatus">
+                            <md-input-container flex="30" class="input-project">
+                                <label translate="PROJECT.STATE">State</label>
+                                <md-select ng-model="vm.formWizard2.state">
+                                    <md-option ng-repeat="state in vm.states" value="{{state}}">
+                                        {{state}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex="70" class="input-project">
+                                <label translate="PROJECT.ATTENTION_NAME">Attention Name</label>
+                                <input type="text" name="attention_name" ng-model="vm.formWizard2.attention_name">
+                                <!--                                 <div ng-messages="wizardStep2.attention_name.$error" role="alert">
+                                    <div ng-message="required">
+                                        <span translate="PROJECT.ATTENTION_ERR">Attention Name field is required.</span>
+                                    </div>
+                                </div> -->
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-wrap ng-show="addAttenStatus">
+                            <md-input-container flex="50" class="input-project">
+                                <label translate="PROJECT.POSITION">Position</label>
+                                <input type="text" name="position" ng-model="vm.formWizard2.position">
+                                <!--                                 <div ng-messages="wizardStep2.position.$error" role="alert">
+                                    <div ng-message="required">
+                                        <span translate="PROJECT.POSITION_ERR">Position field is required.</span>
+                                    </div>
+                                </div> -->
+                            </md-input-container>
+                            <md-input-container flex="50" class="input-project">
+                                <label translate="PROJECT.TEL">Tel</label>
+                                <input type="text" name="tel" ng-model="vm.formWizard2.tel">
+                                <!--                                 <div ng-messages="wizardStep2.tel.$error" role="alert">
+                                    <div ng-message="required">
+                                        <span translate="PROJECT.TEL_ERR">Tel field is required.</span>
+                                    </div>
+                                </div> -->
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-wrap ng-show="addAttenStatus">
+                            <md-input-container flex="80" class="input-project">
+                                <label translate="PROJECT.EMAIL">E-mail</label>
+                                <input type="email" name="email" ng-model="vm.formWizard2.email" translate ng-pattern="/^.+@.+\..+$/">
+                                <div ng-messages="wizardStep2.email.$error" role="alert" multiple>
+                                    <div ng-message="pattern">
+                                        <span translate="PROJECT.EMAIL_VALID">Email must be a valid e-mail address</span>
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container flex="10" class="input-project">
+                                <md-button class="md-icon-button">
+                                    <md-icon md-font-icon="icon-account-remove" class="icon-remove"></md-icon>
+                                </md-button>
+                            </md-input-container>
+                            <md-input-container flex="10" class="input-project">
+                                <md-button class="md-icon-button" ng-click="attention()">
+                                    <md-icon md-font-icon="icon-account-check" class="icon-add"></md-icon>
+                                </md-button>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-wrap></div>
+                        <div layout="row" layout-wrap>
+                            <div class="{{addAttenStatus == true ? 'div-atninfo2 scrollArea' : 'div-atninfo scrollArea'}}">
+                                <table class="simple" ms-responsive-table ng-show="attentionInfo.length > 0">
+                                    <thead>
+                                        <tr>
+                                            <th><strong>State</strong></th>
+                                            <th><strong>Name</strong></th>
+                                            <th><strong>Position</strong></th>
+                                            <th><strong>Tel</strong></th>
+                                            <th><strong>E-mail</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr ng-repeat="atten in attentionInfo">
+                                            <td>{{atten.state}}</td>
+                                            <td>{{atten.attention_name}}</td>
+                                            <td>{{atten.position}}</td>
+                                            <td>{{atten.tel}}</td>
+                                            <td>{{atten.email}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </md-tab-body>
+            </md-tab>
+            <md-tab ng-disabled="wizardStep1.$invalid || wizardStep2.$invalid">
+                <md-tab-label>
+                    <span class="ms-form-wizard-step-label">
+                                <span class="ms-form-wizard-step-number md-accent-bg"
+                                      ng-if="wizardStep3.$invalid">3</span>
+                    <span class="ms-form-wizard-step-number md-accent-bg" ng-if="wizardStep3.$valid">
+                                    <i class="icon-check s16"></i>
+                                </span>
+                    <span class="ms-form-wizard-step-text" translate="PROJECT.SCOPE_OF_WORK">Scope of work</span>
+                    </span>
+                </md-tab-label>
+                <md-tab-body>
+                    <div layout="column" layout-gt-xs="row">
+                        <div flex="100" class="text-right">
+                            <md-button class="add-file-button md-fab md-warn"  ng-click="addScopeOfWork()">
+                                <md-icon md-font-icon="icon-plus"></md-icon>
+                            </md-button>
+                        </div>
+                    </div>
+                    <form name="wizardStep3" class="form-wizardStep" ms-form-wizard-form novalidate>
+                        <div layout="column" layout-gt-xs="row" ng-show="scopeOfWorkStatus">
+                            <md-input-container flex="100" class="input-project">
+                                <label translate="PROJECT.TOPIC">Topic</label>
+                                <input type="text" name="Topic" ng-model="vm.formWizard3.topic">
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-wrap ng-show="scopeOfWorkStatus">
+                            <md-input-container flex="100" class="md-block input-project">
+                                <label translate="PROJECT.DETAIL">Detail</label>
+                                <textarea ng-model="vm.formWizard3.detail"></textarea>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" class="text-right" layout-wrap ng-show="scopeOfWorkStatus">
+                            <md-input-container flex="80" class="input-project">
+                            </md-input-container>
+                            <md-input-container flex="10" class="input-project">
+                                <md-button class="md-icon-button">
+                                    <md-icon md-font-icon="icon-account-remove" class="icon-remove"></md-icon>
+                                </md-button>
+                            </md-input-container>
+                            <md-input-container flex="10" class="input-project">
+                                <md-button class="md-icon-button" ng-click="scopeOfWork()">
+                                    <md-icon md-font-icon="icon-account-check" class="icon-add"></md-icon>
+                                </md-button>
+                            </md-input-container>
+                        </div>
+                        <div layout="row" layout-wrap></div>
+                        <div layout="row" layout-wrap>
+                            <div class="{{scopeOfWorkStatus == true ? 'div-sowinfo2 scrollArea' : 'div-sowinfo scrollArea'}}">
+                                <table class="simple" ms-responsive-table ng-show="scopeOfWorkInfo.length > 0">
+                                    <thead>
+                                        <tr>
+                                            <th><strong>Topic</strong></th>
+                                            <th><strong>Detail</strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr ng-repeat="scope in scopeOfWorkInfo">
+                                            <td>{{$index + 1}}. {{scope.topic}}</td>
+                                            <td>{{scope.detail}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </md-tab-body>
+            </md-tab>
+        </md-tabs>
+        <div class="navigation btn-next" flex layout="row" layout-align="center center">
+            <md-button class="md-raised md-accent" ng-click="msWizard.previousStep()" ng-disabled="msWizard.isFirstStep()">
+                Previous
+            </md-button>
+            <div class="steps">
+                <span ng-repeat="form in msWizard.forms" ng-class="{'selected md-accent-bg':msWizard.selectedIndex === $index}"></span>
+            </div>
+            <md-button class="md-raised md-accent" ng-click="msWizard.nextStep();" ng-hide="msWizard.isLastStep()" ng-disabled="msWizard.currentStepInvalid()">
+                Next
+            </md-button>
+            <md-button class="md-raised md-warn" ng-click="vm.sendProject()" ng-show="msWizard.isLastStep()" ng-disabled="msWizard.formsIncomplete()">
+                Send
+            </md-button>
+        </div>
+    </ms-form-wizard>
+</md-dialog>

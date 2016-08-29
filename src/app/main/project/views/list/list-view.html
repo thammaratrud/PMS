@@ -1,0 +1,52 @@
+<!-- MAIL LIST ITEMS -->
+<div class="mail-list-item" ng-repeat="project in vm.projectData" md-ink-ripple ng-click="vm.selectProject(project)" ng-class="{'selected': vm.selectedProject === project}">
+    <div layout="row" layout-align="start center">
+        <md-checkbox class="no-label" ng-checked="vm.isChecked(project)" ng-click="vm.toggleCheck(project, $event)" aria-label="{{vm.isChecked(project)? 'Uncheck':'check'}}">
+        </md-checkbox>
+        <div class="info" flex layout="column">
+            <div layout="row" layout-align="start center">
+                <!-- กราฟ -->
+                <div flex="55">
+                    <div layout="row" layout-wrap>
+                        <div flex="30" class="text-center">
+                            <md-icon class="icon-status icon-green" md-font-icon="icon-play-circle" ng-show="project.ProjectStatus == 'Play'"></md-icon>
+                            <md-icon class="icon-status icon-yellow" md-font-icon="icon-pause-circle" ng-show="project.ProjectStatus == 'Pause'"></md-icon>
+                            <md-icon class="icon-status icon-clam" md-font-icon="icon-checkbox-marked-circle" ng-show="project.ProjectStatus == 'Pass'"></md-icon>
+                            <md-icon class="icon-status icon-red" md-font-icon="icon-cancel" ng-show="project.ProjectStatus == 'Cancel'"></md-icon>
+                        </div>
+                        <div flex="70">
+                            <div>
+                                <label class="name">{{project.ProjectCode}}</label>
+                            </div>
+                            <div>
+                                <label class="text-truncate">{{project.ProjectName}}</label>
+                            </div>
+                            <div>
+                                <label class="text-truncate">OPTIMUS SOFT CO.,LTD</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div layout="row" layout-wrap>
+                        <div flex="40">
+                            <br> Cost (30)
+                            <md-progress-linear class="md-accent" md-mode="determinate" value="30"></md-progress-linear>
+                            <!-- md-accent ฟ้า md-warn แดง-->
+                        </div> &nbsp; &nbsp; &nbsp; &nbsp;
+                        <div flex="40">
+                            <br> Receipt (65)
+                            <md-progress-linear class="md-warn" md-mode="determinate" value="50"></md-progress-linear>
+                        </div>
+                    </div>
+                    <!-- กราฟ cost receipt -->
+                </div>
+                <div flex="20">
+                    <canvas id="doughnut" class="chart chart-doughnut chart-do-70" chart-data="vm.doughnutChartTime.data" chart-labels="vm.doughnutChartTime.labels" chart-options="options" chart-colors="vm.doughnutChartTime.colors"></canvas>
+                </div>
+                <!-- กราฟ -->
+                <div flex="25">
+                    <canvas id="doughnut" class="chart chart-doughnut chart-do-100" chart-data="vm.doughnutChart.data" chart-labels="vm.doughnutChart.labels" chart-options="options" chart-colors="vm.doughnutChart.colors"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

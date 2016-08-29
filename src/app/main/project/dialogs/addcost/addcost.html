@@ -1,0 +1,103 @@
+<md-dialog class="AddCost-dialog" aria-label="New Message">
+    <form class="md-inline-form">
+        <md-toolbar class="md-accent md-hue-2">
+            <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                <span class="title" translate="PROJECT.ADDCOST_ADDCOST">Add Cost</span>
+                <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog" tranlate translate-aria-label="PROJECT.CLOSE_DIALOG">
+                    <md-icon md-font-icon="icon-close"></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content ms-scroll>
+            <div layout="row" layout-wrap>
+                <div flex="60">
+                    <md-input-container class="md-block input-project">
+                        <md-select ng-model="user.state">
+                            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                {{state.abbrev}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div flex="10">
+                    <label translate="PROJECT.ADDCOST_DATE">Date</label>
+                </div>
+                <div flex="30">
+                    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                </div>
+            </div>
+            <div class="table-title attention-title">
+                <strong translate="PROJECT.ADDCOST_DETAIL">Detail</strong>
+            </div>
+            <div layout="row" layout-wrap>
+                <div flex="60">
+                    <md-input-container class="md-block input-project">
+                        <md-select ng-model="user.state">
+                            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
+                                {{state.abbrev}}
+                            </md-option>
+                        </md-select>
+                    </md-input-container>
+                </div>
+                <div flex="10">
+                    <label translate="PROJECT.ADDCOST_DATE">Date</label>
+                </div>
+                <div flex="30">
+                    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                </div>
+            </div>
+            <br>
+            <div layout="row" layout-wrap>
+                <div flex="60">
+                    <md-input-container class="md-block input-project">
+                        <label translate="PROJECT.ADDCOST_AMOUNT">Amount</label>
+                        <input type="text">
+                    </md-input-container>
+                </div>
+                <div flex="40">
+                    <form name="myForm">
+                        <input type="checkbox" ng-model="addcost1" ng-true-value="'YES'" ng-false-value="'NO'">
+                        <label translate="PROJECT.ADDCOST_VAT">หักภาษี ณ ที่จ่าย</label>
+                        <tt>{{addcost1}}</tt>
+                        <br/>
+                    </form>
+                </div>
+            </div>
+            <div layout="row" layout-wrap>
+                <div flex="70">
+                    <md-input-container class="md-block input-project">
+                        <label translate="PROJECT.ADDCOST_NAME">Name</label>
+                        <input type="text">
+                    </md-input-container>
+                </div>
+                <div flex="30">
+                    <md-input-container class="md-block input-project">
+                        <label translate="PROJECT.ADDCOST_NO">No.</label>
+                        <input type="text">
+                    </md-input-container>
+                </div>
+            </div>
+            <div layout="row" layout-wrap>
+                <div flex="100">
+                    <md-input-container class="md-block input-project">
+                        <label translate="PROJECT.ADDCOST_ADDRESS">Address</label>
+                        <input type="text">
+                    </md-input-container>
+                </div>
+            </div>
+        </md-dialog-content>
+        <md-dialog-actions layout="row" layout-align="space-between center">
+            <div layout="row" layout-align="start center">
+                <md-button ng-click="vm.closeDialog()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONENE">
+                    DONE
+                </md-button>
+            </div>
+            <div layout="row">
+                <md-button class="md-icon-button" aria-label="Delete" translate-attr-aria-label="PROJECT.DELETE">
+                    <md-icon md-font-icon="icon-delete"></md-icon>
+                    <md-tooltip><span translate="PROJECT.DELETE"></span></md-tooltip>
+                </md-button>
+            </div>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
