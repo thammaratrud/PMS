@@ -39,6 +39,9 @@
 
             }
         }
+
+
+        // step2
         $scope.attention = function() {
             $scope.addAttenStatus = false;
 
