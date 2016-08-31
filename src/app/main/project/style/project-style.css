@@ -47,6 +47,7 @@
     margin-top: -70px !important;
 }
 
+
 /**/
 
 .icon-attention {
@@ -135,16 +136,53 @@
     font-style: bold;
 }
 
-
 .text-topic {
     font-size: 26px !important;
     font-style: bold;
 }
 
-.text-date{
-	margin-left: 10px !important;
-	padding: 0px 0px 0px 0px !important;
+.text-date {
+    margin-left: 10px !important;
+    padding: 0px 0px 0px 0px !important;
 }
+
 .form-chkbox {
     margin-top: 10px !important;
+}
+
+.md-progress-linear.md-default-theme.md-yellow .md-bar,
+md-progress-linear.md-yellow .md-bar {
+    background-color: rgb(255, 235, 59);
+}
+
+md-progress-linear.md-yellow .md-container,
+md-progress-linear .md-container {
+    background-color: rgba(255, 235, 59, 0.39);
+}
+
+.md-progress-linear.md-default-theme.md-orange .md-bar,
+md-progress-linear.md-orange .md-bar {
+    background-color: rgb(255, 152, 0);
+}
+
+md-progress-linear.md-orange .md-container,
+md-progress-linear .md-container {
+    background-color: rgba(255, 152, 0, 0.4);
+}
+
+.md-progress-linear.md-default-theme.md-green .md-bar,
+md-progress-linear.md-green .md-bar {
+    background-color: rgb(75, 220, 56);
+}
+
+md-progress-linear.md-green .md-container,
+md-progress-linear .md-container {
+    background-color: rgba(83, 230, 63, 0.4);
+}
+.icon-chart {
+    margin-top: -52px;
+    margin-left: 23px;
+}
+a:hover, a:active {
+    text-decoration: blink !important;
 }

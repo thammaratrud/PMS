@@ -6,7 +6,7 @@
         .controller('ProjectController', ProjectController);
 
     /** @ngInject */
-    function ProjectController($scope, $document, $timeout, $mdDialog, $mdMedia, $mdSidenav,projectService) {
+    function ProjectController($scope, $document, $timeout, $mdDialog, $mdMedia, $mdSidenav, projectService) {
         var vm = this;
 
         // Data
@@ -460,17 +460,32 @@
             }]
         }]
 
+        $scope.colorx = {
+            coloursGood: ['#53e63f', '#b3fda9'],
+            coloursNormal: ['#FFC107', '#f7ffa8'],
+            coloursBad: ['#FF5722', '#fbbfbb']
+
+        }
+
+        // $scope.coloursGood = ['#53e63f', '#b3fda9'];
+        // $scope.coloursNormal = ['#FFC107', '#f7ffa8'];
+        // $scope.coloursBad = ['#FF5722', '#fbbfbb'];
+
+        // $scope.durationValue = 80;
+
         vm.doughnutChartTime = {
             labels: ['UTime', 'Time'],
-            data: [40, 100],
-            colors: ['#DCDCDC']
+            data: [40, 60],
+            color: $scope.colorx.coloursGood
+        };
+        vm.doughnutChartProcess = {
+            labels: ['', ''],
+            data: [70, 30]
         };
         vm.doughnutChart = {
-            labels: ['UTime', 'Time'],
-            data: [40, 100],
-            colors: ['#DCDCDC']
+            labels: ['', ''],
+            data: [40, 60]
         };
-
         // Chart.js Options
         $scope.options = {
 
@@ -560,7 +575,7 @@
         }
 
 
-        
+
 
         // Watch screen size to activate responsive read pane
         $scope.$watch(function() {

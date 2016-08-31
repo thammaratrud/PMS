@@ -26,7 +26,7 @@
 
         $scope.attentionInfo = [];
         $scope.scopeOfWorkInfo = [];
-
+        
         function closeDialog() {
             $mdDialog.hide();
         }

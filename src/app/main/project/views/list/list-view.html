@@ -28,23 +28,26 @@
                     </div>
                     <div layout="row" layout-wrap>
                         <div flex="40">
-                            <br> Cost (30)
-                            <md-progress-linear class="md-accent" md-mode="determinate" value="30"></md-progress-linear>
+                            <br> Cost (30%)
+                            <md-progress-linear class="md-green" md-mode="determinate" value="30"></md-progress-linear>
                             <!-- md-accent ฟ้า md-warn แดง-->
                         </div> &nbsp; &nbsp; &nbsp; &nbsp;
                         <div flex="40">
-                            <br> Receipt (65)
-                            <md-progress-linear class="md-warn" md-mode="determinate" value="50"></md-progress-linear>
+                            <br> Receipt (65%)
+                            <md-progress-linear class="md-yellow" md-mode="determinate" value="50"></md-progress-linear>
                         </div>
                     </div>
                     <!-- กราฟ cost receipt -->
                 </div>
                 <div flex="20">
-                    <canvas id="doughnut" class="chart chart-doughnut chart-do-70" chart-data="vm.doughnutChartTime.data" chart-labels="vm.doughnutChartTime.labels" chart-options="options" chart-colors="vm.selectProject.colors"></canvas>
+                    <canvas id="doughnut" class="chart chart-doughnut chart-do-70" chart-data="vm.doughnutChartTime.data" chart-labels="vm.doughnutChartTime.labels" chart-options="options" chart-colours="vm.doughnutChartTime.color"></canvas>
+                    <div class="icon-chart">
+                        <md-icon md-font-icon="icon-play-circle"></md-icon>
+                    </div>
                 </div>
                 <!-- กราฟ -->
                 <div flex="25">
-                    <canvas id="doughnut" class="chart chart-doughnut chart-do-100" chart-data="vm.doughnutChart.data" chart-labels="vm.doughnutChart.labels" chart-options="options" chart-colors="vm.doughnutChart.colors"></canvas>
+                    <canvas id="doughnut" class="chart chart-doughnut chart-do-100" chart-data="vm.doughnutChartProcess.data" chart-labels="vm.doughnutChartProcess.labels" chart-options="options" chart-colors="vm.doughnutChartProcess.colors"></canvas>
                 </div>
             </div>
         </div>
