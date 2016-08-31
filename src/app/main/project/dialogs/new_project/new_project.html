@@ -78,13 +78,19 @@
                     </span>
                 </md-tab-label>
                 <md-tab-body>
+
+                <!-- ปุ่มบวกสีแดง -->
                     <div layout="column" layout-gt-xs="row">
+
                         <div flex="100" class="text-right">
                             <md-button class="add-file-button md-fab md-warn" ng-click="addAttention()">
                                 <md-icon md-font-icon="icon-plus"></md-icon>
                             </md-button>
                         </div>
                     </div>
+
+                    <!-- ปิดปุ่ม -->
+                    
                     <form name="wizardStep2" class="form-wizardStep" ms-form-wizard-form novalidate>
                         <div layout="column" layout-gt-xs="row" ng-show="addAttenStatus">
                             <md-input-container flex="30" class="input-project">
@@ -98,52 +104,55 @@
                             <md-input-container flex="70" class="input-project">
                                 <label translate="PROJECT.ATTENTION_NAME">Attention Name</label>
                                 <input type="text" name="attention_name" ng-model="vm.formWizard2.attention_name">
-                                <!--                                 <div ng-messages="wizardStep2.attention_name.$error" role="alert">
-                                    <div ng-message="required">
-                                        <span translate="PROJECT.ATTENTION_ERR">Attention Name field is required.</span>
-                                    </div>
-                                </div> -->
+                                
                             </md-input-container>
                         </div>
                         <div layout="row" layout-wrap ng-show="addAttenStatus">
                             <md-input-container flex="50" class="input-project">
                                 <label translate="PROJECT.POSITION">Position</label>
                                 <input type="text" name="position" ng-model="vm.formWizard2.position">
-                                <!--                                 <div ng-messages="wizardStep2.position.$error" role="alert">
-                                    <div ng-message="required">
-                                        <span translate="PROJECT.POSITION_ERR">Position field is required.</span>
-                                    </div>
-                                </div> -->
+                                
                             </md-input-container>
                             <md-input-container flex="50" class="input-project">
                                 <label translate="PROJECT.TEL">Tel</label>
                                 <input type="text" name="tel" ng-model="vm.formWizard2.tel">
-                                <!--                                 <div ng-messages="wizardStep2.tel.$error" role="alert">
-                                    <div ng-message="required">
-                                        <span translate="PROJECT.TEL_ERR">Tel field is required.</span>
-                                    </div>
-                                </div> -->
+                              
                             </md-input-container>
                         </div>
                         <div layout="row" layout-wrap ng-show="addAttenStatus">
                             <md-input-container flex="80" class="input-project">
                                 <label translate="PROJECT.EMAIL">E-mail</label>
                                 <input type="email" name="email" ng-model="vm.formWizard2.email" translate ng-pattern="/^.+@.+\..+$/">
+
+
+                                <!-- เตือนemail -->
                                 <div ng-messages="wizardStep2.email.$error" role="alert" multiple>
                                     <div ng-message="pattern">
                                         <span translate="PROJECT.EMAIL_VALID">Email must be a valid e-mail address</span>
                                     </div>
                                 </div>
+                                <!-- เตือนemail -->
+
+
                             </md-input-container>
                             <md-input-container flex="10" class="input-project">
+
+                            <!-- iconลบ -->
                                 <md-button class="md-icon-button">
                                     <md-icon md-font-icon="icon-account-remove" class="icon-remove"></md-icon>
                                 </md-button>
+
+                            <!-- iconลบ -->
+
                             </md-input-container>
                             <md-input-container flex="10" class="input-project">
+
+                            <!-- iconเพิ่ม -->
                                 <md-button class="md-icon-button" ng-click="attention()">
                                     <md-icon md-font-icon="icon-account-check" class="icon-add"></md-icon>
                                 </md-button>
+                                <!-- iconเพิ่ม -->
+                                
                             </md-input-container>
                         </div>
                         <div layout="row" layout-wrap></div>
@@ -177,6 +186,9 @@
                             </div>
                         </div>
                     </form>
+
+
+
                 </md-tab-body>
             </md-tab>
             <md-tab ng-disabled="wizardStep1.$invalid || wizardStep2.$invalid">

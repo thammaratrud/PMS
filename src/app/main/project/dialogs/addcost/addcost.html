@@ -10,7 +10,7 @@
         </md-toolbar>
         <md-dialog-content ms-scroll>
             <div layout="row" layout-wrap>
-                <div flex="60">
+                <div flex="55">
                     <md-input-container class="md-block input-project">
                         <md-select ng-model="user.state">
                             <md-option ng-repeat="state in states" value="{{state.abbrev}}">
@@ -19,23 +19,20 @@
                         </md-select>
                     </md-input-container>
                 </div>
-                &nbsp; &nbsp;
-                <div flex="5">
-                <div class="form-chkbox">
-                    <label translate="PROJECT.ADDCOST_DATE">Date</label>
+                &nbsp; &nbsp;&nbsp;
+                <div flex="10">
+                    <div class="form-chkbox">
+                        <label translate="PROJECT.ADDCOST_DATE">Date</label>
+                    </div>
                 </div>
-                </div>
-                <div flex="30">
+                <div flex="25">
                     <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
-                
             </div>
-           <br>
-                <strong translate="PROJECT.ADDCOST_DETAIL">Detail</strong>
-            
+            <br>
+            <strong translate="PROJECT.ADDCOST_DETAIL">Detail</strong>
             <div layout="row" layout-wrap>
-                <div flex="60">
-                
+                <div flex="55">
                     <md-input-container class="md-block input-project ">
                         <md-select ng-model="user.state">
                             <md-option ng-repeat="state in states" value="{{state.abbrev}}">
@@ -44,38 +41,56 @@
                         </md-select>
                     </md-input-container>
                 </div>
-                 
-                &nbsp; &nbsp;
-                <div flex="5">
-                <div class="form-chkbox">
-                    <label translate="PROJECT.ADDCOST_DATE">Date</label>
+                &nbsp; &nbsp;&nbsp;
+                <div flex="10">
+                    <div class="form-chkbox">
+                        <label translate="PROJECT.ADDCOST_DATE">Date</label>
+                    </div>
                 </div>
-                </div>
-                <div flex="30">
-                
+                <div flex="25">
                     <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
             </div>
-            
             <br>
             <div layout="row" layout-wrap>
-                <div flex="60">
+                <div flex="50">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ADDCOST_AMOUNT">Amount</label>
                         <input type="text">
                     </md-input-container>
                 </div>
-                &nbsp; &nbsp;
-                <div flex="35">
-                <div class="form-chkbox">
-                    <form name="myForm">
-                        <input type="checkbox" ng-model="addcost1" ng-true-value="'YES'" ng-false-value="'NO'">
-                        <label translate="PROJECT.ADDCOST_VAT">หักภาษี ณ ที่จ่าย</label>
-                        <tt>{{addcost1}}</tt>
-                        <br/>
-                    </form>
+                <div flex="25">
+                    <div class="inset text-center switchdemoBasicUsage">หักภาษี ณ ที่จ่าย
+                    </div>
+                </div>
+                <div flex="15">
+                    <md-switch style="margin-top: 7px;">
+                    </md-switch>
+                </div>
+
+
+                <div flex="10">
+
+                
+<div class="text-left">
+ <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
+                    <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                    <md-tooltip><span translate=""></span></md-tooltip>
+                </md-button>
                 </div>
                  </div>
+
+
+
+
+
+                <!-- <div flex="10">
+    <md-button class="md-icon-button md-accent icon-attention" aria-label="PROJECT.ATTENTION" translate-attr-aria-label="PROJECT.ATTENTION">
+        <md-icon md-font-icon="icon-plus-circle-outline"></md-icon>
+        <md-tooltip><span translate="PROJECT.ATTENTION"></span></md-tooltip>
+    </md-button>
+</div>
+ -->
             </div>
             <div layout="row" layout-wrap>
                 <div flex="70">

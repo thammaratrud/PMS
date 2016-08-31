@@ -10,22 +10,26 @@
         </md-toolbar>
         <md-dialog-content ms-scroll>
             <div layout="row" layout-wrap>
-                <div flex="65">
+                <div flex="50">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ESTIMATE_PRICE">Price</label>
                         <input type="text">
                     </md-input-container>
                 </div>
-                &nbsp; &nbsp;
-                <div flex="30">
-                <div class="form-chkbox">
-
-                    <form name="myForm" ng-controller="ExampleController">
-                        <input type="checkbox">
-                        <label translate="PROJECT.INCLUDE_VAT">Include Vat</label>
-                    </form>
+                
+      <div flex="25">
+                    <div class="inset text-center switchdemoBasicUsage">Include Vat
+                    </div>
                 </div>
-            </div>
+                <div flex="25">
+                    <md-switch style="margin-top: 7px;">
+                    </md-switch>
+                </div>
+
+
+
+
+
             </div>
             <div layout="row" layout-wrap>
                 <div flex="100">
@@ -35,43 +39,56 @@
                     </md-input-container>
                 </div>
             </div>
-
             <div class="table-title attention-title">
                 <strong translate="PROJECT.PERIOD">Period</strong>
             </div>
-            
-            <div layout="row" layout-wrap>
-                <div flex="20">
-                    <md-input-container class="md-block input-project">
-                        <label translate="PROJECT.ESTIMATE_ORDER">Order</label>
-                        <input type="text">
-                    </md-input-container>
-                </div>
-                <div flex="30">
-                    <md-input-container class="md-block input-project">
-                        <label translate="PROJECT.ESTIMATE_DESCRIPTION">Description</label>
-                        <textarea></textarea>
-                    </md-input-container>
-                </div>
-                <div flex="20">
-                    <md-input-container class="md-block input-project">
-                        <label translate="PROJECT.ESTIMATE_PERCENT%">Percent%</label>
-                        <textarea></textarea>
-                    </md-input-container>
-                </div>
-                <div flex="20">
-                    <md-input-container class="md-block input-project">
-                        <label translate="PROJECT.ESTIMATE_AMOUNT">Amount</label>
-                        <textarea></textarea>
-                    </md-input-container>
-                </div>
-                <div flex="10" class="text-right">
-                    <md-button class="md-icon-button md-accent icon-attention" aria-label="PROJECT.ATTENTION" translate-attr-aria-label="PROJECT.ATTENTION">
-                        <md-icon md-font-icon="icon-plus-circle-outline"></md-icon>
-                        <md-tooltip><span translate="PROJECT.ATTENTION"></span></md-tooltip>
+
+
+
+            <!-- test -->
+            <div layout="column" layout-gt-xs="row">
+                <div flex="100" class="text-right">
+                    <md-button class="add-file-button md-fab md-warn" ng-click="addEstimate()">
+                        <md-icon md-font-icon="icon-plus"></md-icon>
                     </md-button>
                 </div>
             </div>
+            
+            <br>
+<!--  -->
+
+                    <div layout="row" layout-wrap ng-show="estimateStatus">
+                        <div flex="20">
+                            <md-input-container class="md-block input-project">
+                                <label translate="PROJECT.ESTIMATE_ORDER">Order</label>
+                                <input type="text">
+                            </md-input-container>
+                        </div>
+                        <div flex="30">
+                            <md-input-container class="md-block input-project">
+                                <label translate="PROJECT.ESTIMATE_DESCRIPTION">Description</label>
+                                <textarea></textarea>
+                            </md-input-container>
+                        </div>
+                        <div flex="20">
+                            <md-input-container class="md-block input-project">
+                                <label translate="PROJECT.ESTIMATE_PERCENT%">Percent%</label>
+                                <textarea></textarea>
+                            </md-input-container>
+                        </div>
+                        <div flex="20">
+                            <md-input-container class="md-block input-project">
+                                <label translate="PROJECT.ESTIMATE_AMOUNT">Amount</label>
+                                <textarea></textarea>
+                            </md-input-container>
+                        </div>
+                        <div flex="10" class="text-right">
+                            <md-button class="md-icon-button md-accent icon-attention" aria-label="PROJECT.ATTENTION" translate-attr-aria-label="PROJECT.ATTENTION">
+                                <md-icon md-font-icon="icon-plus-circle-outline"></md-icon>
+                                <md-tooltip><span translate="PROJECT.ATTENTION"></span></md-tooltip>
+                            </md-button>
+                        </div>
+                    </div>
         </md-dialog-content>
         <md-dialog-actions layout="row" layout-align="space-between center">
             <div layout="row" layout-align="start center">
@@ -86,5 +103,9 @@
                 </md-button>
             </div>
         </md-dialog-actions>
+
+        
+
+
     </form>
 </md-dialog>
