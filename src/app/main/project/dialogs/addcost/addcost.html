@@ -19,19 +19,24 @@
                         </md-select>
                     </md-input-container>
                 </div>
-                <div flex="10">
+                &nbsp; &nbsp;
+                <div flex="5">
+                <div class="form-chkbox">
                     <label translate="PROJECT.ADDCOST_DATE">Date</label>
+                </div>
                 </div>
                 <div flex="30">
                     <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
+                
             </div>
-            <div class="table-title attention-title">
+           <br>
                 <strong translate="PROJECT.ADDCOST_DETAIL">Detail</strong>
-            </div>
+            
             <div layout="row" layout-wrap>
                 <div flex="60">
-                    <md-input-container class="md-block input-project">
+                
+                    <md-input-container class="md-block input-project ">
                         <md-select ng-model="user.state">
                             <md-option ng-repeat="state in states" value="{{state.abbrev}}">
                                 {{state.abbrev}}
@@ -39,13 +44,19 @@
                         </md-select>
                     </md-input-container>
                 </div>
-                <div flex="10">
+                 
+                &nbsp; &nbsp;
+                <div flex="5">
+                <div class="form-chkbox">
                     <label translate="PROJECT.ADDCOST_DATE">Date</label>
                 </div>
+                </div>
                 <div flex="30">
+                
                     <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
             </div>
+            
             <br>
             <div layout="row" layout-wrap>
                 <div flex="60">
@@ -54,7 +65,9 @@
                         <input type="text">
                     </md-input-container>
                 </div>
-                <div flex="40">
+                &nbsp; &nbsp;
+                <div flex="35">
+                <div class="form-chkbox">
                     <form name="myForm">
                         <input type="checkbox" ng-model="addcost1" ng-true-value="'YES'" ng-false-value="'NO'">
                         <label translate="PROJECT.ADDCOST_VAT">หักภาษี ณ ที่จ่าย</label>
@@ -62,6 +75,7 @@
                         <br/>
                     </form>
                 </div>
+                 </div>
             </div>
             <div layout="row" layout-wrap>
                 <div flex="70">

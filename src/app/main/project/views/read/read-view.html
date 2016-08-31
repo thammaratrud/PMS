@@ -2,9 +2,10 @@
     <div flex="70">
         <div layout="row" layout-wrap>
             <p>
-                <label><span class="md-headline">{{vm.selectedProject.ProjectCode}}</span></label>
+                <label>
+                    <h1><strong>{{vm.selectedProject.ProjectCode}}</strong></h1></label>
                 <br>
-                <label>OPTIMUS SOFT CO.LTD.</label>
+                <label>{{vm.selectedProject.CustomerInfo.CompanyName}}</label>
                 <div layout="row" layout-wrap>
                     <!-- ปุ่ม -->
                     <md-button class="md-icon-button" aria-label="Archive" translate translate-attr-aria-label="PROJECT.PLAY" hide show-gt-sm>
@@ -55,9 +56,9 @@
         </div>
     </div>
     <md-menu>
-        <md-button aria-label="More" class="md-icon-button" ng-click="$mdOpenMenu($event)" translate translate-aria-label="MAIL.MORE">
+        <md-button aria-label="More" class="md-icon-button" ng-click="$mdOpenMenu($event)" translate translate-aria-label="PROJECT.MORE">
             <md-icon md-font-icon="icon-dots-vertical"></md-icon>
-            <md-tooltip><span translate="MAIL.MORE"></span></md-tooltip>
+            <md-tooltip><span translate="PROJECT.MORE"></span></md-tooltip>
         </md-button>
         <md-menu-content width="3">
             <md-menu-item>
@@ -106,7 +107,7 @@
 </div>
 <div ng-show="financeStatus">
     <br>
-    <h1 style="text-align:center;">Price: 300,000</h1>
+    <h2 style="text-align:center;"><strong>Price: {{vm.selectedProject.BudgetInfo.Price}}</strong></h2>
     <div layout="row" layout-wrap>
         <div flex="30">
             <div>
@@ -115,49 +116,30 @@
         </div>
         <div flex="70">
             <ul>
-                <li>Budget:100,000</li>
+                <li>Budget:{{vm.selectedProject.BudgetInfo.Budget}}</li>
                 <li>Cost:60,000</li>
             </ul>
             <div class="simple-table-container md-whiteframe-4dp">
-            
-            <table class="simple" ms-responsive-table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td> <p  class="text-date">1 / 6 / 16</p></td>
-                        <td>ค่าน้ำมัน</td>
-                        <td>500 บาท</td>
-                    </tr>
-                    <tr>
-                        <td><p  class="text-date">29 / 6 / 16</p></td>
-                        <td>ค่าทางด่วน</td>
-                        <td>300 บาท</td>
-                    </tr>
-                    <tr>
-                        <td><p  class="text-date">29 / 6 / 16</p></td>
-                        <td>ค่าน้ำมัน</td>
-                        <td>1000 บาท</td>
-                    </tr>
-                    <tr>
-                        <td><p  class="text-date">29 / 6 / 16</p></td>
-                        <td>ค่าทางด่วน</td>
-                        <td>500 บาท</td>
-                    </tr>
-                    <tr>
-                        <td><p  class="text-date">5 / 7 / 16</p></td>
-                        <td>ค่าจอดรถ</td>
-                        <td>2700 บาท</td>
-                    </tr>
-                </tfoot>
-                <tbody>
-                </tbody>
-            </table>
+                <table class="simple" ms-responsive-table>
+                    <thead>
+                        <tr style="background-color: #c5c5c5;">
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tfoot ng-repeat="cost in vm.selectedProject.CostInfo">
+                        <tr>
+                            <td>
+                                <p class="text-date">{{cost.CostDate | date:'dd/MM/yy'}}</p>
+                            </td>
+                            <td>{{cost.CostDesc}}</td>
+                            <td>{{cost.CostAmount}} บาท</td>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
             <br>
             <div class="text-right"><a href="">More >></a></div>
@@ -172,31 +154,30 @@
         </div>
         <div flex="70">
             <ul>
-                <li>Budget:100,000</li>
-                <li>Cost:90,000</li>
+                <li>Price:{{vm.selectedProject.BudgetInfo.Price}}</li>
+                <li>Receipt:90,000</li>
             </ul>
             <div class="simple-table-container md-whiteframe-4dp">
-            
-            <table class="simple" ms-responsive-table>
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Percent</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td>1 / 6 / 16</td>
-                        <td>ค่าน้ำมัน</td>
-                        <td>500 บาท</td>
-                        <td>30 %</td>
-                    </tr>
-                </tfoot>
-                <tbody>
-                </tbody>
-            </table>
+                <table class="simple" ms-responsive-table>
+                    <thead>
+                        <tr style="background-color: #c5c5c5;">
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                            <th>Percent</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td>1 / 6 / 16</td>
+                            <td>ค่าน้ำมัน</td>
+                            <td>500 บาท</td>
+                            <td>30 %</td>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
             <br>
             <div class="text-right"><a href="">More >></a></div>
@@ -205,109 +186,57 @@
     <hr color=DDDDDD size=1>
     <!-- <div layout="row" layout-wrap>
              <div flex="70"> -->
-    <span class="md-title">Price:300,000</span>
+    <h2><strong><span >Price:{{vm.selectedProject.BudgetInfo.Price}}</span></strong></h2>
     <br>
-    <br>
-    <div layout="row" layout-wrap>
-        <label> Period 1 : 90,000(30%) = SRS </label>
-    </div>
-    <div layout="row" layout-wrap>
-        <div flex="32">
-            <div class="button">
-                <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Service Invoice" ng-click="" translate="Service Invoice">Service Invoice
+  
+    <div ng-repeat="period in vm.selectedProject.PeriodInfo">
+        <div layout="row" layout-wrap>
+            <label> Period {{period.PeriodID}} : {{period.PeriodAmout}}(30%) = {{period.PeriodDesc}} </label>
+        </div>
+        <div layout="row" layout-wrap>
+            <div flex="32">
+                <div class="button">
+                    <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Service Invoice" ng-click="" translate="Service Invoice">Service Invoice
+                </div>
+            </div>
+            <div flex="32">
+                <div class="button">
+                    <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Appointment" ng-click="vm.UploadAppointment($event)" translate="Appointment">Appointment
+                </div>
+            </div>
+            <div flex="32">
+                <div class="button">
+                    <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Tax Invoice" ng-click="" translate="Tax Invoice">Tax Invoice
+                </div>
             </div>
         </div>
-        <div flex="32">
-            <div class="button">
-                <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Appointment" ng-click="vm.UploadAppointment($event)" translate="Appointment">Appointment
-            </div>
-        </div>
-        <div flex="32">
-            <div class="button">
-                <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Tax Invoice" ng-click="" translate="Tax Invoice">Tax Invoice
-            </div>
-        </div>
-    </div>
-    <br>
-    <div layout="row" layout-wrap>
-        <label> Period 2 : 90,000(30%) = SIT</label>
-        <br>
-    </div>
-    <div layout="row" layout-wrap>
-        <div flex="32">
-            <div class="button">
-                <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Service Invoice" ng-click="" translate="Service Invoice">Service Invoice
-            </div>
-        </div>
-        <div flex="32">
-            <div class="button">
-                <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Appointment" ng-click="vm.UploadAppointment($event)" translate="Appointment">Appointment
-            </div>
-        </div>
-        <div flex="32">
-            <div class="button">
-                <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Invoice" ng-click="" translate="Tax Invoice">Tax Invoice
-            </div>
-        </div>
-    </div>
-    <br>
-    <div layout="row" layout-wrap>
-        <label>Period 3 : 120,000(40%) = UAT</label>
-        <br>
     </div>
 </div>
 <div ng-show="documentStatus">
-    <h3><label >Finance Document</label></h3>
+    <h2><strong><label >Finance Document</label></strong></h2>
     <div class="simple-table-container md-whiteframe-4dp">
-        <table class="simple" ms-responsive-table >
-            <thead>
-                <tr>
-                    <th >Document</th>
-                    <th >Date</th>
-                    <th >File</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <td >Quotation</td>
-                    <td >01/01/16</td>
-                    <td>
-                        <form name="myForm">
-                            <input type="checkbox">
-                            <label translate=""></label>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td >Purchase Order</td>
-                    <td >12/06/16</td>
-                    <td>
-                        <form name="myForm">
-                            <input type="checkbox">
-                            <label translate=""></label>
-                        </form>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
-        </div>
-
-        <br>
-        <br>
-        <h3><label>Project Document</label></h3>
-        <div class="simple-table-container md-whiteframe-4dp">
         <table class="simple" ms-responsive-table>
             <thead>
-                <tr>
+                <tr style="background-color: #c5c5c5;">
                     <th>Document</th>
-                    <th >Date</th>
-                    <th >File</th>
+                    <th>Date</th>
+                    <th>File</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <td >SRS</td>
-                    <td >22/04/16</td>
+                    <td>Quotation</td>
+                    <td>01/01/16</td>
+                    <td>
+                        <form name="myForm">
+                            <input type="checkbox">
+                            <label translate=""></label>
+                        </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Purchase Order</td>
+                    <td>12/06/16</td>
                     <td>
                         <form name="myForm">
                             <input type="checkbox">
@@ -317,51 +246,76 @@
                 </tr>
             </tfoot>
         </table>
-    
-</div>
+    </div>
+    <br>
+    <br>
+    <h2><strong><label>Project Document</label></strong></h2>
+    <div class="simple-table-container md-whiteframe-4dp">
+        <table class="simple" ms-responsive-table>
+            <thead>
+                <tr style="background-color: #c5c5c5;">
+                    <th>Document</th>
+                    <th>Date</th>
+                    <th>File</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td>SRS</td>
+                    <td>22/04/16</td>
+                    <td>
+                        <form name="myForm">
+                            <input type="checkbox">
+                            <label translate=""></label>
+                        </form>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
 </div>
 <div ng-show="scopeOfWorkStatus">
-<br>
-<br>
-<h3><label>Project Document</label></h3>
-<ul>
-
-<h3>ค่าจ้างพัฒนาระบบ ( KK -CQC Project)</h3>             
-โดยมีรายละเอียดการดำเนินการงาน ดังนี้               
-<h3>Requirement Document   </h3>             
-   <li>ECR Documeny</li>                
-  <li>Specifidation Document    </li>           
-<h3>Development</h3>             
-  <h3>COC Web Application</h3>               
-   <h3><U><li>Ranking Search</li></U></h3>              
-     <li>สามารถแสดงข้อมูล ranking   </li>           
-     <li>สามารถจัดลำดับขึ้นลงได้ (ยกเว้นลำดับแรกและลำดับสุดท้าย) </li>              
-    <h3><U><li>Ranking Management</li></U></h3>             
-    <li>สามารถแก้ไขชื่อลำดับและวันที่ข้ามอย่างเดียวในลำดับแรก   </li>           
-และลำดับสุดท้าย             
-    <li>สามารถเพิ่ม,แก้ไขข้อมูล Ranking แทรกระหว่างลำดับแรก </li>           
-และลำดับสุดท้ายได้ โดยประกอบด้วยข้อมูลรายละเอียดดังนี้              
-ลำดับที่(auto ลำดับก่อนสดท้าย),ชื่อลำดับ,List รายการ                
-Campaign(มากกว่า 1), List รายการ Deler (มากกว่า 1 หรือ              
-สามารถเลือกเป็น All Dealer ได้ )                
-   <h3><U><li>เพิ่ม Field แสดง Product,Dealer ที่หน้า Monitoring</li></U></h3>              
-     <li>เพิ่ม Field ใน db แล้วแสดงบนหน้าจอ </li>           
-  <h3>SLM Web Application </h3>              
-   <h3> <U><li>Upload Lead Search  </li> </U>  </h3>        
-    <li>สามารถแสดงผลการนำเข้าข้อมูล Lead และสถานะการ Upload</li>                
- และผลการUpload (Summary รายการ Completed/Uncompleted )             
-   <h3><U> <li>Upload Lead Management</li></U>   </h3>          
-    <li>สามารถ Upload และนำเข้าข้อมูลผ่าน Excel ได้     </li>       
-    <li>สามารถ Preview ข้อมูลรายละเอียดข้อมูลก่อนบันทึก</li>                
-    <li>สามารถตรวจสอบรายละเอียดของข้อมูลตามเงือนไขที่กำหนดได้   </li>           
-    <li>สามารถแสดงสถานะการตรวจสอบรายละเอียดข้อมูลพร้อมคำแนะนำ   </li>           
-    <li>สามารถ Exprot ข้อมูลที่นำเข้าออกเป็น Excel ไฟล์เพื่อนำแก้ไขได้  </li>           
-    <li> สามารถบันทึกข้อมูลการนำเข้าได้ (สถานะ Submit ) </li>               
-  <h3><U>  <li> Upload Lead Monitoring </li>     </U></h3>      
-    <li> หน้าติดตามงานที่ถูก Uploadแล้ว(Edit ได้บางสถานะไฟล์)       </li>       
- <h3> Payment </h3>              
-    <li> งวดที่ 1  100% = Sit</li>
-</ul>
-                
-
+    <!-- <br>
+    <br>
+    <h3><label>Project Document</label></h3>
+    <ul>
+        <h3>ค่าจ้างพัฒนาระบบ ( KK -CQC Project)</h3> โดยมีรายละเอียดการดำเนินการงาน ดังนี้
+        <h3>Requirement Document   </h3>
+        <li>ECR Documeny</li>
+        <li>Specifidation Document </li>
+        <h3>Development</h3>
+        <h3>COC Web Application</h3>
+        <h3><U><li>Ranking Search</li></U></h3>
+        <li>สามารถแสดงข้อมูล ranking </li>
+        <li>สามารถจัดลำดับขึ้นลงได้ (ยกเว้นลำดับแรกและลำดับสุดท้าย) </li>
+        <h3><U><li>Ranking Management</li></U></h3>
+        <li>สามารถแก้ไขชื่อลำดับและวันที่ข้ามอย่างเดียวในลำดับแรก </li>
+        และลำดับสุดท้าย
+        <li>สามารถเพิ่ม,แก้ไขข้อมูล Ranking แทรกระหว่างลำดับแรก </li>
+        และลำดับสุดท้ายได้ โดยประกอบด้วยข้อมูลรายละเอียดดังนี้ ลำดับที่(auto ลำดับก่อนสดท้าย),ชื่อลำดับ,List รายการ Campaign(มากกว่า 1), List รายการ Deler (มากกว่า 1 หรือ สามารถเลือกเป็น All Dealer ได้ )
+        <h3><U><li>เพิ่ม Field แสดง Product,Dealer ที่หน้า Monitoring</li></U></h3>
+        <li>เพิ่ม Field ใน db แล้วแสดงบนหน้าจอ </li>
+        <h3>SLM Web Application </h3>
+        <h3> <U><li>Upload Lead Search  </li> </U>  </h3>
+        <li>สามารถแสดงผลการนำเข้าข้อมูล Lead และสถานะการ Upload</li>
+        และผลการUpload (Summary รายการ Completed/Uncompleted )
+        <h3><U> <li>Upload Lead Management</li></U>   </h3>
+        <li>สามารถ Upload และนำเข้าข้อมูลผ่าน Excel ได้ </li>
+        <li>สามารถ Preview ข้อมูลรายละเอียดข้อมูลก่อนบันทึก</li>
+        <li>สามารถตรวจสอบรายละเอียดของข้อมูลตามเงือนไขที่กำหนดได้ </li>
+        <li>สามารถแสดงสถานะการตรวจสอบรายละเอียดข้อมูลพร้อมคำแนะนำ </li>
+        <li>สามารถ Exprot ข้อมูลที่นำเข้าออกเป็น Excel ไฟล์เพื่อนำแก้ไขได้ </li>
+        <li> สามารถบันทึกข้อมูลการนำเข้าได้ (สถานะ Submit ) </li>
+        <h3><U>  <li> Upload Lead Monitoring </li>     </U></h3>
+        <li> หน้าติดตามงานที่ถูก Uploadแล้ว(Edit ได้บางสถานะไฟล์) </li>
+        <h3> Payment </h3>
+        <li> งวดที่ 1 100% = Sit</li>
+    </ul> -->
+    <br>
+    <div ng-repeat="SOW in vm.selectedProject.ScopeInfo">
+      
+            <h3><strong>{{SOW.Topic}}</strong></h3>
+            <h5>- {{SOW.Detail}}</h5>
+        
+    </div>
 </div>

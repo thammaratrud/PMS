@@ -22,7 +22,7 @@
                                 <label class="text-truncate">{{project.ProjectName}}</label>
                             </div>
                             <div>
-                                <label class="text-truncate">OPTIMUS SOFT CO.,LTD</label>
+                                <label class="text-truncate">{{project.CustomerInfo.CompanyName}}</label>
                             </div>
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                     <!-- กราฟ cost receipt -->
                 </div>
                 <div flex="20">
-                    <canvas id="doughnut" class="chart chart-doughnut chart-do-70" chart-data="vm.doughnutChartTime.data" chart-labels="vm.doughnutChartTime.labels" chart-options="options" chart-colors="vm.doughnutChartTime.colors"></canvas>
+                    <canvas id="doughnut" class="chart chart-doughnut chart-do-70" chart-data="vm.doughnutChartTime.data" chart-labels="vm.doughnutChartTime.labels" chart-options="options" chart-colors="vm.selectProject.colors"></canvas>
                 </div>
                 <!-- กราฟ -->
                 <div flex="25">

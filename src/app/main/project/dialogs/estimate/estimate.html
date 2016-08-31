@@ -10,18 +10,22 @@
         </md-toolbar>
         <md-dialog-content ms-scroll>
             <div layout="row" layout-wrap>
-                <div flex="70">
+                <div flex="65">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ESTIMATE_PRICE">Price</label>
                         <input type="text">
                     </md-input-container>
                 </div>
+                &nbsp; &nbsp;
                 <div flex="30">
+                <div class="form-chkbox">
+
                     <form name="myForm" ng-controller="ExampleController">
                         <input type="checkbox">
                         <label translate="PROJECT.INCLUDE_VAT">Include Vat</label>
                     </form>
                 </div>
+            </div>
             </div>
             <div layout="row" layout-wrap>
                 <div flex="100">
@@ -31,9 +35,11 @@
                     </md-input-container>
                 </div>
             </div>
+
             <div class="table-title attention-title">
                 <strong translate="PROJECT.PERIOD">Period</strong>
             </div>
+            
             <div layout="row" layout-wrap>
                 <div flex="20">
                     <md-input-container class="md-block input-project">

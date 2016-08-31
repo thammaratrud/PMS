@@ -31,7 +31,7 @@
 
         vm.projectData = [{
             "ProjectID": "3",
-            "ProjectCode": "COA",
+            "ProjectCode": "Project COA",
             "ProjectName": "Corporate Online Approve System",
             "ProjectStatus": "Play",
             "ProjectDuration": 90,
@@ -49,7 +49,7 @@
             "CustomerInfo": {
                 "ProjectID": "3",
                 "CompanyID": "3",
-                "CompanyName": "บริษัทอ๊อปติมัส ซอฟต์ จำกัด (สำนักงานใหญ่)",
+                "CompanyName": "บริษัท อ๊อปติมัส ซอฟต์ จำกัด (สำนักงานใหญ่)",
                 "CompanyAddress": "127/31 อาคารปัญจธานี ทาวเวอร์ ชั้น 26 ถนนนนทรี แขวงช่องนนทรี เขตยานนาวา กรุงเทพมหานคร 10120",
                 "CustomerDetailInfo": [{
                     "CustomerID": 1,
@@ -178,7 +178,148 @@
             }]
         }, {
             "ProjectID": "4",
-            "ProjectCode": "TTSM",
+            "ProjectCode": "Project TTSM",
+            "ProjectName": "Trouble Ticket System Mobility",
+            "ProjectStatus": "Pass",
+            "ProjectDuration": 60,
+            "ScopeInfo": [{
+                "ScopeID": 1,
+                "ProjectID": "4",
+                "Topic": "เพิ่ม Field แสดง Product, Dealer ที่หน้า Monitoring",
+                "Detail": "เพิ่ม Field ใน db แล้วแสดงบนหน้าจอ"
+            }, {
+                "ScopeID": 2,
+                "ProjectID": "4",
+                "Topic": "Upload Lead Management",
+                "Detail": "สามารถ Upload และนำเข้าข้อมูลผ่าน excel ได้"
+            }],
+            "CustomerInfo": {
+                "ProjectID": "4",
+                "CompanyID": "3",
+                "CompanyName": "บริษัท อ๊อปติมัส ซอฟต์ จำกัด (สำนักงานใหญ่)",
+                "CompanyAddress": "127/31 อาคารปัญจธานี ทาวเวอร์ ชั้น 26 ถนนนนทรี แขวงช่องนนทรี เขตยานนาวา กรุงเทพมหานคร 10120",
+                "CustomerDetailInfo": [{
+                    "CustomerID": 1,
+                    "CompanyID": "3",
+                    "CustomerName": "คุณศรราม เทพพิทักษ์",
+                    "CustomerTel": "0956601234",
+                    "CustomerPosition": "Project Manager",
+                    "StateInfo": {
+                        "CustomerID": 1,
+                        "StateID": "3",
+                        "StateName": "Project Manager",
+                        "StateValue": "3"
+                    }
+                }, {
+                    "CustomerID": 2,
+                    "CompanyID": "3",
+                    "CustomerName": "คุณสมร",
+                    "CustomerTel": "0892349999",
+                    "CustomerPosition": "ฝ่ายบัญชี",
+                    "StateInfo": {
+                        "CustomerID": 1,
+                        "StateID": "4",
+                        "StateName": "Accounting",
+                        "StateValue": "4"
+                    }
+                }]
+            },
+            "BudgetInfo": {
+                "ProjectID": "4",
+                "Price": 280000,
+                "Budget": 90000,
+                "IsIncludeVat": false
+            },
+            "PeriodInfo": [{
+                "PeriodID": 1,
+                "ProjectID": "4",
+                "PeriodOrder": 1,
+                "PeriodDesc": "SRS",
+                "PeriodPercent": 50,
+                "PeriodAmout": 149800,
+                "PeriodStatus": "success",
+                "InvoiceNo": "",
+                "InvoiceDate": "2016-08-29T10:27:20.6786992+07:00",
+                "InvoiceFile": "",
+                "AppNo": "",
+                "AppDate": "2016-08-29T10:27:20.6786992+07:00",
+                "AppFile": "",
+                "ReceiptNo": "",
+                "ReceiptDate": "2016-08-29T10:27:20.6786992+07:00",
+                "ReceiptFile": ""
+            }, {
+                "PeriodID": 2,
+                "ProjectID": "4",
+                "PeriodOrder": 2,
+                "PeriodDesc": "SIT",
+                "PeriodPercent": 50,
+                "PeriodAmout": 149800,
+                "PeriodStatus": "ready",
+                "InvoiceNo": "",
+                "InvoiceDate": "2016-08-29T10:27:20.6786992+07:00",
+                "InvoiceFile": "",
+                "AppNo": "",
+                "AppDate": "2016-08-29T10:27:20.6786992+07:00",
+                "AppFile": "",
+                "ReceiptNo": "",
+                "ReceiptDate": "2016-08-29T10:27:20.6786992+07:00",
+                "ReceiptFile": ""
+            }],
+            "QuotationInfo": {
+                "ProjectID": "4",
+                "QuotationNo": "",
+                "QuotationDate": "2016-08-29T10:27:20.6786992+07:00",
+                "QuotationFile": ""
+            },
+            "PurchaseInfo": {
+                "ProjectID": "4",
+                "PurchaseNo": "",
+                "PurchaseDate": "2016-08-29T10:27:20.6786992+07:00",
+                "PurchaseFile": "",
+                "DrillDate": "2016-08-29T10:27:20.6786992+07:00"
+            },
+            "CostInfo": [{
+                "CostID": 1,
+                "ProjectID": "4",
+                "EmpID": "12",
+                "CostEmp": "สรายุทธ กังสรานุวัตถ์",
+                "CostDate": "2016-08-29T10:27:20.6786992+07:00",
+                "CostDesc": "ค่าน้ำมัน",
+                "CostAmount": 700,
+                "CostFile": "",
+                "IsTax": false,
+                "CostName": "",
+                "CostNoTax": "",
+                "CostAdd": ""
+            }],
+            "TaskInfo": [{
+                "TaskID": 1,
+                "ProjectID": "4",
+                "EmpID": "12",
+                "TaskEmp": "สรายุทธ กังสรานุวัตถ์",
+                "Duration": 3,
+                "StartDate": "2016-08-29T10:27:20.6797001+07:00",
+                "FinishDate": "2016-09-29T10:27:20.6797001+07:00",
+                "IsStatus": true,
+                "Row": "",
+                "InPeriod": "",
+                "Ratio": 35,
+                "Issue": ""
+            }],
+            "DocumentInfo": [{
+                "DocID": 1,
+                "ProjectID": "4",
+                "DocName": "PPS1",
+                "DocFile": ""
+            }, {
+                "DocID": 2,
+                "ProjectID": "4",
+                "DocName": "PPS2",
+                "DocFile": ""
+            }]
+        }, {
+            "ProjectID": "5",
+            "ProjectCode": "Project TTSM",
             "ProjectName": "Trouble Ticket System Mobility",
             "ProjectStatus": "Pass",
             "ProjectDuration": 60,
@@ -196,7 +337,7 @@
             "CustomerInfo": {
                 "ProjectID": "4",
                 "CompanyID": "3",
-                "CompanyName": "บริษัทอ๊อปติมัส ซอฟต์ จำกัด (สำนักงานใหญ่)",
+                "CompanyName": "บริษัท อ๊อปติมัส ซอฟต์ จำกัด (สำนักงานใหญ่)",
                 "CompanyAddress": "127/31 อาคารปัญจธานี ทาวเวอร์ ชั้น 26 ถนนนนทรี แขวงช่องนนทรี เขตยานนาวา กรุงเทพมหานคร 10120",
                 "CustomerDetailInfo": [{
                     "CustomerID": 1,
@@ -417,6 +558,9 @@
             $scope.documentStatus = false;
             $scope.scopeOfWorkStatus = true;
         }
+
+
+        
 
         // Watch screen size to activate responsive read pane
         $scope.$watch(function() {
