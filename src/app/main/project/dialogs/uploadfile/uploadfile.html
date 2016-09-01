@@ -1,8 +1,8 @@
-<md-dialog class="UploadAppointment-dialog" aria-label="New Message">
+<md-dialog class="UploadFiledialog" aria-label="New Message">
     <form class="md-inline-form">
         <md-toolbar class="md-accent md-hue-2">
             <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
-                <span class="title" translate="">Upload Appointment</span>
+                <span class="title" translate="">Upload File</span>
                 <md-button class="md-icon-button" ng-click="vm.closeDialog()" aria-label="Close dialog" tranlate translate-aria-label="PROJECT.CLOSE_DIALOG">
                     <md-icon md-font-icon="icon-close"></md-icon>
                 </md-button>
@@ -10,22 +10,28 @@
         </md-toolbar>
         <md-dialog-content ms-scroll>
             <div layout="row" layout-wrap>
-                <div flex="100">
+                <div flex="80">
                     <md-input-container class="md-block input-project">
-                        <label translate="">Appointment No.</label>
+                        <label translate="">File Name</label>
                         <input type="text">
                     </md-input-container>
                 </div>
-            </div>
-            <div layout="row" layout-wrap>
-                <div flex="30">
-                    <label translate="">Appointment Date:</label>
-                    <input type="text">
+
+                <div flex="20">
+
+                
+<div class="text-left">
+ <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
+                    <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                    <md-tooltip><span translate=""></span></md-tooltip>
+                </md-button>
                 </div>
-                <div flex="70">
-                    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                
                 </div>
+
+
             </div>
+            
         </md-dialog-content>
         <md-dialog-actions layout="row" layout-align="space-between center">
             <div layout="row" layout-align="start center">

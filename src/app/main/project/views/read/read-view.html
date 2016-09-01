@@ -107,6 +107,8 @@
             </ul>
         </div>
     </div>
+    <br>
+    
     <div layout="row" layout-wrap>
         <div class="simple-table-container md-whiteframe-2dp text-center">
             <table class="simple" ms-responsive-table>
@@ -129,6 +131,8 @@
             </table>
         </div>
     </div>
+    <br>
+    <br>
     <div layout="row" class="text-right" layout-wrap>
         <div class="compose-button">
             <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" aria-label="compose" translate="More">More
@@ -149,6 +153,8 @@
             </ul>
         </div>
     </div>
+    <br>
+    
     <div layout="row" class="text-right" layout-wrap>
         <div class="simple-table-container md-whiteframe-4dp">
             <table class="simple" ms-responsive-table>
@@ -173,6 +179,8 @@
             </table>
         </div>
     </div>
+    <br>
+    <br>
     <div layout="row" class="text-right" layout-wrap>
         <div class="compose-button">
             <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" aria-label="compose" translate="More">More
@@ -208,66 +216,99 @@
     </div>
 </div>
 <div ng-show="documentStatus">
-    <h2><strong><label >Finance Document</label></strong></h2>
-    <div class="simple-table-container md-whiteframe-4dp">
-        <table class="simple" ms-responsive-table>
-            <thead>
-                <tr style="background-color: #c5c5c5;">
-                    <th>Document</th>
-                    <th>Date</th>
-                    <th>File</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <td>Quotation</td>
-                    <td>01/01/16</td>
-                    <td>
-                        <form name="myForm">
-                            <input type="checkbox">
-                            <label translate=""></label>
-                        </form>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Purchase Order</td>
-                    <td>12/06/16</td>
-                    <td>
-                        <form name="myForm">
-                            <input type="checkbox">
-                            <label translate=""></label>
-                        </form>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+    <div layout="row" layout-wrap>
+        <h2><strong><label >Finance Document</label></strong></h2>
+    </div>
+    <div layout="row" layout-wrap>
+        <div class="simple-table-container md-whiteframe-4dp">
+            <table class="simple" ms-responsive-table>
+                <thead>
+                    <tr style="background-color: #c5c5c5;">
+                        <th>Document</th>
+                        <th>Date</th>
+                        <th>File</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td>Quotation</td>
+                        <td>01/01/16</td>
+                        <td>
+                            <form name="myForm">
+                                <input type="checkbox">
+                                <label translate=""></label>
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Purchase Order</td>
+                        <td>12/06/16</td>
+                        <td>
+                            <form name="myForm">
+                                <input type="checkbox">
+                                <label translate=""></label>
+                            </form>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
     <br>
     <br>
-    <h2><strong><label>Project Document</label></strong></h2>
-    <div class="simple-table-container md-whiteframe-4dp">
-        <table class="simple" ms-responsive-table>
-            <thead>
-                <tr style="background-color: #c5c5c5;">
-                    <th>Document</th>
-                    <th>Date</th>
-                    <th>File</th>
-                </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <td>SRS</td>
-                    <td>22/04/16</td>
-                    <td>
-                        <form name="myForm">
-                            <input type="checkbox">
-                            <label translate=""></label>
-                        </form>
-                    </td>
-                </tr>
-            </tfoot>
-        </table>
+    <div layout="row" layout-wrap>
+        <h2><strong><label>Project Document</label></strong></h2>
     </div>
+    <div layout="row" layout-wrap>
+        <div class="simple-table-container md-whiteframe-4dp">
+            <table class="simple" ms-responsive-table>
+                <thead>
+                    <tr style="background-color: #c5c5c5;">
+                        <th>Document</th>
+                        <th>Date</th>
+                        <th>File</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td>SRS</td>
+                        <td>22/04/16</td>
+                        <td>
+                            <form name="myForm">
+                                <input type="checkbox">
+                                <label translate=""></label>
+                            </form>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+    <br>
+    <br>
+
+
+
+
+
+
+
+     <div layout="row" class="text-right" layout-wrap>
+        <div class="compose-button">
+            <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" ng-click="vm.UploadFiledialog($event)" aria-label="compose" translate="">Upload File
+            </md-button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
 </div>
 <div ng-show="scopeOfWorkStatus">
     <br>
@@ -276,3 +317,6 @@
         <h5>- {{SOW.Detail}}</h5>
     </div>
 </div>
+
+
+

@@ -561,6 +561,7 @@
         vm.UploadpoDialog = UploadpoDialog
         vm.AddCostDialog = AddCostDialog
         vm.UploadAppointment = UploadAppointment
+        vm.UploadFiledialog = UploadFiledialog
         vm.isChecked = isChecked;
         vm.replyDialog = replyDialog;
         vm.selectProject = selectProject;
@@ -735,6 +736,27 @@
                 clickOutsideToClose: true
             });
         }
+
+
+
+        function UploadFiledialog(ev) {
+            $mdDialog.show({
+                controller: 'UploadFileController',
+                controllerAs: 'vm',
+                locals: {
+                    selectedProject: undefined
+                },
+                templateUrl: 'app/main/project/dialogs/UploadFile/uploadFile.html',
+                parent: angular.element($document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            });
+        }
+
+
+
+
+        
 
 
         function UploadpoDialog(ev) {
