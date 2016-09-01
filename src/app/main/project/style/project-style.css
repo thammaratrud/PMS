@@ -122,9 +122,14 @@
     width: 70px !important;
 }
 
-.chart-do-100 {
-    height: 100px !important;
-    width: 100px !important;
+.chart-do-90 {
+    height: 90px !important;
+    width: 90px !important;
+}
+
+.chart-do-120 {
+    height: 120px !important;
+    width: 120px !important;
 }
 
 .text-desc {
@@ -179,10 +184,46 @@ md-progress-linear.md-green .md-container,
 md-progress-linear .md-container {
     background-color: rgba(83, 230, 63, 0.4);
 }
+
 .icon-chart {
     margin-top: -52px;
     margin-left: 23px;
 }
-a:hover, a:active {
+
+.icon-chart-process {
+    margin-top: -63px;
+    margin-left: 29px;
+}
+
+.font-size-100 {
+    font-size: 30px !important;
+}
+
+a:hover,
+a:active {
     text-decoration: blink !important;
+}
+
+.margin-top-35 {
+    margin-top: -35px;
+}
+
+.color-clam {
+    color: #039be5 !important;
+}
+
+.color-green {
+    color: #53e63f !important;
+}
+
+.color-yellow {
+    color: #FFC107 !important;
+}
+
+.color-red {
+    color: #FF5722 !important;
+}
+
+.margin-top5 {
+    margin-top: 5px;
 }

@@ -8,6 +8,8 @@
         "EMAIL_ERR":"Email field is required",
         "EMAIL_VALID":"Email must be a valid e-mail address",
 
+        "SEARCH_PLACEHOLDER": "Search for Project",
+
         "NEW_PROJECT": "New Project",
         "PROJECT_INFORMATION": "Project Information",
         "PROJECT_NAME": "Project Name",
@@ -100,7 +102,6 @@
         "SETTINGS": "Settings",
         "HELP": "Help",
         "TOGGLE_SIDENAV": "Toggle Sidenav",
-        "SEARCH_PLACEHOLDER": "Search for an e-mail or contact",
         "FILTERS": "Filters",
         "ACTIONS": "Mail Actions",
 

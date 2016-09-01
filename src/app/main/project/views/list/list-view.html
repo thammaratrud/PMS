@@ -8,7 +8,7 @@
                 <!-- กราฟ -->
                 <div flex="55">
                     <div layout="row" layout-wrap>
-                        <div flex="30" class="text-center">
+                        <div flex="30" class="text-center margin-top5">
                             <md-icon class="icon-status icon-green" md-font-icon="icon-play-circle" ng-show="project.ProjectStatus == 'Play'"></md-icon>
                             <md-icon class="icon-status icon-yellow" md-font-icon="icon-pause-circle" ng-show="project.ProjectStatus == 'Pause'"></md-icon>
                             <md-icon class="icon-status icon-clam" md-font-icon="icon-checkbox-marked-circle" ng-show="project.ProjectStatus == 'Pass'"></md-icon>
@@ -39,15 +39,18 @@
                     </div>
                     <!-- กราฟ cost receipt -->
                 </div>
-                <div flex="20">
-                    <canvas ng-repeat="can in vm.doughnutChartTime" ng-show="can.name == project.ProjectCode" id="doughnut" class="chart chart-doughnut chart-do-70" chart-data="can.data" chart-labels="can.labels" chart-options="options" chart-colours="can.color"></canvas>
+                <div flex="20" ng-repeat="can in vm.doughnutChartTime" ng-show="can.name == project.ProjectCode">
+                    <canvas id="doughnut" class="chart chart-doughnut chart-do-70" chart-data="can.data" chart-labels="can.labels" chart-options="options" chart-colours="can.color"></canvas>
                     <div class="icon-chart">
-                        <md-icon md-font-icon="icon-play-circle"></md-icon>
+                        <md-icon ng-class="{'color-green' : can.status == 'Good', 'color-yellow' : can.status == 'Normal','color-red' : can.status == 'Bad'}" md-font-icon="icon-calendar-clock"></md-icon>
                     </div>
                 </div>
                 <!-- กราฟ -->
-                <div flex="25">
-                    <canvas ng-repeat="canPro in vm.doughnutChartProcess" ng-show="canPro.name == project.ProjectCode" id="doughnut" class="chart chart-doughnut chart-do-100" chart-data="canPro.data" chart-labels="canPro.labels" chart-options="options" chart-colours="canPro.color"></canvas>
+                <div flex="25" class="margin-top-35">
+                    <canvas ng-repeat="canPro in vm.doughnutChartProcess" ng-show="canPro.name == project.ProjectCode" id="doughnut" class="chart chart-doughnut chart-do-90" chart-data="canPro.data" chart-labels="canPro.labels" chart-options="options" chart-colours="canPro.color"></canvas>
+                    <div class="icon-chart-process">
+                        <md-icon class="font-size-100 color-clam" md-font-icon="icon-margin"></md-icon>
+                    </div>
                 </div>
             </div>
         </div>
