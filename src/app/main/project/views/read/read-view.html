@@ -11,7 +11,7 @@
     </div>
     <div flex="30">
         <div>
-            <canvas id="doughnut" class="chart chart-doughnut chart-do-100" chart-data="vm.doughnutChart.data" chart-labels="vm.doughnutChart.labels"></canvas>
+            <canvas ng-repeat="canPro in vm.doughnutChartProcess" ng-show="canPro.name == vm.selectedProject.ProjectCode" id="doughnut" class="chart chart-doughnut chart-do-100" chart-data="canPro.data" chart-labels="canPro.labels" chart-options="options" chart-colours="canPro.color"></canvas>
         </div>
     </div>
     <md-menu>

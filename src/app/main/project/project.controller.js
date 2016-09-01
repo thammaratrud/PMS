@@ -463,7 +463,8 @@
         $scope.colorx = {
             coloursGood: ['#53e63f', '#b3fda9'],
             coloursNormal: ['#FFC107', '#f7ffa8'],
-            coloursBad: ['#FF5722', '#fbbfbb']
+            coloursBad: ['#FF5722', '#fbbfbb'],
+            coloursDefault:['#039be5', '#8cd9ff']
 
         }
 
@@ -471,20 +472,35 @@
         // $scope.coloursNormal = ['#FFC107', '#f7ffa8'];
         // $scope.coloursBad = ['#FF5722', '#fbbfbb'];
 
-        // $scope.durationValue = 80;
+        $scope.durationValue = 100;
 
-        vm.doughnutChartTime = {
+        vm.doughnutChartTime = [{
+            name:'Project COA',
             labels: ['UTime', 'Time'],
-            data: [40, 60],
+            data: [90, 50],
+            color: $scope.colorx.coloursNormal
+        },{
+            name:'Project TTSM',
+            labels: ['UTime', 'Time'],
+            data: [10, 80],
             color: $scope.colorx.coloursGood
-        };
-        vm.doughnutChartProcess = {
-            labels: ['', ''],
-            data: [70, 30]
-        };
+        }];
+
+        vm.doughnutChartProcess = [{
+            name:'Project COA',
+            labels: ['UTime', 'Time'],
+            data: [85, 15],
+            color: $scope.colorx.coloursDefault
+        },{
+            name:'Project TTSM',
+            labels: ['UTime', 'Time'],
+            data: [95, 5],
+            color: $scope.colorx.coloursDefault
+        }];
         vm.doughnutChart = {
             labels: ['', ''],
-            data: [40, 60]
+            data: [70, 30],
+            color: $scope.colorx.coloursDefault
         };
         // Chart.js Options
         $scope.options = {

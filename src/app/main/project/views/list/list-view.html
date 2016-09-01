@@ -40,14 +40,14 @@
                     <!-- กราฟ cost receipt -->
                 </div>
                 <div flex="20">
-                    <canvas id="doughnut" class="chart chart-doughnut chart-do-70" chart-data="vm.doughnutChartTime.data" chart-labels="vm.doughnutChartTime.labels" chart-options="options" chart-colours="vm.doughnutChartTime.color"></canvas>
+                    <canvas ng-repeat="can in vm.doughnutChartTime" ng-show="can.name == project.ProjectCode" id="doughnut" class="chart chart-doughnut chart-do-70" chart-data="can.data" chart-labels="can.labels" chart-options="options" chart-colours="can.color"></canvas>
                     <div class="icon-chart">
                         <md-icon md-font-icon="icon-play-circle"></md-icon>
                     </div>
                 </div>
                 <!-- กราฟ -->
                 <div flex="25">
-                    <canvas id="doughnut" class="chart chart-doughnut chart-do-100" chart-data="vm.doughnutChartProcess.data" chart-labels="vm.doughnutChartProcess.labels" chart-options="options" chart-colors="vm.doughnutChartProcess.colors"></canvas>
+                    <canvas ng-repeat="canPro in vm.doughnutChartProcess" ng-show="canPro.name == project.ProjectCode" id="doughnut" class="chart chart-doughnut chart-do-100" chart-data="canPro.data" chart-labels="canPro.labels" chart-options="options" chart-colours="canPro.color"></canvas>
                 </div>
             </div>
         </div>
