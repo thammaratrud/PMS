@@ -95,7 +95,7 @@
                         <div layout="column" layout-gt-xs="row" ng-show="addAttenStatus">
                             <md-input-container flex="30" class="input-project">
                                 <label translate="PROJECT.STATE">State</label>
-                                <md-select ng-model="vm.formWizard2.state">
+                                <md-select ng-model="vm.formWizard2.StateInfo.StateName">
                                     <md-option ng-repeat="state in vm.states" value="{{state}}">
                                         {{state}}
                                     </md-option>
@@ -103,19 +103,19 @@
                             </md-input-container>
                             <md-input-container flex="70" class="input-project">
                                 <label translate="PROJECT.ATTENTION_NAME">Attention Name</label>
-                                <input type="text" name="attention_name" ng-model="vm.formWizard2.attention_name">
+                                <input type="text" name="attention_name" ng-model="vm.formWizard2.CustomerDetailInfo.CustomerName">
                                 
                             </md-input-container>
                         </div>
                         <div layout="row" layout-wrap ng-show="addAttenStatus">
                             <md-input-container flex="50" class="input-project">
                                 <label translate="PROJECT.POSITION">Position</label>
-                                <input type="text" name="position" ng-model="vm.formWizard2.position">
+                                <input type="text" name="position" ng-model="vm.formWizard2.CustomerDetailInfo.CustomerPosition">
                                 
                             </md-input-container>
                             <md-input-container flex="50" class="input-project">
                                 <label translate="PROJECT.TEL">Tel</label>
-                                <input type="text" name="tel" ng-model="vm.formWizard2.tel">
+                                <input type="text" name="tel" ng-model="vm.formWizard2.CustomerDetailInfo.CustomerTel">
                               
                             </md-input-container>
                         </div>
@@ -175,10 +175,10 @@
                                     </tfoot>
                                     <tbody>
                                         <tr ng-repeat="atten in attentionInfo">
-                                            <td>{{atten.state}}</td>
-                                            <td>{{atten.attention_name}}</td>
-                                            <td>{{atten.position}}</td>
-                                            <td>{{atten.tel}}</td>
+                                            <td>{{atten.CustomerDetailInfo.StateInfo.StateName}}</td>
+                                            <td>{{atten.CustomerDetailInfo.CustomerName}}</td>
+                                            <td>{{atten.CustomerDetailInfo.CustomerPosition}}</td>
+                                            <td>{{atten.CustomerDetailInfo.CustomerTel}}</td>
                                             <td>{{atten.email}}</td>
                                         </tr>
                                     </tbody>
@@ -214,13 +214,13 @@
                         <div layout="column" layout-gt-xs="row" ng-show="scopeOfWorkStatus">
                             <md-input-container flex="100" class="input-project">
                                 <label translate="PROJECT.TOPIC">Topic</label>
-                                <input type="text" name="Topic" ng-model="vm.formWizard3.topic">
+                                <input type="text" name="Topic" ng-model="vm.formWizard3.Topic">
                             </md-input-container>
                         </div>
                         <div layout="row" layout-wrap ng-show="scopeOfWorkStatus">
                             <md-input-container flex="100" class="md-block input-project">
                                 <label translate="PROJECT.DETAIL">Detail</label>
-                                <textarea ng-model="vm.formWizard3.detail"></textarea>
+                                <textarea ng-model="vm.formWizard3.Detail"></textarea>
                             </md-input-container>
                         </div>
                         <div layout="row" class="text-right" layout-wrap ng-show="scopeOfWorkStatus">
@@ -254,8 +254,8 @@
                                     </tfoot>
                                     <tbody>
                                         <tr ng-repeat="scope in scopeOfWorkInfo">
-                                            <td>{{$index + 1}}. {{scope.topic}}</td>
-                                            <td>{{scope.detail}}</td>
+                                            <td>{{$index + 1}}. {{scope.Topic}}</td>
+                                            <td>{{scope.Detail}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

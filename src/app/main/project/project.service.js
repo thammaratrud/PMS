@@ -16,7 +16,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://www.w3schools.com/angular/customers.php').success(function(response) {
+            $http.get('http://localhost:5145/api/ProjectDatas').success(function(response) {
 
                 deferred.resolve(response);
 
@@ -24,41 +24,49 @@
 
                 deferred.reject(err);
             });
-            // 
-            // var response = "Hello";
-            // deferred.resolve(response);
-            // 
+
             return deferred.promise;
 
-        };
+        }
 
-        var _getMe = function() {
+        var _postProject = function(data) {
 
             var deferred = $q.defer();
 
-            // $http.get('http://www.w3schools.com/angular/customers.php').success(function(response) {
+            $http.post('http://localhost:5145/api/ProjectDatas', data).success(function(response) {
 
-            //     deferred.resolve(response);
+                deferred.resolve(response);
 
-            // }).error(function(err, status) {
+            }).error(function(err, status) {
 
-            //     deferred.reject(err);
-            // });
-            // 
-            var response = [{
-                name: "Kanitthakan",
-                nickname: "Buay"
-            }, {
-                name: "Kanitthakan2",
-                nickname: "Buay2"
-            }];
-            deferred.resolve(response);
-            // 
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+
+        }
+
+        var _putProject = function(data) {
+
+            var deferred = $q.defer();
+
+            $http.put('http://localhost:5145/api/ProjectDatas/' + data.ProjectID, data).success(function(response) {
+
+                deferred.resolve(response);
+
+            }).error(function(err, status) {
+
+                deferred.reject(err);
+            });
+
             return deferred.promise;
 
         };
+
+
         projectServiceFactory.getProject = _getProject;
-        projectServiceFactory.getMe = _getMe;
+        projectServiceFactory.postProject = _postProject;
+        projectServiceFactory.putProject = _putProject;
 
         return projectServiceFactory;
     }

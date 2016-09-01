@@ -68,56 +68,25 @@
                             </md-menu-item>
                         </md-menu-content>
                     </md-menu>
-                    <div class="divider-vertical" hide show-gt-sm></div>
-                    <md-button class="md-icon-button" aria-label="Archive" translate translate-attr-aria-label="PROJECT.PLAY" hide show-gt-sm>
+                    <div class="divider-vertical"></div>
+                    <md-button class="md-icon-button" aria-label="Archive" translate translate-attr-aria-label="PROJECT.PLAY" ng-click="showConfirm($event , 'Play')">
                         <md-icon md-font-icon="icon-play-circle"></md-icon>
                         <md-tooltip><span translate="PROJECT.PLAY">Play</span></md-tooltip>
                     </md-button>
-                    <md-button class="md-icon-button" aria-label="Spam" translate translate-attr-aria-label="PROJECT.PAUSE" hide show-gt-sm>
+                    <md-button class="md-icon-button" aria-label="Spam" translate translate-attr-aria-label="PROJECT.PAUSE" ng-click="showConfirm($event , 'Pause')">
                         <md-icon md-font-icon="icon-pause-circle"></md-icon>
                         <md-tooltip><span translate="PROJECT.PAUSE">Pause</span></md-tooltip>
                     </md-button>
-                    <md-button class="md-icon-button" aria-label="Delete" translate translate-attr-aria-label="PROJECT.PASS" hide show-gt-sm>
+                    <md-button class="md-icon-button" aria-label="Delete" translate translate-attr-aria-label="PROJECT.PASS" ng-click="showConfirm($event , 'Pass')">
                         <md-icon md-font-icon="icon-checkbox-marked-circle"></md-icon>
                         <md-tooltip><span translate="PROJECT.PASS">Pass</span></md-tooltip>
                     </md-button>
-                    <md-button class="md-icon-button" aria-label="Delete" translate translate-attr-aria-label="PROJECT.CANCEL" hide show-gt-sm>
+                    <md-button class="md-icon-button" aria-label="Delete" translate translate-attr-aria-label="PROJECT.CANCEL" ng-click="showConfirm($event , 'Cancel')">
                         <md-icon md-font-icon="icon-cancel"></md-icon>
                         <md-tooltip><span translate="PROJECT.CANCEL">Cancel</span></md-tooltip>
                     </md-button>
                     <div class="divider-vertical"></div>
                 </div>
-                <md-menu hide-gt-sm>
-                    <md-button class="md-icon-button" ng-click="$mdOpenMenu($event)" aria-label="Mail Actions" translate translate-attr-aria-label="MAIL.ACTIONS">
-                        <md-icon md-font-icon="icon-dots-vertical"></md-icon>
-                    </md-button>
-                    <md-menu-content width="3">
-                        <md-menu-item>
-                            <md-button aria-label="Play" translate-attr-aria-label="PROJECT.PLAY">
-                                <md-icon md-font-icon="icon-play-circle"></md-icon>
-                                <span translate="PROJECT.PLAY">Play</span>
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item>
-                            <md-button aria-label="Pause" translate-attr-aria-label="PROJECT.PAUSE">
-                                <md-icon md-font-icon="icon-pause-circle"></md-icon>
-                                <span translate="PROJECT.PAUSE">Pause</span>
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item>
-                            <md-button aria-label="Pass" translate-aria-label="PROJECT.PASS">
-                                <md-icon md-font-icon="icon-checkbox-marked-circle"></md-icon>
-                                <span translate="PROJECT.PASS">Pass</span>
-                            </md-button>
-                        </md-menu-item>
-                        <md-menu-item>
-                            <md-button aria-label="Cancel" translate-attr-aria-label="PROJECT.CANCEL">
-                                <md-icon md-font-icon="icon-cancel"></md-icon>
-                                <span translate="PROJECT.CANCEL">Cancel</span>
-                            </md-button>
-                        </md-menu-item>
-                    </md-menu-content>
-                </md-menu>
             </div>
             <!-- / CONTENT TOOLBAR -->
             <!-- CONTENT WRAPPER -->
