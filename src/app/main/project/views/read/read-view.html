@@ -97,7 +97,7 @@
     <div layout="row" layout-wrap>
         <div flex="30">
             <div>
-                <canvas id="doughnut" class="chart chart-doughnut chart-do-100" chart-data="vm.doughnutChart.data" chart-labels="vm.doughnutChart.labels"></canvas>
+                <canvas id="doughnut" class="chart chart-doughnut chart-do-120" chart-data="vm.doughnutChart.data" chart-labels="vm.doughnutChart.labels"></canvas>
             </div>
         </div>
         <div flex="70">
@@ -108,28 +108,25 @@
         </div>
     </div>
     <br>
-    
     <div layout="row" layout-wrap>
-        <div class="simple-table-container md-whiteframe-2dp text-center">
-            <table class="simple" ms-responsive-table>
-                <thead>
-                    <tr style="background-color: #c5c5c5;">
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tfoot ng-repeat="cost in vm.selectedProject.CostInfo">
-                    <tr>
-                        <td>
-                            <p class="text-date">{{cost.CostDate | date:'dd/MM/yy'}}</p>
-                        </td>
-                        <td>{{cost.CostDesc}}</td>
-                        <td>{{cost.CostAmount}} บาท</td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+        <table class="simple md-whiteframe-2dp">
+            <thead style="background-color: #c5c5c5;">
+                <tr>
+                    <th class="text-left">Date</th>
+                    <th class="text-left">Description</th>
+                    <th class="text-center">Amount</th>
+                </tr>
+            </thead>
+            <tfoot ng-repeat="cost in vm.selectedProject.CostInfo">
+                <tr>
+                    <td class="text-left">
+                        <p>&nbsp; &nbsp; &nbsp; &nbsp;{{cost.CostDate | date:'dd/MM/yy'}}</p>
+                    </td>
+                    <td class="text-left">{{cost.CostDesc}}</td>
+                    <td class="text-center">{{cost.CostAmount}} บาท&nbsp; &nbsp; &nbsp; &nbsp;</td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
     <br>
     <br>
@@ -143,7 +140,7 @@
     <div layout="row" layout-wrap>
         <div flex="30">
             <div>
-                <canvas id="doughnut" class="chart chart-doughnut chart-do-100" chart-data="vm.doughnutChart.data" chart-labels="vm.doughnutChart.labels"></canvas>
+                <canvas id="doughnut" class="chart chart-doughnut chart-do-120" chart-data="vm.doughnutChart.data" chart-labels="vm.doughnutChart.labels"></canvas>
             </div>
         </div>
         <div flex="70">
@@ -154,30 +151,27 @@
         </div>
     </div>
     <br>
-    
-    <div layout="row" class="text-right" layout-wrap>
-        <div class="simple-table-container md-whiteframe-4dp">
-            <table class="simple" ms-responsive-table>
-                <thead>
-                    <tr style="background-color: #c5c5c5;">
-                        <th>Date</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Percent</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td>1 / 6 / 16</td>
-                        <td>ค่าน้ำมัน</td>
-                        <td>500 บาท</td>
-                        <td>30 %</td>
-                    </tr>
-                </tfoot>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
+    <div layout="row" layout-wrap>
+        <table class="simple md-whiteframe-2dp">
+            <thead style="background-color: #c5c5c5;">
+                <tr>
+                    <th class="text-left">Date</th>
+                    <th class="text-left">Description</th>
+                    <th class="text-center">Amount</th>
+                    <th class="text-center">Percent</th>
+                </tr>
+            </thead>
+            <tfoot ng-repeat="cost in vm.selectedProject.CostInfo">
+                <tr>
+                    <td class="text-left">
+                        <p>&nbsp; &nbsp; &nbsp; &nbsp;{{cost.CostDate | date:'dd/MM/yy'}}</p>
+                    </td>
+                    <td class="text-left">{{cost.CostDesc}}</td>
+                    <td class="text-center">{{cost.CostAmount}} บาท&nbsp; &nbsp; &nbsp; &nbsp;</td>
+                    <td class="text-center">30%</td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
     <br>
     <br>
@@ -286,29 +280,12 @@
     </div>
     <br>
     <br>
-
-
-
-
-
-
-
-     <div layout="row" class="text-right" layout-wrap>
+    <div layout="row" class="text-right" layout-wrap>
         <div class="compose-button">
             <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" ng-click="vm.UploadFiledialog($event)" aria-label="compose" translate="">Upload File
             </md-button>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
 </div>
 <div ng-show="scopeOfWorkStatus">
     <br>
@@ -317,6 +294,3 @@
         <h5>- {{SOW.Detail}}</h5>
     </div>
 </div>
-
-
-
