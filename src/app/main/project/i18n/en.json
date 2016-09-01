@@ -41,7 +41,7 @@
         "FILTER_PAUSE": "Filter By Pause Status",
         "FILTER_PASS": "Filter By Pass Status",
         "FILTER_CANCEL": "Filter By Cancel Status",
-       
+       "Upload File_doc":"Upload File",
 
         "ESTIMATE": "Estimate",
         "ESTIMATE_PRICE": "Price",
@@ -53,6 +53,10 @@
         "ESTIMATE_PERCENT%": "Percent%",
         "ESTIMATE_AMOUNT": "Amount",
         "DONE": "Done",
+
+
+
+
 
 
         "UPLOADPO_UPLOAD": "Upload Purchase Order",
