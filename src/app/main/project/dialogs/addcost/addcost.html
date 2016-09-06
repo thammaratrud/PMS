@@ -10,23 +10,14 @@
         </md-toolbar>
         <md-dialog-content ms-scroll>
             <div layout="row" layout-wrap>
-                <div flex="55">
+                <div flex="100">
                     <md-input-container class="md-block input-project">
-                        <md-select ng-model="user.state">
-                            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                                {{state.abbrev}}
+                        <md-select ng-model="selectName">
+                            <md-option ng-repeat="name in optionName" value="{{name}}">
+                                {{name.Name}}
                             </md-option>
                         </md-select>
                     </md-input-container>
-                </div>
-                &nbsp; &nbsp;&nbsp;
-                <div flex="10">
-                    <div class="form-chkbox">
-                        <label translate="PROJECT.ADDCOST_DATE">Date</label>
-                    </div>
-                </div>
-                <div flex="25">
-                    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
             </div>
             <br>
@@ -34,9 +25,10 @@
             <div layout="row" layout-wrap>
                 <div flex="55">
                     <md-input-container class="md-block input-project ">
-                        <md-select ng-model="user.state">
-                            <md-option ng-repeat="state in states" value="{{state.abbrev}}">
-                                {{state.abbrev}}
+                        <md-select ng-model="addCost.CostDesc
+">
+                            <md-option ng-repeat="type in optionType" value="{{type}}">
+                                {{type}}
                             </md-option>
                         </md-select>
                     </md-input-container>
@@ -48,15 +40,15 @@
                     </div>
                 </div>
                 <div flex="25">
-                    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                    <md-datepicker ng-model="addCost.CostDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
             </div>
             <br>
             <div layout="row" layout-wrap>
-                <div flex="50">
+                <div flex="30">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ADDCOST_AMOUNT">Amount</label>
-                        <input type="text">
+                        <input type="number" ng-model="addCost.CostAmount">
                     </md-input-container>
                 </div>
                 <div flex="25">
@@ -64,45 +56,26 @@
                     </div>
                 </div>
                 <div flex="15">
-                    <md-switch style="margin-top: 7px;">
+                    <md-switch style="margin-top: 7px;" ng-model="addCost.IsTax">
                     </md-switch>
                 </div>
-
-
-                <div flex="10">
-
-                
-<div class="text-left">
- <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
-                    <md-icon md-font-icon="icon-folder-outline"></md-icon>
-                    <md-tooltip><span translate=""></span></md-tooltip>
-                </md-button>
+                <div flex="30">
+                    <div class="text-left">
+                        <input id="fileInput" type="file">
+                    </div>
                 </div>
-                 </div>
-
-
-
-
-
-                <!-- <div flex="10">
-    <md-button class="md-icon-button md-accent icon-attention" aria-label="PROJECT.ATTENTION" translate-attr-aria-label="PROJECT.ATTENTION">
-        <md-icon md-font-icon="icon-plus-circle-outline"></md-icon>
-        <md-tooltip><span translate="PROJECT.ATTENTION"></span></md-tooltip>
-    </md-button>
-</div>
- -->
             </div>
             <div layout="row" layout-wrap>
                 <div flex="70">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ADDCOST_NAME">Name</label>
-                        <input type="text">
+                        <input type="text" ng-model="addCost.CostName">
                     </md-input-container>
                 </div>
                 <div flex="30">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ADDCOST_NO">No.</label>
-                        <input type="text">
+                        <input type="text" ng-model="addCost.CostNoTax">
                     </md-input-container>
                 </div>
             </div>
@@ -110,14 +83,14 @@
                 <div flex="100">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ADDCOST_ADDRESS">Address</label>
-                        <input type="text">
+                        <input type="text" ng-model="addCost.CostAdd">
                     </md-input-container>
                 </div>
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row" layout-align="space-between center">
             <div layout="row" layout-align="start center">
-                <md-button ng-click="vm.closeDialog()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONENE">
+                <md-button ng-click="sendCost()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONENE">
                     DONE
                 </md-button>
             </div>

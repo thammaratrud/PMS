@@ -832,7 +832,7 @@
                 controller: 'Upload_PO_Controller',
                 controllerAs: 'vm',
                 locals: {
-                    selectedProject: undefined
+                    selectedProject: vm.selectedProject
                 },
                 templateUrl: 'app/main/project/dialogs/upload_po/upload_po.html',
                 parent: angular.element($document.body),
@@ -847,7 +847,7 @@
                 controller: 'AddcostController',
                 controllerAs: 'vm',
                 locals: {
-                    selectedProject: undefined
+                    selectedProject: vm.selectedProject
                 },
                 templateUrl: 'app/main/project/dialogs/addcost/addcost.html',
                 parent: angular.element($document.body),

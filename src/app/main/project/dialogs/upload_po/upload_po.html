@@ -10,70 +10,51 @@
         </md-toolbar>
         <md-dialog-content ms-scroll>
             <div layout="row" layout-wrap>
-                <div flex="80">
+                <div flex="50">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.UPLOADPO_PURCHASEORDERNO">Purchase Order No.</label>
-                        <input type="text">
+                        <input type="text" ng-model="uploadData.PurchaseNo">
                     </md-input-container>
                 </div>
-
-
-<div flex="20">
-               <div layout="row">
-<div class="text-left">
- <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
-                    <md-icon md-font-icon="icon-folder-outline"></md-icon>
-                    <md-tooltip><span translate=""></span></md-tooltip>
-                </md-button>
+                <div flex="50">
+                    <div layout="row">
+                        <div class="text-left">
+                            <!--                             <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add" ngf-select="upload($file)">
+                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                            </md-button> -->
+                            <input id="fileInput" type="file">
+                        </div>
+                    </div>
                 </div>
-                
-                </div>
-
-
-
-
-
-</div>
-
             </div>
             <div layout="row" layout-wrap>
                 <div flex="20">
-                <div class="form-chkbox">
-                    <label translate="PROJECT.UPLOADPO_PURCHASEDATE">Purchase Date:</label>
-                    <input type="text">
-                </div>
+                    <div class="form-chkbox">
+                        <label translate="PROJECT.UPLOADPO_PURCHASEDATE">Purchase Date:</label>
+                        <input type="text">
+                    </div>
                 </div>
                 <div flex="30">
-                    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                    <md-datepicker ng-model="uploadData.PurchaseDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
                 <div flex="5">
                 </div>
-
-
                 <div flex="15">
-                <div class="form-chkbox">
-                    <label translate="PROJECT.UPLOADPO_DRILLDATE">Drill Date:</label>
-                </div>
+                    <div class="form-chkbox">
+                        <label translate="PROJECT.UPLOADPO_DRILLDATE">Drill Date:</label>
+                    </div>
                 </div>
                 <div flex="30">
-                    <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
+                    <md-datepicker ng-model="uploadData.DrillDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
             </div>
         </md-dialog-content>
-
         <md-dialog-actions layout="row" layout-align="space-between center">
             <div layout="row" layout-align="start center">
-                <md-button ng-click="vm.closeDialog()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONENE">
+                <md-button ng-click="uploadPO()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONENE">
                     DONE
                 </md-button>
             </div>
-
-
-
-
-
-
-
             <div layout="row">
                 <md-button class="md-icon-button" aria-label="Delete" translate-attr-aria-label="PROJECT.DELETE">
                     <md-icon md-font-icon="icon-delete"></md-icon>
