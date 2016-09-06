@@ -178,7 +178,7 @@
         var api = {};
 
         // Base Url
-        api.baseUrl = 'app/data/';
+        api.baseUrl = 'http://localhost:5145/';
 
         // api.sample = $resource(api.baseUrl + 'sample/sample.json');
 

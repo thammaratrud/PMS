@@ -18,13 +18,13 @@
         vm.formWizard2 = {};
         vm.formWizard3 = {};
         //////////
-        vm.states = ['1', '2', '3'];
+        vm.states = ['Project Manager', 'Accounting'];
 
 
         $scope.addAttenStatus = false;
         $scope.scopeOfWorkStatus = false;
 
-        $scope.attentionInfo = [];
+        $scope.customerDetailInfo = [];
         $scope.scopeOfWorkInfo = [];
 
         function closeDialog() {
@@ -44,16 +44,24 @@
         // step2
         $scope.attention = function() {
             $scope.addAttenStatus = false;
-            var customer_id = $scope.attentionInfo.length + 1;
-            vm.formWizard2.CustomerID = customer_id
-            vm.formWizard2.StateInfo = {
-                "CustomerID": customer_id,
-                "StateID": customer_id,
-                "StateValue": ""
-            }
-            $scope.attentionInfo.push(vm.formWizard2);
+            var project_id = projectData.length + 1;
+            var customer_id = $scope.customerDetailInfo.length + 1;
+            vm.formWizard2.CustomerID = customer_id;
+            vm.formWizard2.CompanyID = "1-" + project_id;
+            vm.formWizard2.CustomerStateValue = "";
+            $scope.customerDetailInfo.push(vm.formWizard2);
             vm.formWizard2 = {};
         }
+
+        $scope.removeAttention = function() {
+            var remove = $scope.customerDetailInfo.indexOf(vm.formWizard2);
+
+            if (remove > -1) {
+                $scope.customerDetailInfo.splice(remove, 1);
+            }
+            vm.formWizard2 = {};
+        }
+
         $scope.addScopeOfWork = function() {
             if ($scope.scopeOfWorkStatus == false) {
                 $scope.scopeOfWorkStatus = true;
@@ -63,6 +71,16 @@
 
             }
         }
+
+        $scope.removeScope = function() {
+            var remove = $scope.scopeOfWorkInfo.indexOf(vm.formWizard3);
+
+            if (remove > -1) {
+                $scope.scopeOfWorkInfo.splice(remove, 1);
+            }
+            vm.formWizard3 = {};
+        }
+
         $scope.scopeOfWork = function() {
             $scope.scopeOfWorkStatus = false;
 
@@ -78,11 +96,6 @@
 
             var project_id = projectData.length + 1;
 
-
-            console.log(vm.formWizard); //page 1
-            console.log($scope.attentionInfo); //page 2
-            console.log($scope.scopeOfWorkInfo); //page 3
-
             var data = {
                 "ProjectID": project_id,
                 "ProjectCode": vm.formWizard.project_code,
@@ -92,10 +105,10 @@
                 "ScopeInfo": $scope.scopeOfWorkInfo,
                 "CustomerInfo": {
                     "ProjectID": project_id,
-                    "CompanyID": "3",
+                    "CompanyID": "1-" + project_id,
                     "CompanyName": vm.formWizard.client,
                     "CompanyAddress": vm.formWizard.company_address,
-                    "CustomerDetailInfo": $scope.attentionInfo
+                    "CustomerDetailInfo": $scope.customerDetailInfo
                 },
                 "BudgetInfo": {
                     "ProjectID": project_id,
@@ -127,5 +140,16 @@
                 console.log('Fail : ' + JSON.stringify(err))
             })
         }
+
+        $scope.changeCustomerDetail = function(atten) {
+            $scope.addAttenStatus = true;
+            vm.formWizard2 = atten;
+        }
+
+        $scope.changeScope = function(atten) {
+            $scope.scopeOfWorkStatus = true;
+            vm.formWizard3 = atten;
+        }
+
     }
 })();

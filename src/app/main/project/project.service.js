@@ -16,7 +16,7 @@
 
             var deferred = $q.defer();
 
-            $http.get('http://localhost:5145/api/ProjectDatas').success(function(response) {
+            $http.get(serviceBase + 'api/ProjectDatas').success(function(response) {
 
                 deferred.resolve(response);
 
@@ -33,7 +33,7 @@
 
             var deferred = $q.defer();
 
-            $http.post('http://localhost:5145/api/ProjectDatas', data).success(function(response) {
+            $http.post(serviceBase + 'api/ProjectDatas', data).success(function(response) {
 
                 deferred.resolve(response);
 
@@ -50,7 +50,7 @@
 
             var deferred = $q.defer();
 
-            $http.put('http://localhost:5145/api/ProjectDatas/' + data.ProjectID, data).success(function(response) {
+            $http.put(serviceBase + 'api/ProjectDatas/' + data.ProjectID, data).success(function(response) {
 
                 deferred.resolve(response);
 
