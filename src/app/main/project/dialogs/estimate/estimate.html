@@ -37,7 +37,6 @@
             <div class="table-title attention-title">
                 <strong translate="PROJECT.PERIOD">Period</strong>
             </div>
-            <!-- test -->
             <div layout="column" layout-gt-xs="row">
                 <div flex="100" class="text-right" style="margin-top: -70px;">
                     <md-button class="add-file-button md-fab md-warn" ng-click="addEstimate()">
@@ -45,38 +44,60 @@
                     </md-button>
                 </div>
             </div>
-            <br>
-            <!--  -->
             <div layout="row" layout-wrap ng-show="estimateStatus">
-                <div flex="20">
+                <div flex="10">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ESTIMATE_ORDER">Order</label>
-                        <input type="text">
+                        <input type="number" ng-model="periodInfo.PeriodOrder">
                     </md-input-container>
                 </div>
                 <div flex="30">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ESTIMATE_DESCRIPTION">Description</label>
-                        <textarea></textarea>
+                        <input type="text" ng-model="periodInfo.PeriodDesc">
                     </md-input-container>
                 </div>
-                <div flex="20">
+                <div flex="10">
                     <md-input-container class="md-block input-project">
-                        <label translate="PROJECT.ESTIMATE_PERCENT%">Percent%</label>
-                        <textarea></textarea>
+                        <label translate="%">%</label>
+                        <input type="number" ng-model="periodInfo.PeriodPercent">
                     </md-input-container>
                 </div>
-                <div flex="20">
+                <div flex="30">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ESTIMATE_AMOUNT">Amount</label>
-                        <textarea></textarea>
+                        <input type="number" ng-model="periodInfo.PeriodAmout">
                     </md-input-container>
                 </div>
-                <div flex="10" class="text-right" style="margin-top: -10px;">
-                    <md-button class="md-icon-button md-accent icon-attention" aria-label="PROJECT.ATTENTION" translate-attr-aria-label="PROJECT.ATTENTION">
-                        <md-icon md-font-icon="icon-plus-circle-outline"></md-icon>
-                        <md-tooltip><span translate="PROJECT.ATTENTION"></span></md-tooltip>
+                <div flex="20" class="text-right" style="margin-top: -10px;">
+                    <md-button class="md-icon-button" ng-click="removePeriod()">
+                        <md-icon md-font-icon="icon-close-circle-outline" class="icon-remove"></md-icon>
                     </md-button>
+                    <md-button class="md-icon-button" ng-click="period()">
+                        <md-icon md-font-icon="icon-plus-circle-outline" class="icon-add"></md-icon>
+                    </md-button>
+                </div>
+            </div>
+            <div layout="row" layout-wrap ng-show="periodData.length > 0">
+                <div flex="100" class="{{estimateStatus == true ? 'div-sowinfo2 scrollArea' : 'div-sowinfo scrollArea'}}">
+                    <table class="simple" >
+                        <thead>
+                            <tr>
+                                <th><strong>Order</strong></th>
+                                <th><strong>Description</strong></th>
+                                <th><strong>%</strong></th>
+                                <th><strong>Amount</strong></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="periodItem in periodData | orderBy : 'PeriodOrder'" ng-click="changePeriodItem(periodItem)">
+                                <td>{{periodItem.PeriodOrder}}</td>
+                                <td>{{periodItem.PeriodDesc}}</td>
+                                <td>{{periodItem.PeriodPercent}}</td>
+                                <td>{{periodItem.PeriodAmout}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </md-dialog-content>
