@@ -10,28 +10,35 @@
         </md-toolbar>
         <md-dialog-content ms-scroll>
             <div layout="row" layout-wrap>
-                <div flex="80">
+                <div flex="45">
+                    <md-input-container class="md-block input-project">
+                        <label translate="">Service Invoice No.</label>
+                        <input type="text" name="project_name" ng-model="vm.formWizard.project_name" required>
+                        <div ng-messages="wizardStep1.project_name.$error" role="alert">
+                            <div ng-message="required">
+                                <span translate="">Service Invoice No field is required.</span>
+                            </div>
+                        </div>
+                    </md-input-container>
+                </div>
+                <div flex="10"></div>
+                <div flex="45">
                     <md-input-container class="md-block input-project">
                         <label translate="">Appointment No.</label>
                         <input type="text">
                     </md-input-container>
                 </div>
-
-
-
             </div>
             <div layout="row" layout-wrap>
-            <br>
+                <br>
                 <div flex="20">
-                <div class="form-chkbox">
-                    <label translate="">Appointment Date:</label>
-                </div>
+                    <div class="form-chkbox">
+                        <label translate="">Appointment Date:</label>
+                    </div>
                 </div>
                 <div flex="80">
-                
                     <md-datepicker ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
-                
             </div>
         </md-dialog-content>
         <md-dialog-actions layout="row" layout-align="space-between center">
@@ -40,8 +47,6 @@
                     DONE
                 </md-button>
             </div>
-
-            
             <md-button class="md-icon-button" aria-label="Delete" translate-attr-aria-label="PROJECT.DELETE">
                 <md-icon md-font-icon="icon-delete"></md-icon>
                 <md-tooltip><span translate="PROJECT.DELETE"></span></md-tooltip>
