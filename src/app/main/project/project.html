@@ -46,24 +46,24 @@
                         </md-button>
                         <md-menu-content width="3">
                             <md-menu-item>
-                                <md-button aria-label="All" translate="PROJECT.ALL" translate-attr-aria-label="PROJECT.ALL">
+                                <md-button aria-label="All" translate="PROJECT.ALL" translate-attr-aria-label="PROJECT.ALL" ng-click="filterStatus.filter = ''">
                                     All
                                 </md-button>
                             </md-menu-item>
                             <md-menu-item>
-                                <md-button aria-label="None" translate="PROJECT.FILTER_PLAY" translate-attr-aria-label="PROJECT.FILTER_PLAY">Play
+                                <md-button aria-label="None" translate="PROJECT.FILTER_PLAY" translate-attr-aria-label="PROJECT.FILTER_PLAY" ng-click="filterStatus.filter = 'Play'">Play
                                 </md-button>
                             </md-menu-item>
                             <md-menu-item>
-                                <md-button aria-label="Read" translate="PROJECT.FILTER_PAUSE" translate-attr-aria-label="PROJECT.FILTER_PAUSE">Pause
+                                <md-button aria-label="Read" translate="PROJECT.FILTER_PAUSE" translate-attr-aria-label="PROJECT.FILTER_PAUSE" ng-click="filterStatus.filter = 'Pause'">Pause
                                 </md-button>
                             </md-menu-item>
                             <md-menu-item>
-                                <md-button aria-label="Unread" translate="PROJECT.FILTER_PASS" translate-attr-aria-label="PROJECT.FILTER_PASS">Pass
+                                <md-button aria-label="Unread" translate="PROJECT.FILTER_PASS" translate-attr-aria-label="PROJECT.FILTER_PASS" ng-click="filterStatus.filter = 'Pass'">Pass
                                 </md-button>
                             </md-menu-item>
                             <md-menu-item>
-                                <md-button aria-label="Starred" translate="PROJECT.FILTER_CANCEL" translate-attr-aria-label="PROJECT.FILTER_CANCEL">Cancel
+                                <md-button aria-label="Starred" translate="PROJECT.FILTER_CANCEL" translate-attr-aria-label="PROJECT.FILTER_CANCEL" ng-click="filterStatus.filter = 'Cancel'">Cancel
                                 </md-button>
                             </md-menu-item>
                         </md-menu-content>

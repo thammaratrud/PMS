@@ -44,7 +44,14 @@
         // step2
         $scope.attention = function() {
             $scope.addAttenStatus = false;
-            var project_id = select_project.length + 1;
+
+            var remove = $scope.customerDetailInfo.indexOf(vm.formWizard2);
+
+            if (remove > -1) {
+                $scope.customerDetailInfo.splice(remove, 1);
+            }
+
+            var project_id = $scope.select_project.ProjectID;
             var customer_id = $scope.customerDetailInfo.length + 1;
             vm.formWizard2.CustomerID = customer_id;
             vm.formWizard2.CompanyID = "1-" + project_id;
@@ -84,21 +91,27 @@
         $scope.scopeOfWork = function() {
             $scope.scopeOfWorkStatus = false;
 
-            var scope_id = $scope.scopeOfWorkInfo.length + 1;
-            var project_id = select_project.length + 1;
+            var remove = $scope.scopeOfWorkInfo.indexOf(vm.formWizard3);
+
+            if (remove > -1) {
+                $scope.scopeOfWorkInfo.splice(remove, 1);
+            }
+
+            var project_id = $scope.select_project.ProjectID;
             vm.formWizard3.ProjectID = project_id;
-            // vm.formWizard3.ScopeID = scope_id;
             $scope.scopeOfWorkInfo.push(vm.formWizard3);
             vm.formWizard3 = {};
         }
 
         $scope.sendEditProject = function() {
-            console.log(select_project);
-            // projectService.postProject(select_project).then(function(response) {
-            //     closeDialog();
-            // }, function(err) {
-            //     console.log('Fail : ' + JSON.stringify(err))
-            // })
+            console.log($scope.select_project);
+            projectService.putProject($scope.select_project).then(function(response) {
+                console.log('edit project success.');
+                $rootScope.chart_progress();
+                closeDialog();
+            }, function(err) {
+                console.log('edit project fail : ' + JSON.stringify(err));
+            })
         }
 
         $scope.changeCustomerDetail = function(atten) {

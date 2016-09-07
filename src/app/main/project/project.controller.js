@@ -466,7 +466,7 @@
             coloursDefault: ['#039be5', '#8cd9ff']
 
         }
-
+        $scope.IsSuccess = false;
         // $scope.coloursGood = ['#53e63f', '#b3fda9'];
         // $scope.coloursNormal = ['#FFC107', '#f7ffa8'];
         // $scope.coloursBad = ['#FF5722', '#fbbfbb'];
@@ -534,11 +534,25 @@
         }
 
         $scope.searchProject = {};
+        $scope.filterStatus = {};
         $scope.$watch('searchProject', function(n, o) {
             // console.log(o + ":" + n);
         }, true);
+        $scope.$watch('filterStatus', function(n, o) {
+            // console.log(o + ":" + n);
+        }, true);
         // call Service
-
+        $scope.costTotal = 0;
+        $scope.doughnutChartBySelectProject = {
+            labels: ['', ''],
+            data: [0, 100],
+            color: $scope.colorx.coloursDefault
+        }
+        $scope.receiptChartBySelectProject = {
+            labels: ['', ''],
+            data: [0, 100],
+            color: $scope.colorx.coloursBad
+        }
         $rootScope.getProjectData = function() {
             $scope.costPercent = 0;
             $scope.useDays = 0;
@@ -549,6 +563,26 @@
                 console.log('Call Service Success ');
                 vm.projectData = data;
                 vm.selectedProject = vm.projectData[0];
+                if (vm.selectedProject.CostInfo.length > 0) {
+                    angular.forEach(vm.selectedProject.CostInfo, function(cost) {
+                        $scope.costTotal += cost.CostAmount;
+                    })
+                    $scope.costPercent = ($scope.costTotal / vm.selectedProject.BudgetInfo.Budget) * 100;
+                    $scope.leftCostPercent = 100 - parseInt($scope.costPercent);
+
+                    if ($scope.costPercent < 30) {
+                        $scope.colorxCart = $scope.colorx.coloursGood;
+                    } else if ($scope.costPercent < 70) {
+                        $scope.colorxCart = $scope.colorx.coloursNormal;
+                    } else {
+                        $scope.colorxCart = $scope.colorx.coloursBad;
+                    }
+                    $scope.doughnutChartBySelectProject = {
+                        labels: ['Cost(%)', 'Budget(%)'],
+                        data: [parseInt($scope.costPercent), $scope.leftCostPercent],
+                        color: $scope.colorxCart
+                    }
+                }
                 $rootScope.chart_progress();
 
             }, function(err) {
@@ -672,6 +706,11 @@
             $scope.scopeOfWorkStatus = true;
         }
 
+        // $scope.filterStatus = function(status) {
+        //     $scope.filterStatus = status;
+
+        // }
+
         $scope.showConfirm = function(ev, status) {
             var projectCode = "";
             if (vm.checked.length > 0) {
@@ -730,6 +769,58 @@
 
         };
 
+        $scope.updatePeriod = function(period, e) {
+
+            var confirm = $mdDialog.confirm()
+                .title('Confirm?')
+                .textContent('Are you sure for update period.')
+                .ariaLabel('update period.')
+                .targetEvent()
+                .ok('OK')
+                .cancel('Cancel');
+            $mdDialog.show(confirm).then(function() {
+                console.log('You are sure :)');
+
+                angular.forEach(vm.selectedProject.PeriodInfo, function(periodInfo) {
+                    if (periodInfo.PeriodOrder == period.PeriodOrder) {
+                        if(periodInfo.PeriodStatus){
+                            periodInfo.PeriodStatus = '';
+                        }else{
+                            periodInfo.PeriodStatus = 'Success';
+                        }
+                         
+                    }
+                })
+
+
+                projectService.putProject(vm.selectedProject).then(function() {
+
+                    console.log('update period success');
+                    // $rootScope.chart_progress();
+                }, function(err) {
+                    console.log('update period fail' + err);
+                })
+
+
+                if ($scope.IsSuccess == true) {
+                    $scope.IsSuccess = false;
+                } else {
+                    $scope.IsSuccess = true;
+                }
+            }, function() {
+                console.log('You are  not sure :(');
+
+                if ($scope.IsSuccess == true) {
+                    $scope.IsSuccess = true;
+                } else {
+                    $scope.IsSuccess = false;
+                }
+
+                console.log($scope.IsSuccess);
+
+            });
+
+        }
 
         // Watch screen size to activate responsive read pane
         $scope.$watch(function() {
@@ -750,8 +841,43 @@
          *
          * @param mail
          */
+
         function selectProject(project) {
+
             vm.selectedProject = project;
+
+
+            $scope.costTotal = 0;
+            $scope.costPercent = 0;
+            $scope.colorxCart;
+            if (project.CostInfo.length > 0) {
+                angular.forEach(project.CostInfo, function(cost) {
+                    $scope.costTotal += cost.CostAmount;
+                })
+                $scope.costPercent = ($scope.costTotal / project.BudgetInfo.Budget) * 100;
+                $scope.leftCostPercent = 100 - parseInt($scope.costPercent);
+
+                if ($scope.costPercent < 30) {
+                    $scope.colorxCart = $scope.colorx.coloursGood;
+                } else if ($scope.costPercent < 70) {
+                    $scope.colorxCart = $scope.colorx.coloursNormal;
+                } else {
+                    $scope.colorxCart = $scope.colorx.coloursBad;
+                }
+
+                $scope.doughnutChartBySelectProject = {
+                    labels: ['', ''],
+                    data: [parseInt($scope.costPercent), $scope.leftCostPercent],
+                    color: $scope.colorxCart
+                }
+            } else {
+                $scope.doughnutChartBySelectProject = {
+                    labels: ['', ''],
+                    data: [0, 100],
+                    color: $scope.colorx.coloursDefault
+                }
+            }
+
 
             $timeout(function() {
                 // If responsive read pane is

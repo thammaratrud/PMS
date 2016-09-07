@@ -103,13 +103,13 @@
     <div layout="row" layout-wrap>
         <div flex="30">
             <div>
-                <canvas id="doughnut" class="chart chart-doughnut chart-do-120" chart-data="vm.doughnutChart.data" chart-labels="vm.doughnutChart.labels"></canvas>
+                <canvas id="doughnut" class="chart chart-doughnut chart-do-120" chart-data="doughnutChartBySelectProject.data" chart-labels="doughnutChartBySelectProject.labels" chart-options="options" chart-colours="doughnutChartBySelectProject.color"></canvas>
             </div>
         </div>
         <div flex="70">
             <ul>
-                <li>Budget:{{vm.selectedProject.BudgetInfo.Budget | number}}</li>
-                <li>Cost:60,000</li>
+                <li>Budget : {{vm.selectedProject.BudgetInfo.Budget | number}}</li>
+                <li>Cost : {{costTotal | number}}</li>
             </ul>
         </div>
     </div>
@@ -123,7 +123,7 @@
                     <th class="text-center">Amount</th>
                 </tr>
             </thead>
-            <tfoot ng-repeat="cost in vm.selectedProject.CostInfo">
+            <tfoot ng-repeat="cost in vm.selectedProject.CostInfo | orderBy:'CostDate' | limitTo: 5">
                 <tr>
                     <td class="text-left">
                         <p>&nbsp; &nbsp; &nbsp; &nbsp;{{cost.CostDate | date:'dd/MM/yy'}}</p>
@@ -167,7 +167,7 @@
                     <th class="text-center">Percent</th>
                 </tr>
             </thead>
-            <tfoot ng-repeat="cost in vm.selectedProject.CostInfo">
+            <tfoot ng-repeat="cost in vm.selectedProject.CostInfo | limitTo : 5">
                 <tr>
                     <td class="text-left">
                         <p>&nbsp; &nbsp; &nbsp; &nbsp;{{cost.CostDate | date:'dd/MM/yy'}}</p>
@@ -194,7 +194,7 @@
     <br>
     <div ng-repeat="period in vm.selectedProject.PeriodInfo">
         <div layout="row" layout-wrap>
-            <label> Period {{period.PeriodID}} : {{period.PeriodAmout}}(30%) = {{period.PeriodDesc}} </label>
+            <label> Period {{period.PeriodOrder}} : {{period.PeriodAmout}}(30%) = {{period.PeriodDesc}} </label>
             <div layout="row" layout-wrap>
                 <div flex="50">
                     <div class="text-right ">
@@ -206,16 +206,12 @@
                 <div flex="20">
                     <div class="inset text-center switchdemoBasicUsage sot">
                     </div>
-                
-                
-                    <md-switch style="margin-top: 7px;" ng-model="IsSuccess">
+                    <md-switch style="margin-top: 7px;" ng-checked="period.PeriodStatus" ng-click="updatePeriod(period,IsSuccess)">
                     </md-switch>
                 </div>
             </div>
         </div>
-
-
-        <div layout="row" layout-wrap ng-show="IsSuccess">
+        <div layout="row" layout-wrap ng-show="period.PeriodStatus">
             <div flex="32">
                 <div class="button">
                     <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Service Invoice" ng-click="" translate="Service Invoice">Service Invoice

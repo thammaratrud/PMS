@@ -1,5 +1,5 @@
 <!-- MAIL LIST ITEMS -->
-<div class="mail-list-item" ng-repeat="project in vm.projectData | filter:searchProject.search" md-ink-ripple ng-click="vm.selectProject(project)" ng-class="{'selected': vm.selectedProject === project}">
+<div class="mail-list-item" ng-repeat="project in vm.projectData | filter:searchProject.search || { ProjectStatus : filterStatus.filter }" md-ink-ripple ng-click="vm.selectProject(project)" ng-class="{'selected': vm.selectedProject === project}">
     <div layout="row" layout-align="start center">
         <md-checkbox class="no-label" ng-checked="vm.isChecked(project)" ng-click="vm.toggleCheck(project, $event)" aria-label="{{vm.isChecked(project)? 'Uncheck':'check'}}">
         </md-checkbox>
@@ -29,7 +29,7 @@
                     <div layout="row" layout-wrap>
                         <div flex="40" ng-repeat="item in costProgress" ng-show="item.name == project.ProjectCode">
                             <br> Cost ({{item.progress | number:0}}%)
-                            <md-progress-linear class="md-green" md-mode="determinate" value="{{item.progress}}"></md-progress-linear>
+                            <md-progress-linear ng-class="{'md-green' : item.progress < 30 ,' md-yellow': item.progress < 70 , 'md-orange' : item.progress >= 70}" md-mode="determinate" value="{{item.progress}}"></md-progress-linear>
                             <!-- md-accent ฟ้า md-warn แดง-->
                         </div> &nbsp; &nbsp; &nbsp; &nbsp;
                         <div flex="40">

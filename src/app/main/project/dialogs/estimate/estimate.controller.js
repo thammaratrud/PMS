@@ -47,7 +47,7 @@
             }
 
             $scope.periodInfo.ProjectID = selected_project.ProjectID;
-            $scope.periodInfo.PeriodStatus = "Wait";
+            $scope.periodInfo.PeriodStatus = "";
             $scope.periodInfo.InvoiceNo = "";
             $scope.periodInfo.InvoiceDate = new Date();
             $scope.periodInfo.InvoiceFile = "";
