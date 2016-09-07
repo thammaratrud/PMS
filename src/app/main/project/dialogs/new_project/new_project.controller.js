@@ -6,7 +6,7 @@
         .controller('NewProjectController', NewProjectController);
 
     /** @ngInject */
-    function NewProjectController($scope, $mdDialog, projectData, projectService) {
+    function NewProjectController($scope, $rootScope, $mdDialog, projectData, projectService) {
         var vm = this;
 
         // Data
@@ -44,7 +44,11 @@
         // step2
         $scope.attention = function() {
             $scope.addAttenStatus = false;
-            var project_id = projectData.length + 1;
+            if (projectData) {
+                var project_id = projectData.length + 1;
+            } else {
+                var project_id = 1;
+            }
             var customer_id = $scope.customerDetailInfo.length + 1;
             vm.formWizard2.CustomerID = customer_id;
             vm.formWizard2.CompanyID = "1-" + project_id;
@@ -94,7 +98,11 @@
 
         function sendProject() {
 
-            var project_id = projectData.length + 1;
+            if (projectData) {
+                var project_id = projectData.length + 1;
+            } else {
+                var project_id = 1;
+            }
 
             var data = {
                 "ProjectID": project_id,
@@ -136,6 +144,8 @@
             }
             projectService.postProject(data).then(function(response) {
                 closeDialog();
+                $rootScope.getProjectData();
+                console.log('Create project success.');
             }, function(err) {
                 console.log('Fail : ' + JSON.stringify(err))
             })
