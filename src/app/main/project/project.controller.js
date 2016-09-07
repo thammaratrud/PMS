@@ -533,9 +533,12 @@
             legendTemplate: '<ul class="tc-chart-js-legend"><% for (var i=0; i<segments.length; i++){%><li><span style="background-color:<%=segments[i].fillColor%>"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>'
         }
 
+        $scope.searchProject = {};
+        $scope.$watch('searchProject', function(n, o) {
+            // console.log(o + ":" + n);
+        }, true);
         // call Service
 
-        
         $rootScope.getProjectData = function() {
             $scope.costPercent = 0;
             $scope.useDays = 0;
@@ -546,73 +549,67 @@
                 console.log('Call Service Success ');
                 vm.projectData = data;
                 vm.selectedProject = vm.projectData[0];
-                vm.doughnutChartTime = [];
-                vm.doughnutChartProcess = [];
-                $scope.costProgress = [];
-                angular.forEach(vm.projectData, function(project) {
-                    if (project.ProjectDuration > 0) {
-                        $scope.useDays = parseInt((new Date() - new Date(project.Created)) / 86400000);
-                        $scope.lefts = project.ProjectDuration - $scope.useDays;
-                        $scope.persenDays = ($scope.useDays / project.ProjectDuration) * 100;
-                        if ($scope.persenDays < 30) {
-                            $scope.colorxCart = $scope.colorx.coloursGood;
-                            $scope.statusCart = 'Good';
-                        } else if ($scope.persenDays < 70) {
-                            $scope.colorxCart = $scope.colorx.coloursNormal;
-                            $scope.statusCart = 'Normal';
-                        } else {
-                            $scope.colorxCart = $scope.colorx.coloursBad;
-                            $scope.statusCart = 'Bad';
-                        }
-
-                        // $scope.colorx = {
-                        //     coloursGood: ['#53e63f', '#b3fda9'],
-                        //     coloursNormal: ['#FFC107', '#f7ffa8'],
-                        //     coloursBad: ['#FF5722', '#fbbfbb'],
-                        //     coloursDefault: ['#039be5', '#8cd9ff']
-
-                        // }
-                    }
-
-                    var costTotal = 0;
-                    $scope.costPercent = 0;
-                    if (project.CostInfo.length > 0) {
-                        angular.forEach(project.CostInfo, function(cost) {
-                            costTotal += cost.CostAmount;
-                        })
-                        $scope.costPercent = (costTotal / project.BudgetInfo.Budget) * 100;
-                    }
-                    $scope.costProgress.push({
-                        name: project.ProjectCode,
-                        progress: $scope.costPercent
-                    })
-
-                    vm.doughnutChartTime.push({
-                        name: project.ProjectCode,
-                        labels: ['', ''],
-                        data: [$scope.useDays, $scope.lefts],
-                        color: $scope.colorxCart,
-                        status: $scope.statusCart
-                    })
-
-                    vm.doughnutChartProcess.push({
-                        name: project.ProjectCode,
-                        labels: ['', ''],
-                        data: [50, 50],
-                        color: $scope.colorx.coloursDefault
-
-                    })
-
-                });
+                $rootScope.chart_progress();
 
             }, function(err) {
                 console.log('Call Service Fail');
             })
         };
 
-
         $rootScope.getProjectData();
 
+        $rootScope.chart_progress = function() {
+            vm.doughnutChartTime = [];
+            vm.doughnutChartProcess = [];
+            $scope.costProgress = [];
+            angular.forEach(vm.projectData, function(project) {
+                if (project.ProjectDuration > 0) {
+                    $scope.useDays = parseInt((new Date() - new Date(project.Created)) / 86400000);
+                    $scope.lefts = project.ProjectDuration - $scope.useDays;
+                    $scope.persenDays = ($scope.useDays / project.ProjectDuration) * 100;
+                    if ($scope.persenDays < 30) {
+                        $scope.colorxCart = $scope.colorx.coloursGood;
+                        $scope.statusCart = 'Good';
+                    } else if ($scope.persenDays < 70) {
+                        $scope.colorxCart = $scope.colorx.coloursNormal;
+                        $scope.statusCart = 'Normal';
+                    } else {
+                        $scope.colorxCart = $scope.colorx.coloursBad;
+                        $scope.statusCart = 'Bad';
+                    }
+                }
+
+                var costTotal = 0;
+                $scope.costPercent = 0;
+                if (project.CostInfo.length > 0) {
+                    angular.forEach(project.CostInfo, function(cost) {
+                        costTotal += cost.CostAmount;
+                    })
+                    $scope.costPercent = (costTotal / project.BudgetInfo.Budget) * 100;
+                }
+                $scope.costProgress.push({
+                    name: project.ProjectCode,
+                    progress: $scope.costPercent
+                })
+
+                vm.doughnutChartTime.push({
+                    name: project.ProjectCode,
+                    labels: ['', ''],
+                    data: [$scope.useDays, $scope.lefts],
+                    color: $scope.colorxCart,
+                    status: $scope.statusCart
+                })
+
+                vm.doughnutChartProcess.push({
+                    name: project.ProjectCode,
+                    labels: ['', ''],
+                    data: [50, 50],
+                    color: $scope.colorx.coloursDefault
+
+                })
+
+            });
+        }
 
         // call Service end
 
@@ -644,7 +641,7 @@
         vm.UploadFiledialog = UploadFiledialog;
 
 
-       
+
         vm.isChecked = isChecked;
         vm.replyDialog = replyDialog;
         vm.selectProject = selectProject;
@@ -682,7 +679,7 @@
                 for (var i = vm.checked.length - 1; i >= 0; i--) {
                     if (projectCode == "") {
                         projectCode = vm.checked[i].ProjectCode + projectCode;
-                    } else if (i > 0) {
+                    } else if (i == vm.checked.length - 2) {
                         projectCode = vm.checked[i].ProjectCode + " and " + projectCode;
                     } else {
                         projectCode = vm.checked[i].ProjectCode + " , " + projectCode;
@@ -697,7 +694,20 @@
                     .ok('OK')
                     .cancel('Cancel');
                 $mdDialog.show(confirm).then(function() {
-                    console.log('You are sure : ' + JSON.stringify(vm.checked));
+                    console.log('You are sure :)');
+                    angular.forEach(vm.checked, function(project) {
+
+                            project.ProjectStatus = status;
+
+                            projectService.putProject(project).then(function() {
+                                console.log('update status success');
+
+                                vm.checked = [];
+                            }, function(err) {
+                                console.log('update status fail' + err);
+                            })
+                        })
+                        // $rootScope.getProjectData();
                 }, function() {
                     console.log('You are  not sure :(');
                 });
@@ -917,12 +927,12 @@
 
 
 
-         function EditDialog(ev) {
+        function EditDialog(ev) {
             $mdDialog.show({
                 controller: 'EditController',
                 controllerAs: 'vm',
                 locals: {
-                    projectData: vm.projectData
+                    selectedProject: vm.selectedProject
                 },
                 templateUrl: 'app/main/project/dialogs/Edit/Edit.html',
                 parent: angular.element($document.body),

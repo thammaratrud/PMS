@@ -6,7 +6,7 @@
         .controller('EstimateController', EstimateController);
 
     /** @ngInject */
-    function EstimateController($scope, $mdDialog, selectedProject, projectService) {
+    function EstimateController($scope, $rootScope, $mdDialog, selectedProject, projectService) {
 
         var vm = this;
         var selected_project = selectedProject;
@@ -74,7 +74,7 @@
             if (remove > -1) {
                 $scope.periodData.splice(remove, 1);
             }
-             $scope.periodInfo = {};
+            $scope.periodInfo = {};
         }
 
         //swith//
@@ -98,6 +98,7 @@
 
             projectService.putProject(projectData).then(function() {
                 console.log('Post estimate success.');
+                $rootScope.chart_progress();
             }, function(err) {
                 console.log('Post estimate fail.');
             })

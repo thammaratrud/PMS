@@ -1,5 +1,5 @@
 <!-- MAIL LIST ITEMS -->
-<div class="mail-list-item" ng-repeat="project in vm.projectData" md-ink-ripple ng-click="vm.selectProject(project)" ng-class="{'selected': vm.selectedProject === project}">
+<div class="mail-list-item" ng-repeat="project in vm.projectData | filter:searchProject.search" md-ink-ripple ng-click="vm.selectProject(project)" ng-class="{'selected': vm.selectedProject === project}">
     <div layout="row" layout-align="start center">
         <md-checkbox class="no-label" ng-checked="vm.isChecked(project)" ng-click="vm.toggleCheck(project, $event)" aria-label="{{vm.isChecked(project)? 'Uncheck':'check'}}">
         </md-checkbox>

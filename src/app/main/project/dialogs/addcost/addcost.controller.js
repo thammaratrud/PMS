@@ -59,12 +59,13 @@
 
             projectService.putProject(select_project).then(function() {
                 console.log('Put cost success.');
+                $rootScope.chart_progress();
             }, function(err) {
                 console.log('Put cost fail.');
             })
 
             $scope.selectName = {};
-            $rootScope.getProjectData();
+
             closeDialog()
         }
 

@@ -6,13 +6,13 @@
         .controller('EditController', EditController);
 
     /** @ngInject */
-    function EditController($scope, $mdDialog, projectData, projectService) {
-        var vm = this;
+    function EditController($scope, $mdDialog, selectedProject, projectService) {
 
+        $scope.select_project = selectedProject;
+        var vm = this;
         // Data
         // Methods
         vm.closeDialog = closeDialog;
-        vm.sendProject = sendProject;
 
         vm.formWizard = {};
         vm.formWizard2 = {};
@@ -24,8 +24,8 @@
         $scope.addAttenStatus = false;
         $scope.scopeOfWorkStatus = false;
 
-        $scope.customerDetailInfo = [];
-        $scope.scopeOfWorkInfo = [];
+        $scope.customerDetailInfo = $scope.select_project.CustomerInfo.CustomerDetailInfo;
+        $scope.scopeOfWorkInfo = $scope.select_project.ScopeInfo;
 
         function closeDialog() {
             $mdDialog.hide();
@@ -44,7 +44,7 @@
         // step2
         $scope.attention = function() {
             $scope.addAttenStatus = false;
-            var project_id = projectData.length + 1;
+            var project_id = select_project.length + 1;
             var customer_id = $scope.customerDetailInfo.length + 1;
             vm.formWizard2.CustomerID = customer_id;
             vm.formWizard2.CompanyID = "1-" + project_id;
@@ -85,60 +85,20 @@
             $scope.scopeOfWorkStatus = false;
 
             var scope_id = $scope.scopeOfWorkInfo.length + 1;
-            var project_id = projectData.length + 1;
+            var project_id = select_project.length + 1;
             vm.formWizard3.ProjectID = project_id;
             // vm.formWizard3.ScopeID = scope_id;
             $scope.scopeOfWorkInfo.push(vm.formWizard3);
             vm.formWizard3 = {};
         }
 
-        function sendProject() {
-
-            var project_id = projectData.length + 1;
-
-            var data = {
-                "ProjectID": project_id,
-                "ProjectCode": vm.formWizard.project_code,
-                "ProjectName": vm.formWizard.project_name,
-                "ProjectStatus": "Pause",
-                "ProjectDuration": vm.formWizard.duration,
-                "ScopeInfo": $scope.scopeOfWorkInfo,
-                "CustomerInfo": {
-                    "ProjectID": project_id,
-                    "CompanyID": "1-" + project_id,
-                    "CompanyName": vm.formWizard.client,
-                    "CompanyAddress": vm.formWizard.company_address,
-                    "CustomerDetailInfo": $scope.customerDetailInfo
-                },
-                "BudgetInfo": {
-                    "ProjectID": project_id,
-                    "Price": 0,
-                    "Budget": 0,
-                    "IsIncludeVat": false
-                },
-                "PeriodInfo": [],
-                "QuotationInfo": {
-                    "ProjectID": project_id,
-                    "QuotationNo": "",
-                    "QuotationDate": new Date(),
-                    "QuotationFile": ""
-                },
-                "PurchaseInfo": {
-                    "ProjectID": project_id,
-                    "PurchaseNo": "",
-                    "PurchaseDate": new Date(),
-                    "PurchaseFile": "",
-                    "DrillDate": new Date()
-                },
-                "CostInfo": [],
-                "TaskInfo": [],
-                "DocumentInfo": []
-            }
-            projectService.postProject(data).then(function(response) {
-                closeDialog();
-            }, function(err) {
-                console.log('Fail : ' + JSON.stringify(err))
-            })
+        $scope.sendEditProject = function() {
+            console.log(select_project);
+            // projectService.postProject(select_project).then(function(response) {
+            //     closeDialog();
+            // }, function(err) {
+            //     console.log('Fail : ' + JSON.stringify(err))
+            // })
         }
 
         $scope.changeCustomerDetail = function(atten) {
