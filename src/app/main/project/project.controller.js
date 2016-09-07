@@ -638,15 +638,19 @@
         vm.closeReadPane = closeReadPane;
         vm.composeDialog = composeDialog;
         vm.EstimateDialog = EstimateDialog;
-        vm.UploadpoDialog = UploadpoDialog
-        vm.AddCostDialog = AddCostDialog
-        vm.UploadAppointment = UploadAppointment
-        vm.UploadFiledialog = UploadFiledialog
+        vm.UploadpoDialog = UploadpoDialog;
+        vm.AddCostDialog = AddCostDialog;
+        vm.UploadAppointment = UploadAppointment;
+        vm.UploadFiledialog = UploadFiledialog;
+
+
+       
         vm.isChecked = isChecked;
         vm.replyDialog = replyDialog;
         vm.selectProject = selectProject;
         vm.toggleStarred = toggleStarred;
         vm.toggleCheck = toggleCheck;
+        vm.EditDialog = EditDialog;
 
         $scope.financeStatus = true;
         $scope.documentStatus = false;
@@ -913,6 +917,22 @@
 
 
 
+         function EditDialog(ev) {
+            $mdDialog.show({
+                controller: 'EditController',
+                controllerAs: 'vm',
+                locals: {
+                    projectData: vm.projectData
+                },
+                templateUrl: 'app/main/project/dialogs/Edit/Edit.html',
+                parent: angular.element($document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            });
+        }
+
+
+
         function UploadAppointment(ev) {
             $mdDialog.show({
                 controller: 'AppointmentController',
@@ -926,6 +946,20 @@
                 clickOutsideToClose: true
             });
         }
+
+        // function EditProjectDialog(ev) {
+        //     $mdDialog.show({
+        //         controller: 'EditProjectController',
+        //         controllerAs: 'vm',
+        //         locals: {
+        //             selectedProject:  vm.projectData
+        //         },
+        //         templateUrl: 'app/main/project/dialogs/EditProject/EditProject.html',
+        //         parent: angular.element($document.body),
+        //         targetEvent: ev,
+        //         clickOutsideToClose: true
+        //     });
+        // }
 
         /**
          * Open reply dialog
@@ -945,6 +979,10 @@
                 clickOutsideToClose: true
             });
         }
+
+
+
+
 
         /**
          * Toggle sidenav
