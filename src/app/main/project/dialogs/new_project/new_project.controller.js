@@ -99,6 +99,7 @@
         function sendProject() {
 
             if (projectData) {
+
                 var project_id = projectData.length + 1;
             } else {
                 var project_id = 1;
@@ -143,8 +144,9 @@
                 "DocumentInfo": []
             }
             projectService.postProject(data).then(function(response) {
-                closeDialog();
+
                 $rootScope.getProjectData();
+                closeDialog();
                 console.log('Create project success.');
             }, function(err) {
                 console.log('Fail : ' + JSON.stringify(err))

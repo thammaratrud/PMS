@@ -534,9 +534,8 @@
         }
 
         // call Service
-        vm.doughnutChartTime = [];
-        vm.doughnutChartProcess = [];
-        $scope.costProgress = [];
+
+        
         $rootScope.getProjectData = function() {
             $scope.costPercent = 0;
             $scope.useDays = 0;
@@ -547,7 +546,9 @@
                 console.log('Call Service Success ');
                 vm.projectData = data;
                 vm.selectedProject = vm.projectData[0];
-
+                vm.doughnutChartTime = [];
+                vm.doughnutChartProcess = [];
+                $scope.costProgress = [];
                 angular.forEach(vm.projectData, function(project) {
                     if (project.ProjectDuration > 0) {
                         $scope.useDays = parseInt((new Date() - new Date(project.Created)) / 86400000);

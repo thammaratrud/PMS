@@ -6,7 +6,7 @@
         .controller('AddcostController', AddcostController);
 
     /** @ngInject */
-    function AddcostController($scope, $mdDialog, selectedProject, projectService) {
+    function AddcostController($scope, $rootScope, $mdDialog, selectedProject, projectService) {
         var select_project = selectedProject;
         var vm = this;
 
@@ -64,6 +64,7 @@
             })
 
             $scope.selectName = {};
+            $rootScope.getProjectData();
             closeDialog()
         }
 
