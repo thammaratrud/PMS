@@ -50,6 +50,12 @@
                     <span translate="">Cost</span>
                 </md-button>
             </md-menu-item>
+            <md-menu-item>
+                <md-button aria-label="Mark as unread" translate-aria-label="" ng-click="vm.EditDialog($event)">
+                    <md-icon md-font-icon="icon-border-color"></md-icon>
+                    <span translate="">Edit Project</span>
+                </md-button>
+            </md-menu-item>
         </md-menu-content>
     </md-menu>
 </div>
@@ -189,34 +195,23 @@
     <div ng-repeat="period in vm.selectedProject.PeriodInfo">
         <div layout="row" layout-wrap>
             <label> Period {{period.PeriodID}} : {{period.PeriodAmout}}(30%) = {{period.PeriodDesc}} </label>
-        
-
-<div layout="row" layout-wrap>
-<div flex="50">
-                     
-                <div class="text-right " >
-                    <md-button class="md-fab gry cot" >
-                        
-                    </md-button>
+            <div layout="row" layout-wrap>
+                <div flex="50">
+                    <div class="text-right ">
+                        <md-button class="md-fab gry cot">
+                        </md-button>
+                    </div>
                 </div>
-            </div>
-            &nbsp;&nbsp;
-
-             <div flex="20">
-       
+                &nbsp;&nbsp;
+                <div flex="20">
                     <div class="inset text-center switchdemoBasicUsage sot">
                     </div>
                 
                 
                     <md-switch style="margin-top: 7px;" ng-model="IsSuccess">
                     </md-switch>
-                    </div>
-
- 
-             </div>
-
-
-
+                </div>
+            </div>
         </div>
 
 
@@ -237,7 +232,7 @@
                 </div>
             </div>
         </div>
-         <br>
+        <br>
         <br>
     </div>
 </div>
