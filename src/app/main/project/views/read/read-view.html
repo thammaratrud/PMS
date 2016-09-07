@@ -208,7 +208,7 @@
                     </div>
                 
                 
-                    <md-switch style="margin-top: 7px;">
+                    <md-switch style="margin-top: 7px;" ng-model="IsSuccess">
                     </md-switch>
                     </div>
 
@@ -220,7 +220,7 @@
         </div>
 
 
-        <div layout="row" layout-wrap>
+        <div layout="row" layout-wrap ng-show="IsSuccess">
             <div flex="32">
                 <div class="button">
                     <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Service Invoice" ng-click="" translate="Service Invoice">Service Invoice

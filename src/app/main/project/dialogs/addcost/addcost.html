@@ -65,26 +65,28 @@
                     </div>
                 </div>
             </div>
-            <div layout="row" layout-wrap>
-                <div flex="70">
-                    <md-input-container class="md-block input-project">
-                        <label translate="PROJECT.ADDCOST_NAME">Name</label>
-                        <input type="text" ng-model="addCost.CostName">
-                    </md-input-container>
+            <div ng-show="addCost.IsTax">
+                <div layout="row" layout-wrap>
+                    <div flex="70">
+                        <md-input-container class="md-block input-project">
+                            <label translate="PROJECT.ADDCOST_NAME">Name</label>
+                            <input type="text" ng-model="addCost.CostName">
+                        </md-input-container>
+                    </div>
+                    <div flex="30">
+                        <md-input-container class="md-block input-project">
+                            <label translate="PROJECT.ADDCOST_NO">No.</label>
+                            <input type="text" ng-model="addCost.CostNoTax">
+                        </md-input-container>
+                    </div>
                 </div>
-                <div flex="30">
-                    <md-input-container class="md-block input-project">
-                        <label translate="PROJECT.ADDCOST_NO">No.</label>
-                        <input type="text" ng-model="addCost.CostNoTax">
-                    </md-input-container>
-                </div>
-            </div>
-            <div layout="row" layout-wrap>
-                <div flex="100">
-                    <md-input-container class="md-block input-project">
-                        <label translate="PROJECT.ADDCOST_ADDRESS">Address</label>
-                        <input type="text" ng-model="addCost.CostAdd">
-                    </md-input-container>
+                <div layout="row" layout-wrap>
+                    <div flex="100">
+                        <md-input-container class="md-block input-project">
+                            <label translate="PROJECT.ADDCOST_ADDRESS">Address</label>
+                            <input type="text" ng-model="addCost.CostAdd">
+                        </md-input-container>
+                    </div>
                 </div>
             </div>
         </md-dialog-content>
