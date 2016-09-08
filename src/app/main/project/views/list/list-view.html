@@ -47,7 +47,7 @@
                 </div>
                 <!-- กราฟ -->
                 <div flex="25" class="margin-top-35">
-                    <canvas ng-repeat="canPro in vm.doughnutChartProcess" ng-show="canPro.name == project.ProjectCode" id="doughnut" class="chart chart-doughnut chart-do-90" chart-data="canPro.data" chart-labels="canPro.labels" chart-options="options" chart-colours="canPro.color"></canvas>
+                    <canvas ng-repeat="canPro in doughnutChartProcess" ng-show="canPro.name == project.ProjectCode" id="doughnut" class="chart chart-doughnut chart-do-90" chart-data="canPro.data" chart-labels="canPro.labels" chart-options="options" chart-colours="canPro.color"></canvas>
                     <div class="icon-chart-process">
                         <md-icon class="font-size-100 color-clam" md-font-icon="icon-margin"></md-icon>
                     </div>

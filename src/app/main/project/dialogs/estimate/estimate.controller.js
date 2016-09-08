@@ -20,11 +20,13 @@
         vm.closeDialog = closeDialog;
         $scope.estimateStatus = false;
         $scope.periodInfo = {};
-        $scope.periodData = selected_project.PeriodInfo;
+        $scope.periodData = angular.copy(selected_project.PeriodInfo);
+        $scope.periodOriginal = selected_project.PeriodInfo;
         //////////
 
         function closeDialog() {
             $mdDialog.hide();
+            $scope.periodData = $scope.periodOriginal;
         }
 
 

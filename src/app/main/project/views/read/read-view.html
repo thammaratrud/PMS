@@ -146,13 +146,13 @@
     <div layout="row" layout-wrap>
         <div flex="30">
             <div>
-                <canvas id="doughnut" class="chart chart-doughnut chart-do-120" chart-data="vm.doughnutChart.data" chart-labels="vm.doughnutChart.labels"></canvas>
+                <canvas id="doughnut" class="chart chart-doughnut chart-do-120" chart-data="receiptChartBySelectProject.data" chart-labels="receiptChartBySelectProject.labels" chart-options="options" chart-colours="receiptChartBySelectProject.color"></canvas>
             </div>
         </div>
         <div flex="70">
             <ul>
                 <li>Price:{{vm.selectedProject.BudgetInfo.Price | number}}</li>
-                <li>Receipt:90,000</li>
+                <li>Receipt:{{receiptTotal}}</li>
             </ul>
         </div>
     </div>
@@ -167,14 +167,14 @@
                     <th class="text-center">Percent</th>
                 </tr>
             </thead>
-            <tfoot ng-repeat="cost in vm.selectedProject.CostInfo | limitTo : 5">
+            <tfoot ng-repeat="period in vm.selectedProject.PeriodInfo | filter:{PeriodStatus:'PERIOD_RECEIPTED'}">
                 <tr>
                     <td class="text-left">
-                        <p>&nbsp; &nbsp; &nbsp; &nbsp;{{cost.CostDate | date:'dd/MM/yy'}}</p>
+                        <p>&nbsp; &nbsp; &nbsp; &nbsp;{{period.ReceiptDate | date:'dd/MM/yy'}}</p>
                     </td>
-                    <td class="text-left">{{cost.CostDesc}}</td>
-                    <td class="text-center">{{cost.CostAmount}} บาท&nbsp; &nbsp; &nbsp; &nbsp;</td>
-                    <td class="text-center">30%</td>
+                    <td class="text-center">{{period.PeriodDesc}}</td>
+                    <td class="text-center">{{period.PeriodAmout}} บาท&nbsp; &nbsp; &nbsp; &nbsp;</td>
+                    <td class="text-center">{{period.PeriodPercent}}%</td>
                 </tr>
             </tfoot>
         </table>
@@ -194,21 +194,17 @@
     <br>
     <div ng-repeat="period in vm.selectedProject.PeriodInfo">
         <div layout="row" layout-wrap>
-            <label> Period {{period.PeriodOrder}} : {{period.PeriodAmout}}(30%) = {{period.PeriodDesc}} </label>
-            <div layout="row" layout-wrap>
-                <div flex="50">
-                    <div class="text-right ">
-                        <md-button class="md-fab gry cot">
-                        </md-button>
-                    </div>
-                </div>
-                &nbsp;&nbsp;
-                <div flex="20">
-                    <div class="inset text-center switchdemoBasicUsage sot">
-                    </div>
-                    <md-switch style="margin-top: 7px;" ng-checked="period.PeriodStatus" ng-click="updatePeriod(period,IsSuccess)">
-                    </md-switch>
-                </div>
+            <div flex="40">
+                <label> Period {{period.PeriodOrder}} : {{period.PeriodAmout}}({{period.PeriodPercent}}%) = {{period.PeriodDesc}} </label>
+            </div>
+            <div flex="50">
+                <md-button class="md-fab gry cot" ng-class="{'period-status-red' : period.PeriodStatus == 'PERIOD_SUCCESS' , 'period-status-yellow' : period.PeriodStatus == 'PERIOD_WAITING' ,'period-status-green' : period.PeriodStatus == 'PERIOD_RECEIPTED'}">
+                    <md-tooltip><span translate="PROJECT.{{period.PeriodStatus}}">Cancel</span></md-tooltip>
+                </md-button>
+            </div>
+            <div flex="10">
+                <md-switch ng-disabled="period.PeriodStatus == 'PERIOD_WAITING' || period.PeriodStatus == 'PERIOD_RECEIPTED'" style="margin-top: -7px;" ng-checked="period.PeriodStatus" ng-click="updatePeriod(period,IsSuccess)">
+                </md-switch>
             </div>
         </div>
         <div layout="row" layout-wrap ng-show="period.PeriodStatus">
@@ -219,12 +215,12 @@
             </div>
             <div flex="32">
                 <div class="button">
-                    <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Appointment" ng-click="vm.UploadAppointment($event)" translate="Appointment">Appointment
+                    <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Appointment" ng-click="vm.UploadAppointment($event , period)" translate="Appointment">Appointment
                 </div>
             </div>
             <div flex="32">
                 <div class="button">
-                    <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Tax Invoice" ng-click="" translate="Tax Invoice">Tax Invoice
+                    <md-button class="md-raised" ng-disabled="period.PeriodStatus == 'PERIOD_SUCCESS'" style="background-color: rgb(EEEEEE);" aria-label="Tax Invoice" ng-click="taxInvoice(period)" translate="Tax Invoice">Tax Invoice
                 </div>
             </div>
         </div>

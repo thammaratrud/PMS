@@ -467,38 +467,10 @@
 
         }
         $scope.IsSuccess = false;
-        // $scope.coloursGood = ['#53e63f', '#b3fda9'];
-        // $scope.coloursNormal = ['#FFC107', '#f7ffa8'];
-        // $scope.coloursBad = ['#FF5722', '#fbbfbb'];
 
         $scope.durationValue = 100;
 
-        vm.doughnutChartTime = [{
-            name: 'COA',
-            labels: ['UTime', 'Time'],
-            data: [90, 50],
-            color: $scope.colorx.coloursNormal,
-            status: 'Normal'
-        }, {
-            name: 'TTSM',
-            labels: ['UTime', 'Time'],
-            data: [10, 80],
-            color: $scope.colorx.coloursGood,
-            status: 'Good'
-        }, {
-            name: 'TTSM V2',
-            labels: ['UTime', 'Time'],
-            data: [10, 80],
-            color: $scope.colorx.coloursGood,
-            status: 'Good'
-        }];
-
-
-        vm.doughnutChart = {
-            labels: ['', ''],
-            data: [70, 30],
-            color: $scope.colorx.coloursDefault
-        };
+        vm.doughnutChartReceipted = {};
         // Chart.js Options
         $scope.options = {
 
@@ -553,7 +525,11 @@
             data: [0, 100],
             color: $scope.colorx.coloursBad
         }
+
+
         $rootScope.getProjectData = function() {
+            var periodPercentAmount = 0;
+            var periodPercentleft = 100;
             $scope.costPercent = 0;
             $scope.useDays = 0;
             $scope.lefts = 0;
@@ -583,6 +559,22 @@
                         color: $scope.colorxCart
                     }
                 }
+                if (vm.selectedProject.PeriodInfo.length > 0) {
+                    angular.forEach(vm.selectedProject.PeriodInfo, function(period) {
+                        if (period.PeriodStatus == 'PERIOD_RECEIPTED') {
+                            periodPercentAmount += period.PeriodPercent;
+                        }
+                    })
+                    periodPercentleft = periodPercentleft - periodPercentAmount;
+                    $scope.receiptChartBySelectProject = {
+                        labels: ['Receipt(%)', 'Price(%)'],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursBad
+                    }
+                }
+
+
+
                 $rootScope.chart_progress();
 
             }, function(err) {
@@ -594,7 +586,7 @@
 
         $rootScope.chart_progress = function() {
             vm.doughnutChartTime = [];
-            vm.doughnutChartProcess = [];
+            $scope.doughnutChartProcess = [];
             $scope.costProgress = [];
             angular.forEach(vm.projectData, function(project) {
                 if (project.ProjectDuration > 0) {
@@ -634,14 +626,44 @@
                     status: $scope.statusCart
                 })
 
-                vm.doughnutChartProcess.push({
-                    name: project.ProjectCode,
-                    labels: ['', ''],
-                    data: [50, 50],
-                    color: $scope.colorx.coloursDefault
+                // Progress Chart
 
-                })
+                // vm.doughnutChartProcess.push({
+                //         name: project.ProjectCode,
+                //         labels: ['', ''],
+                //         data: [50, 50],
+                //         color: $scope.colorx.coloursDefault
 
+                //     })
+                var periodPercentAmount = 0;
+                var periodPercentleft = 100;
+
+                if (project.PeriodInfo.length > 0) {
+
+                    angular.forEach(project.PeriodInfo, function(period) {
+
+                        if (period.PeriodStatus == 'PERIOD_RECEIPTED') {
+                            periodPercentAmount += period.PeriodPercent;
+                        }
+
+                    })
+                    periodPercentleft = periodPercentleft - periodPercentAmount;
+                    $scope.doughnutChartProcess.push({
+                        name: project.ProjectCode,
+                        labels: ['Price(%)', 'Receipt(%)'],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursDefault
+                    })
+
+                } else {
+                    $scope.doughnutChartProcess.push({
+                        name: project.ProjectCode,
+                        labels: ['Price(%)', 'Receipt(%)'],
+                        data: [0, 100],
+                        color: $scope.colorx.coloursDefault
+                    })
+                }
+                // Progress Chart end
             });
         }
 
@@ -768,57 +790,79 @@
             }
 
         };
-
         $scope.updatePeriod = function(period, e) {
 
-            var confirm = $mdDialog.confirm()
-                .title('Confirm?')
-                .textContent('Are you sure for update period.')
-                .ariaLabel('update period.')
-                .targetEvent()
-                .ok('OK')
-                .cancel('Cancel');
-            $mdDialog.show(confirm).then(function() {
-                console.log('You are sure :)');
+            if (period.PeriodStatus == "" || period.PeriodStatus == "PERIOD_SUCCESS") {
 
-                angular.forEach(vm.selectedProject.PeriodInfo, function(periodInfo) {
-                    if (periodInfo.PeriodOrder == period.PeriodOrder) {
-                        if(periodInfo.PeriodStatus){
-                            periodInfo.PeriodStatus = '';
-                        }else{
-                            periodInfo.PeriodStatus = 'Success';
+                var confirm = $mdDialog.confirm()
+                    .title('Confirm?')
+                    .textContent('Are you sure for update period.')
+                    .ariaLabel('update period.')
+                    .targetEvent()
+                    .ok('OK')
+                    .cancel('Cancel');
+                $mdDialog.show(confirm).then(function() {
+                    console.log('You are sure :)');
+
+                    angular.forEach(vm.selectedProject.PeriodInfo, function(periodInfo) {
+                        if (periodInfo.PeriodOrder == period.PeriodOrder) {
+                            if (periodInfo.PeriodStatus) {
+                                periodInfo.PeriodStatus = "";
+                            } else {
+                                periodInfo.PeriodStatus = "PERIOD_SUCCESS";
+                            }
+
                         }
-                         
+                    })
+
+
+                    projectService.putProject(vm.selectedProject).then(function() {
+
+                        console.log('update period success');
+                        // $rootScope.chart_progress();
+                    }, function(err) {
+                        console.log('update period fail' + err);
+                    })
+
+                    if ($scope.IsSuccess == true) {
+                        $scope.IsSuccess = false;
+                    } else {
+                        $scope.IsSuccess = true;
                     }
-                })
 
+                }, function() {
+                    console.log('You are  not sure :(');
 
-                projectService.putProject(vm.selectedProject).then(function() {
+                    if ($scope.IsSuccess == true) {
+                        $scope.IsSuccess = true;
+                    } else {
+                        $scope.IsSuccess = false;
+                    }
 
-                    console.log('update period success');
-                    // $rootScope.chart_progress();
-                }, function(err) {
-                    console.log('update period fail' + err);
-                })
+                    console.log($scope.IsSuccess);
 
+                });
 
-                if ($scope.IsSuccess == true) {
-                    $scope.IsSuccess = false;
-                } else {
-                    $scope.IsSuccess = true;
+            }
+
+        }
+
+        $scope.taxInvoice = function(period) {
+
+            angular.forEach(vm.selectedProject.PeriodInfo, function(periodInfo) {
+                if (periodInfo.PeriodOrder == period.PeriodOrder) {
+
+                    periodInfo.PeriodStatus = "PERIOD_RECEIPTED";
+
                 }
-            }, function() {
-                console.log('You are  not sure :(');
+            })
 
-                if ($scope.IsSuccess == true) {
-                    $scope.IsSuccess = true;
-                } else {
-                    $scope.IsSuccess = false;
-                }
-
-                console.log($scope.IsSuccess);
-
-            });
+            projectService.putProject(vm.selectedProject).then(function() {
+                console.log('update period success');
+                // $rootScope.chart_progress();
+            }, function(err) {
+                console.log('update period fail' + err);
+            })
 
         }
 
@@ -846,10 +890,12 @@
 
             vm.selectedProject = project;
 
-
+            var periodPercentAmount = 0;
+            var periodPercentleft = 100;
             $scope.costTotal = 0;
             $scope.costPercent = 0;
             $scope.colorxCart;
+            $scope.receiptTotal = 0;
             if (project.CostInfo.length > 0) {
                 angular.forEach(project.CostInfo, function(cost) {
                     $scope.costTotal += cost.CostAmount;
@@ -877,7 +923,26 @@
                     color: $scope.colorx.coloursDefault
                 }
             }
-
+            if (vm.selectedProject.PeriodInfo.length > 0) {
+                angular.forEach(vm.selectedProject.PeriodInfo, function(period) {
+                    if (period.PeriodStatus == 'PERIOD_RECEIPTED') {
+                        periodPercentAmount += period.PeriodPercent;
+                        $scope.receiptTotal += period.PeriodAmout;
+                    }
+                })
+                periodPercentleft = periodPercentleft - periodPercentAmount;
+                $scope.receiptChartBySelectProject = {
+                    labels: ['Price(%)', 'Receipt(%)'],
+                    data: [periodPercentAmount, periodPercentleft],
+                    color: $scope.colorx.coloursBad
+                }
+            } else {
+                $scope.receiptChartBySelectProject = {
+                    labels: ['Price(%)', 'Receipt(%)'],
+                    data: [0, 100],
+                    color: $scope.colorx.coloursBad
+                }
+            }
 
             $timeout(function() {
                 // If responsive read pane is
@@ -1069,12 +1134,13 @@
 
 
 
-        function UploadAppointment(ev) {
+        function UploadAppointment(ev, period) {
             $mdDialog.show({
                 controller: 'AppointmentController',
                 controllerAs: 'vm',
                 locals: {
-                    selectedProject: undefined
+                    selectedProject: vm.selectedProject,
+                    period: period
                 },
                 templateUrl: 'app/main/project/dialogs/appointment/appointment.html',
                 parent: angular.element($document.body),
