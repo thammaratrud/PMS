@@ -720,6 +720,9 @@
         vm.UploadAppointment = UploadAppointment;
         vm.UploadFiledialog = UploadFiledialog;
 
+        vm.receiptmore = receiptmore;
+        vm.costmore = vm.costmore
+
 
 
         vm.isChecked = isChecked;
@@ -864,6 +867,7 @@
                     }
 
                     console.log($scope.IsSuccess);
+<<<<<<< HEAD
 
                 });
 
@@ -923,6 +927,67 @@
                 console.log('update period fail' + err);
             })
 
+=======
+
+                });
+
+            }
+
+        }
+
+        $scope.taxInvoice = function(period) {
+
+            var periodPercentAmount = 0;
+            var periodPercentleft = 100;
+
+            angular.forEach(vm.selectedProject.PeriodInfo, function(periodInfo) {
+                if (periodInfo.PeriodOrder == period.PeriodOrder) {
+
+                    periodInfo.PeriodStatus = "PERIOD_RECEIPTED";
+
+                }
+            })
+
+            projectService.putProject(vm.selectedProject).then(function() {
+                console.log('update period success');
+                $rootScope.chart_progress();
+
+                if (vm.selectedProject.PeriodInfo.length > 0) {
+                    angular.forEach(vm.selectedProject.PeriodInfo, function(period) {
+                        if (period.PeriodStatus == 'PERIOD_RECEIPTED') {
+                            periodPercentAmount += period.PeriodPercent;
+                            $scope.receiptTotal += period.PeriodAmout;
+                        }
+                    })
+                    periodPercentleft = periodPercentleft - periodPercentAmount;
+                    $scope.receiptChartBySelectProject = {
+                        labels: ['Price(%)', 'Receipt(%)'],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursBad
+                    }
+                    $scope.progressChartBySelectProject = {
+                        labels: ['', ''],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursDefault
+                    }
+                } else {
+                    $scope.receiptChartBySelectProject = {
+                        labels: ['Price(%)', 'Receipt(%)'],
+                        data: [0, 100],
+                        color: $scope.colorx.coloursBad
+                    }
+                    $scope.progressChartBySelectProject = {
+                        labels: ['', ''],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursDefault
+                    }
+                }
+                // $rootScope.chart_progress();
+            }, function(err) {
+                console.log('update period fail' + err);
+            })
+
+>>>>>>> 84ed52606052533a2226c25ebe521fd309513def
         }
 
         // Watch screen size to activate responsive read pane
@@ -1185,6 +1250,51 @@
         }
 
 
+function receiptmore(ev,receipt) {
+            $mdDialog.show({
+                controller: 'receiptmoreController',
+                controllerAs: 'vm',
+                locals: {
+                    receipt: receipt
+                },
+                templateUrl: 'app/main/project/dialogs/receipt-more/receipt-more.html',
+                parent: angular.element($document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            });
+        }
+
+
+
+
+function costmore(ev,cost) {
+            $mdDialog.show({
+                controller: 'costmoreController',
+                controllerAs: 'vm',
+                locals: {
+                    cost: cost
+                },
+                templateUrl: 'app/main/project/dialogs/cost-more/cost-more.html',
+                parent: angular.element($document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            });
+        }
+
+
+$scope.costsMore = function(ev,cost){
+                  $mdDialog.show({
+                controller: 'costmoreController',
+                controllerAs: 'vm',
+                locals: {
+                    cost: cost
+                },
+                templateUrl: 'app/main/project/dialogs/cost-more/cost-more.html',
+                parent: angular.element($document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            });
+}
 
 
 
@@ -1218,6 +1328,18 @@
                 clickOutsideToClose: true
             });
         }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

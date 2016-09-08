@@ -138,7 +138,7 @@
     <br>
     <div layout="row" class="text-right" layout-wrap>
         <div class="compose-button">
-            <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" aria-label="compose" translate="More">More
+            <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" aria-label="compose" translate="More" ng-click="costsMore(event, vm.selectedProject.CostInfo)">More
             </md-button>
         </div>
     </div>
@@ -183,7 +183,7 @@
     <br>
     <div layout="row" class="text-right" layout-wrap>
         <div class="compose-button">
-            <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" aria-label="compose" translate="More">More
+            <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" aria-label="compose" translate="More" ng-click="vm.receiptmore(event,vm.selectedProject.PeriodInfo)">More
             </md-button>
         </div>
     </div>
@@ -228,13 +228,18 @@
         <br>
     </div>
 </div>
+
+
+
+
+
 <div ng-show="documentStatus">
     <div layout="row" layout-wrap>
         <h2><strong><label >Finance Document</label></strong></h2>
     </div>
     <div layout="row" layout-wrap>
-        <div class="simple-table-container md-whiteframe-4dp">
-            <table class="simple" ms-responsive-table>
+        
+            <table class="simple md-whiteframe-2dp">
                 <thead>
                     <tr style="background-color: #c5c5c5;">
                         <th>Document</th>
@@ -244,23 +249,27 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <td>Quotation</td>
+                        <td class="text-center">Quotation</td>
                         <td>01/01/16</td>
                         <td>
-                            <form name="myForm">
-                                <input type="checkbox">
-                                <label translate=""></label>
-                            </form>
+                            <div class="text-left">
+ <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
+                    <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                    <md-tooltip><span translate=""></span></md-tooltip>
+                </md-button>
+                </div>
                         </td>
                     </tr>
                     <tr>
                         <td>Purchase Order</td>
                         <td>12/06/16</td>
                         <td>
-                            <form name="myForm">
-                                <input type="checkbox">
-                                <label translate=""></label>
-                            </form>
+                           <div class="text-left">
+ <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
+                    <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                    <md-tooltip><span translate=""></span></md-tooltip>
+                </md-button>
+                </div>
                         </td>
                     </tr>
                 </tfoot>
@@ -273,8 +282,8 @@
         <h2><strong><label>Project Document</label></strong></h2>
     </div>
     <div layout="row" layout-wrap>
-        <div class="simple-table-container md-whiteframe-4dp">
-            <table class="simple" ms-responsive-table>
+        
+            <table class="simple md-whiteframe-2dp" >
                 <thead>
                     <tr style="background-color: #c5c5c5;">
                         <th>Document</th>
@@ -287,10 +296,23 @@
                         <td>SRS</td>
                         <td>22/04/16</td>
                         <td>
-                            <form name="myForm">
-                                <input type="checkbox">
-                                <label translate=""></label>
-                            </form>
+
+                        <div class="text-left">
+ <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
+                    <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                    <md-tooltip><span translate=""></span></md-tooltip>
+                </md-button>
+                </div>
+                           
+
+
+
+
+
+
+
+
+
                         </td>
                     </tr>
                 </tfoot>
