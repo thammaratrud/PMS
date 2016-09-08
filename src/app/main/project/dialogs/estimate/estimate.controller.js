@@ -23,6 +23,42 @@
         $scope.periodOriginal = selected_project.PeriodInfo;
         $scope.periodData = angular.copy($scope.periodOriginal);
         //////////
+        $scope.calculateAmout = function() {
+            var checkAmout = 0;
+            angular.forEach($scope.periodData, function(period) {
+
+                checkAmout += period.PeriodPercent;
+
+            })
+            if ((checkAmout + $scope.periodInfo.PeriodPercent) <= 100) {
+                var newAmout = ($scope.budgetData.Price * $scope.periodInfo.PeriodPercent) / 100;
+                $scope.periodInfo.PeriodAmout = parseInt(newAmout);
+            }else{
+                $scope.periodInfo.PeriodPercent = 100 - checkAmout;
+                var newAmout = ($scope.budgetData.Price * $scope.periodInfo.PeriodPercent) / 100;
+                $scope.periodInfo.PeriodAmout = parseInt(newAmout);
+            }
+
+
+        }
+        $scope.calculatePercent = function() {
+            var chachedPercent = 0;
+            angular.forEach($scope.periodData, function(period) {
+
+                chachedPercent += period.PeriodAmout;
+
+            })
+
+            if ((chachedPercent + $scope.periodInfo.PeriodAmout) <= $scope.budgetData.Price) {
+                var newPercent = ($scope.periodInfo.PeriodAmout / $scope.budgetData.Price) * 100;
+                $scope.periodInfo.PeriodPercent = parseInt(newPercent);
+            } else {
+                $scope.periodInfo.PeriodAmout = $scope.budgetData.Price - chachedPercent;
+                var newPercent = ($scope.periodInfo.PeriodAmout / $scope.budgetData.Price) * 100;
+                $scope.periodInfo.PeriodPercent = parseInt(newPercent);
+            }
+
+        }
 
         function closeDialog() {
             $mdDialog.hide();

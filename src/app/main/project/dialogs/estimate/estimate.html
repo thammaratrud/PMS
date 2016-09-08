@@ -60,13 +60,13 @@
                 <div flex="10">
                     <md-input-container class="md-block input-project">
                         <label translate="%">%</label>
-                        <input type="number" ng-model="periodInfo.PeriodPercent">
+                        <input type="number" ng-model="periodInfo.PeriodPercent" ng-keyup="calculateAmout()">
                     </md-input-container>
                 </div>
                 <div flex="30">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ESTIMATE_AMOUNT">Amount</label>
-                        <input type="number" ng-model="periodInfo.PeriodAmout">
+                        <input type="number" ng-model="periodInfo.PeriodAmout" ng-keyup="calculatePercent()">
                     </md-input-container>
                 </div>
                 <div flex="20" class="text-right" style="margin-top: -10px;">

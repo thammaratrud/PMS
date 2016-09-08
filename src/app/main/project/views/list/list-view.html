@@ -32,10 +32,15 @@
                             <md-progress-linear ng-class="{'md-green' : item.progress < 30 ,' md-yellow': item.progress < 70 , 'md-orange' : item.progress >= 70}" md-mode="determinate" value="{{item.progress}}"></md-progress-linear>
                             <!-- md-accent ฟ้า md-warn แดง-->
                         </div> &nbsp; &nbsp; &nbsp; &nbsp;
-                        <div flex="40">
+                        <div flex="40" ng-repeat="item in receiptProgress" ng-show="item.name == project.ProjectCode">
+                            <br> Receipt ({{item.progress | number:0}}%)
+                            <md-progress-linear ng-class="{'md-orange' : item.progress < 30 ,' md-yellow': item.progress < 70 , 'md-green' : item.progress >= 70}" md-mode="determinate" value="{{item.progress}}"></md-progress-linear>
+                            <!-- md-accent ฟ้า md-warn แดง-->
+                        </div>
+<!--                         <div flex="40">
                             <br> Receipt (65%)
                             <md-progress-linear class="md-yellow" md-mode="determinate" value="50"></md-progress-linear>
-                        </div>
+                        </div> -->
                     </div>
                     <!-- กราฟ cost receipt -->
                 </div>

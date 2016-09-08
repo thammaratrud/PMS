@@ -578,7 +578,7 @@
                     $scope.progressChartBySelectProject = {
                         labels: ['', ''],
                         data: [periodPercentAmount, periodPercentleft],
-                        color: $scope.colorx.coloursBad
+                        color: $scope.colorx.coloursDefault
                     }
                 }
 
@@ -595,6 +595,7 @@
             vm.doughnutChartTime = [];
             $scope.doughnutChartProcess = [];
             $scope.costProgress = [];
+            $scope.receiptProgress = [];
             angular.forEach(vm.projectData, function(project) {
                 if (project.ProjectDuration > 0) {
                     $scope.useDays = parseInt((new Date() - new Date(project.Created)) / 86400000);
@@ -671,6 +672,22 @@
                     })
                 }
                 // Progress Chart end
+
+                // receipt bar listview
+                var periodTotal = 0;
+                if (project.PeriodInfo.length > 0) {
+                    angular.forEach(project.PeriodInfo, function(period) {
+                        if(period.PeriodStatus == "PERIOD_RECEIPTED"){
+                             periodTotal += period.PeriodPercent; 
+                        }
+                        
+                    })
+                }
+                $scope.receiptProgress.push({
+                        name: project.ProjectCode,
+                        progress: periodTotal
+                    })
+                    // receipt bar listview end
             });
         }
 
