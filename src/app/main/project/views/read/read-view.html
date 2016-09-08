@@ -228,99 +228,75 @@
         <br>
     </div>
 </div>
-
-
-
-
-
 <div ng-show="documentStatus">
     <div layout="row" layout-wrap>
         <h2><strong><label >Finance Document</label></strong></h2>
     </div>
     <div layout="row" layout-wrap>
-        
-            <table class="simple md-whiteframe-2dp">
-                <thead>
-                    <tr style="background-color: #c5c5c5;">
-                        <th>Document</th>
-                        <th>Date</th>
-                        <th>File</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td class="text-center">Quotation</td>
-                        <td>01/01/16</td>
-                        <td>
-                            <div class="text-left">
- <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
-                    <md-icon md-font-icon="icon-folder-outline"></md-icon>
-                    <md-tooltip><span translate=""></span></md-tooltip>
-                </md-button>
-                </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Purchase Order</td>
-                        <td>12/06/16</td>
-                        <td>
-                           <div class="text-left">
- <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
-                    <md-icon md-font-icon="icon-folder-outline"></md-icon>
-                    <md-tooltip><span translate=""></span></md-tooltip>
-                </md-button>
-                </div>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+        <table class="simple md-whiteframe-2dp">
+            <thead>
+                <tr style="background-color: #c5c5c5;">
+                    <th>Document</th>
+                    <th>Date</th>
+                    <th>File</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td class="text-center">Quotation</td>
+                    <td>01/01/16</td>
+                    <td>
+                        <div class="text-left">
+                            <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
+                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                                <md-tooltip><span translate=""></span></md-tooltip>
+                            </md-button>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Purchase Order</td>
+                    <td>12/06/16</td>
+                    <td>
+                        <div class="text-left">
+                            <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
+                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                                <md-tooltip><span translate=""></span></md-tooltip>
+                            </md-button>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
-    <br>
-    <br>
     <div layout="row" layout-wrap>
         <h2><strong><label>Project Document</label></strong></h2>
     </div>
     <div layout="row" layout-wrap>
-        
-            <table class="simple md-whiteframe-2dp" >
-                <thead>
-                    <tr style="background-color: #c5c5c5;">
-                        <th>Document</th>
-                        <th>Date</th>
-                        <th>File</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td>SRS</td>
-                        <td>22/04/16</td>
-                        <td>
-
+        <table class="simple md-whiteframe-2dp">
+            <thead>
+                <tr style="background-color: #c5c5c5;">
+                    <th>Document</th>
+                    <th>Date</th>
+                    <th>File</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td>SRS</td>
+                    <td>22/04/16</td>
+                    <td>
                         <div class="text-left">
- <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
-                    <md-icon md-font-icon="icon-folder-outline"></md-icon>
-                    <md-tooltip><span translate=""></span></md-tooltip>
-                </md-button>
-                </div>
-                           
-
-
-
-
-
-
-
-
-
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+                            <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
+                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                                <md-tooltip><span translate=""></span></md-tooltip>
+                            </md-button>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
-    <br>
-    <br>
     <div layout="row" class="text-right" layout-wrap>
         <div class="compose-button">
             <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" ng-click="vm.UploadFiledialog($event)" aria-label="compose" translate="">Upload File
@@ -328,6 +304,7 @@
         </div>
     </div>
 </div>
+<br>
 <div ng-show="scopeOfWorkStatus">
     <br>
     <div ng-repeat="SOW in vm.selectedProject.ScopeInfo">

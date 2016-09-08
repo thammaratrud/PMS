@@ -677,10 +677,10 @@
                 var periodTotal = 0;
                 if (project.PeriodInfo.length > 0) {
                     angular.forEach(project.PeriodInfo, function(period) {
-                        if(period.PeriodStatus == "PERIOD_RECEIPTED"){
-                             periodTotal += period.PeriodPercent; 
+                        if (period.PeriodStatus == "PERIOD_RECEIPTED") {
+                            periodTotal += period.PeriodPercent;
                         }
-                        
+
                     })
                 }
                 $scope.receiptProgress.push({
@@ -867,7 +867,6 @@
                     }
 
                     console.log($scope.IsSuccess);
-<<<<<<< HEAD
 
                 });
 
@@ -926,68 +925,6 @@
             }, function(err) {
                 console.log('update period fail' + err);
             })
-
-=======
-
-                });
-
-            }
-
-        }
-
-        $scope.taxInvoice = function(period) {
-
-            var periodPercentAmount = 0;
-            var periodPercentleft = 100;
-
-            angular.forEach(vm.selectedProject.PeriodInfo, function(periodInfo) {
-                if (periodInfo.PeriodOrder == period.PeriodOrder) {
-
-                    periodInfo.PeriodStatus = "PERIOD_RECEIPTED";
-
-                }
-            })
-
-            projectService.putProject(vm.selectedProject).then(function() {
-                console.log('update period success');
-                $rootScope.chart_progress();
-
-                if (vm.selectedProject.PeriodInfo.length > 0) {
-                    angular.forEach(vm.selectedProject.PeriodInfo, function(period) {
-                        if (period.PeriodStatus == 'PERIOD_RECEIPTED') {
-                            periodPercentAmount += period.PeriodPercent;
-                            $scope.receiptTotal += period.PeriodAmout;
-                        }
-                    })
-                    periodPercentleft = periodPercentleft - periodPercentAmount;
-                    $scope.receiptChartBySelectProject = {
-                        labels: ['Price(%)', 'Receipt(%)'],
-                        data: [periodPercentAmount, periodPercentleft],
-                        color: $scope.colorx.coloursBad
-                    }
-                    $scope.progressChartBySelectProject = {
-                        labels: ['', ''],
-                        data: [periodPercentAmount, periodPercentleft],
-                        color: $scope.colorx.coloursDefault
-                    }
-                } else {
-                    $scope.receiptChartBySelectProject = {
-                        labels: ['Price(%)', 'Receipt(%)'],
-                        data: [0, 100],
-                        color: $scope.colorx.coloursBad
-                    }
-                    $scope.progressChartBySelectProject = {
-                        labels: ['', ''],
-                        data: [periodPercentAmount, periodPercentleft],
-                        color: $scope.colorx.coloursDefault
-                    }
-                }
-                // $rootScope.chart_progress();
-            }, function(err) {
-                console.log('update period fail' + err);
-            })
-
->>>>>>> 84ed52606052533a2226c25ebe521fd309513def
         }
 
         // Watch screen size to activate responsive read pane
@@ -1250,7 +1187,7 @@
         }
 
 
-function receiptmore(ev,receipt) {
+        function receiptmore(ev, receipt) {
             $mdDialog.show({
                 controller: 'receiptmoreController',
                 controllerAs: 'vm',
@@ -1267,7 +1204,7 @@ function receiptmore(ev,receipt) {
 
 
 
-function costmore(ev,cost) {
+        function costmore(ev, cost) {
             $mdDialog.show({
                 controller: 'costmoreController',
                 controllerAs: 'vm',
@@ -1282,8 +1219,8 @@ function costmore(ev,cost) {
         }
 
 
-$scope.costsMore = function(ev,cost){
-                  $mdDialog.show({
+        $scope.costsMore = function(ev, cost) {
+            $mdDialog.show({
                 controller: 'costmoreController',
                 controllerAs: 'vm',
                 locals: {
@@ -1294,7 +1231,7 @@ $scope.costsMore = function(ev,cost){
                 targetEvent: ev,
                 clickOutsideToClose: true
             });
-}
+        }
 
 
 
