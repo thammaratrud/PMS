@@ -850,6 +850,7 @@
                     }
 
                     console.log($scope.IsSuccess);
+<<<<<<< HEAD
 
                 });
 
@@ -909,6 +910,67 @@
                 console.log('update period fail' + err);
             })
 
+=======
+
+                });
+
+            }
+
+        }
+
+        $scope.taxInvoice = function(period) {
+
+            var periodPercentAmount = 0;
+            var periodPercentleft = 100;
+
+            angular.forEach(vm.selectedProject.PeriodInfo, function(periodInfo) {
+                if (periodInfo.PeriodOrder == period.PeriodOrder) {
+
+                    periodInfo.PeriodStatus = "PERIOD_RECEIPTED";
+
+                }
+            })
+
+            projectService.putProject(vm.selectedProject).then(function() {
+                console.log('update period success');
+                $rootScope.chart_progress();
+
+                if (vm.selectedProject.PeriodInfo.length > 0) {
+                    angular.forEach(vm.selectedProject.PeriodInfo, function(period) {
+                        if (period.PeriodStatus == 'PERIOD_RECEIPTED') {
+                            periodPercentAmount += period.PeriodPercent;
+                            $scope.receiptTotal += period.PeriodAmout;
+                        }
+                    })
+                    periodPercentleft = periodPercentleft - periodPercentAmount;
+                    $scope.receiptChartBySelectProject = {
+                        labels: ['Price(%)', 'Receipt(%)'],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursBad
+                    }
+                    $scope.progressChartBySelectProject = {
+                        labels: ['', ''],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursDefault
+                    }
+                } else {
+                    $scope.receiptChartBySelectProject = {
+                        labels: ['Price(%)', 'Receipt(%)'],
+                        data: [0, 100],
+                        color: $scope.colorx.coloursBad
+                    }
+                    $scope.progressChartBySelectProject = {
+                        labels: ['', ''],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursDefault
+                    }
+                }
+                // $rootScope.chart_progress();
+            }, function(err) {
+                console.log('update period fail' + err);
+            })
+
+>>>>>>> 84ed52606052533a2226c25ebe521fd309513def
         }
 
         // Watch screen size to activate responsive read pane
