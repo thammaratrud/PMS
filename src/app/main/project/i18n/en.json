@@ -2,11 +2,11 @@
     "PROJECT": {
         "PROJECT_NAME_ERR": "Project Name field is required.",
         "PROJECT_CODE_ERR": "Project Code field is required.",
-        "ATTENTION_ERR":"Attention Name field is required.",
-        "POSITION_ERR":"Position field is required.",
-        "TEL_ERR":"Tel field is required.",
-        "EMAIL_ERR":"Email field is required",
-        "EMAIL_VALID":"Email must be a valid e-mail address",
+        "ATTENTION_ERR": "Attention Name field is required.",
+        "POSITION_ERR": "Position field is required.",
+        "TEL_ERR": "Tel field is required.",
+        "EMAIL_ERR": "Email field is required",
+        "EMAIL_VALID": "Email must be a valid e-mail address",
 
         "SEARCH_PLACEHOLDER": "Search for Project",
 
@@ -22,7 +22,7 @@
         "ATTENTION_NAME": "Attention Name",
         "POSITION": "Position",
         "TEL": "Tel",
-        "EMAIL":"E-mail",
+        "EMAIL": "E-mail",
         "ADD_ATTENTION": "Add Attention",
         "EDIT": "Edit",
         "DELETE": "Delete",
@@ -41,11 +41,11 @@
         "FILTER_PAUSE": "Filter By Pause Status",
         "FILTER_PASS": "Filter By Pass Status",
         "FILTER_CANCEL": "Filter By Cancel Status",
-       "Upload File_doc":"Upload File",
+        "Upload File_doc": "Upload File",
 
 
 
-"EdittabDialog":"Edit Project",
+        "EdittabDialog": "Edit Project",
 
         "ESTIMATE": "Estimate",
         "ESTIMATE_PRICE": "Price",
@@ -58,8 +58,10 @@
         "ESTIMATE_AMOUNT": "Amount",
         "DONE": "Done",
 
-
-
+        "":"WORKING",
+        "PERIOD_SUCCESS":"SUCCESS",
+        "PERIOD_WAITING":"WAITING",
+        "PERIOD_RECEIPTED":"RECEIPTED",
 
 
 

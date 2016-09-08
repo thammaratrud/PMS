@@ -227,3 +227,12 @@ a:active {
 .margin-top5 {
     margin-top: 5px;
 }
+.period-status-red {
+    background-color: #F44336 !important;
+}
+.period-status-yellow {
+    background-color: #ffeb3b !important;
+}
+.period-status-green {
+    background-color: #53e63f !important;
+}

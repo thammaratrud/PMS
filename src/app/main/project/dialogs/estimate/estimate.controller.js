@@ -20,11 +20,13 @@
         vm.closeDialog = closeDialog;
         $scope.estimateStatus = false;
         $scope.periodInfo = {};
-        $scope.periodData = selected_project.PeriodInfo;
+        $scope.periodOriginal = selected_project.PeriodInfo;
+        $scope.periodData = angular.copy($scope.periodOriginal);
         //////////
 
         function closeDialog() {
             $mdDialog.hide();
+            $scope.periodData = $scope.periodOriginal;
         }
 
 
@@ -47,7 +49,7 @@
             }
 
             $scope.periodInfo.ProjectID = selected_project.ProjectID;
-            $scope.periodInfo.PeriodStatus = "Wait";
+            $scope.periodInfo.PeriodStatus = "";
             $scope.periodInfo.InvoiceNo = "";
             $scope.periodInfo.InvoiceDate = new Date();
             $scope.periodInfo.InvoiceFile = "";
@@ -96,9 +98,11 @@
             projectData.BudgetInfo = $scope.budgetData;
             projectData.PeriodInfo = $scope.periodData;
 
-            projectService.putProject(projectData).then(function() {
+            projectService.putProject(projectData).then(function(data) {
                 console.log('Post estimate success.');
+                closeDialog();
                 $rootScope.chart_progress();
+                $rootScope.reloadCost();
             }, function(err) {
                 console.log('Post estimate fail.');
             })
