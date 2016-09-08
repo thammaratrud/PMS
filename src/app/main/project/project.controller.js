@@ -525,7 +525,11 @@
             data: [0, 100],
             color: $scope.colorx.coloursBad
         }
-
+        $scope.progressChartBySelectProject = {
+            labels: ['', ''],
+            data: [0, 100],
+            color: $scope.colorx.coloursBad
+        }
 
         $rootScope.getProjectData = function() {
             var periodPercentAmount = 0;
@@ -567,13 +571,16 @@
                     })
                     periodPercentleft = periodPercentleft - periodPercentAmount;
                     $scope.receiptChartBySelectProject = {
-                        labels: ['Receipt(%)', 'Price(%)'],
+                        labels: ['', ''],
                         data: [periodPercentAmount, periodPercentleft],
-                        color: $scope.colorx.coloursBad
+                        color: $scope.colorx.coloursDefault
+                    }
+                    $scope.progressChartBySelectProject = {
+                        labels: ['', ''],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursDefault
                     }
                 }
-
-
 
                 $rootScope.chart_progress();
 
@@ -650,7 +657,7 @@
                     periodPercentleft = periodPercentleft - periodPercentAmount;
                     $scope.doughnutChartProcess.push({
                         name: project.ProjectCode,
-                        labels: ['Price(%)', 'Receipt(%)'],
+                        labels: ['', ''],
                         data: [periodPercentAmount, periodPercentleft],
                         color: $scope.colorx.coloursDefault
                     })
@@ -658,7 +665,7 @@
                 } else {
                     $scope.doughnutChartProcess.push({
                         name: project.ProjectCode,
-                        labels: ['Price(%)', 'Receipt(%)'],
+                        labels: ['', ''],
                         data: [0, 100],
                         color: $scope.colorx.coloursDefault
                     })
@@ -849,6 +856,9 @@
 
         $scope.taxInvoice = function(period) {
 
+            var periodPercentAmount = 0;
+            var periodPercentleft = 100;
+
             angular.forEach(vm.selectedProject.PeriodInfo, function(periodInfo) {
                 if (periodInfo.PeriodOrder == period.PeriodOrder) {
 
@@ -859,6 +869,38 @@
 
             projectService.putProject(vm.selectedProject).then(function() {
                 console.log('update period success');
+                $rootScope.chart_progress();
+
+                if (vm.selectedProject.PeriodInfo.length > 0) {
+                    angular.forEach(vm.selectedProject.PeriodInfo, function(period) {
+                        if (period.PeriodStatus == 'PERIOD_RECEIPTED') {
+                            periodPercentAmount += period.PeriodPercent;
+                            $scope.receiptTotal += period.PeriodAmout;
+                        }
+                    })
+                    periodPercentleft = periodPercentleft - periodPercentAmount;
+                    $scope.receiptChartBySelectProject = {
+                        labels: ['Price(%)', 'Receipt(%)'],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursBad
+                    }
+                    $scope.progressChartBySelectProject = {
+                        labels: ['', ''],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursDefault
+                    }
+                } else {
+                    $scope.receiptChartBySelectProject = {
+                        labels: ['Price(%)', 'Receipt(%)'],
+                        data: [0, 100],
+                        color: $scope.colorx.coloursBad
+                    }
+                    $scope.progressChartBySelectProject = {
+                        labels: ['', ''],
+                        data: [periodPercentAmount, periodPercentleft],
+                        color: $scope.colorx.coloursDefault
+                    }
+                }
                 // $rootScope.chart_progress();
             }, function(err) {
                 console.log('update period fail' + err);
@@ -885,6 +927,40 @@
          *
          * @param mail
          */
+
+        $rootScope.reloadCost = function() {
+            $scope.costTotal = 0;
+            $scope.costPercent = 0;
+            $scope.colorxCart;
+            $scope.receiptTotal = 0;
+            if (vm.selectedProject.CostInfo.length > 0) {
+                angular.forEach(vm.selectedProject.CostInfo, function(cost) {
+                    $scope.costTotal += cost.CostAmount;
+                })
+                $scope.costPercent = ($scope.costTotal / vm.selectedProject.BudgetInfo.Budget) * 100;
+                $scope.leftCostPercent = 100 - parseInt($scope.costPercent);
+
+                if ($scope.costPercent < 30) {
+                    $scope.colorxCart = $scope.colorx.coloursGood;
+                } else if ($scope.costPercent < 70) {
+                    $scope.colorxCart = $scope.colorx.coloursNormal;
+                } else {
+                    $scope.colorxCart = $scope.colorx.coloursBad;
+                }
+
+                $scope.doughnutChartBySelectProject = {
+                    labels: ['', ''],
+                    data: [parseInt($scope.costPercent), $scope.leftCostPercent],
+                    color: $scope.colorxCart
+                }
+            } else {
+                $scope.doughnutChartBySelectProject = {
+                    labels: ['', ''],
+                    data: [0, 100],
+                    color: $scope.colorx.coloursDefault
+                }
+            }
+        }
 
         function selectProject(project) {
 
@@ -936,11 +1012,21 @@
                     data: [periodPercentAmount, periodPercentleft],
                     color: $scope.colorx.coloursBad
                 }
+                $scope.progressChartBySelectProject = {
+                    labels: ['', ''],
+                    data: [periodPercentAmount, periodPercentleft],
+                    color: $scope.colorx.coloursDefault
+                }
             } else {
                 $scope.receiptChartBySelectProject = {
                     labels: ['Price(%)', 'Receipt(%)'],
                     data: [0, 100],
                     color: $scope.colorx.coloursBad
+                }
+                $scope.progressChartBySelectProject = {
+                    labels: ['', ''],
+                    data: [periodPercentAmount, periodPercentleft],
+                    color: $scope.colorx.coloursDefault
                 }
             }
 

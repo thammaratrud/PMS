@@ -20,8 +20,8 @@
         vm.closeDialog = closeDialog;
         $scope.estimateStatus = false;
         $scope.periodInfo = {};
-        $scope.periodData = angular.copy(selected_project.PeriodInfo);
         $scope.periodOriginal = selected_project.PeriodInfo;
+        $scope.periodData = angular.copy($scope.periodOriginal);
         //////////
 
         function closeDialog() {
@@ -98,9 +98,11 @@
             projectData.BudgetInfo = $scope.budgetData;
             projectData.PeriodInfo = $scope.periodData;
 
-            projectService.putProject(projectData).then(function() {
+            projectService.putProject(projectData).then(function(data) {
                 console.log('Post estimate success.');
+                closeDialog();
                 $rootScope.chart_progress();
+                $rootScope.reloadCost();
             }, function(err) {
                 console.log('Post estimate fail.');
             })

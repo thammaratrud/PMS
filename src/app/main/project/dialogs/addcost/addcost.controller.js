@@ -60,6 +60,7 @@
             projectService.putProject(select_project).then(function() {
                 console.log('Put cost success.');
                 $rootScope.chart_progress();
+                $rootScope.reloadCost();
             }, function(err) {
                 console.log('Put cost fail.');
             })
