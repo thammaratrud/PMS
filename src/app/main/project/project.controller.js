@@ -573,12 +573,12 @@
                     $scope.receiptChartBySelectProject = {
                         labels: ['', ''],
                         data: [periodPercentAmount, periodPercentleft],
-                        color: $scope.colorx.coloursDefault
+                        color: $scope.colorx.coloursBad
                     }
                     $scope.progressChartBySelectProject = {
                         labels: ['', ''],
                         data: [periodPercentAmount, periodPercentleft],
-                        color: $scope.colorx.coloursDefault
+                        color: $scope.colorx.coloursBad
                     }
                 }
 
