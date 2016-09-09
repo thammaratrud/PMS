@@ -236,3 +236,6 @@ a:active {
 .period-status-green {
     background-color: #53e63f !important;
 }
+.td-detail{
+    margin-left: 19px !important;
+}

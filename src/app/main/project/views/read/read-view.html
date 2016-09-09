@@ -101,7 +101,9 @@
     </div>
 </div>
 <div ng-show="financeStatus">
-    <h1><strong>Price: {{vm.selectedProject.BudgetInfo.Price | number}}</strong></h1>
+    <div layout="row" layout-wrap>
+        <h1><strong>Price: {{vm.selectedProject.BudgetInfo.Price | number}}</strong></h1>
+    </div>
     <div layout="row" layout-wrap>
         <div flex="30">
             <div>
@@ -137,14 +139,16 @@
         </table>
     </div>
     <br>
-    <br>
     <div layout="row" class="text-right" layout-wrap>
         <div class="compose-button">
             <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" aria-label="compose" translate="More" ng-click="costsMore(event, vm.selectedProject.CostInfo)">More
             </md-button>
         </div>
     </div>
+    <br>
     <hr color=DDDDDD size=1>
+    <br>
+    <br>
     <div layout="row" layout-wrap>
         <div flex="30">
             <div>
@@ -182,52 +186,54 @@
         </table>
     </div>
     <br>
-    <br>
     <div layout="row" class="text-right" layout-wrap>
         <div class="compose-button">
             <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" aria-label="compose" translate="More" ng-click="vm.receiptmore(event,vm.selectedProject.PeriodInfo)">More
             </md-button>
         </div>
     </div>
-    <hr color=DDDDDD size=1>
-    <!-- <div layout="row" layout-wrap>
-             <div flex="70"> -->
-    <h2><strong><span >Price:{{vm.selectedProject.BudgetInfo.Price | number}}</span></strong></h2>
     <br>
-    <div ng-repeat="period in vm.selectedProject.PeriodInfo">
-        <div layout="row" layout-wrap>
-            <div flex="40">
-                <label> Period {{period.PeriodOrder}} : {{period.PeriodAmout}}({{period.PeriodPercent}}%) = {{period.PeriodDesc}} </label>
-            </div>
-            <div flex="50">
-                <md-button class="md-fab gry cot" ng-class="{'period-status-red' : period.PeriodStatus == 'PERIOD_SUCCESS' , 'period-status-yellow' : period.PeriodStatus == 'PERIOD_WAITING' ,'period-status-green' : period.PeriodStatus == 'PERIOD_RECEIPTED'}">
-                    <md-tooltip><span translate="PROJECT.{{period.PeriodStatus}}">Cancel</span></md-tooltip>
-                </md-button>
-            </div>
-            <div flex="10">
-                <md-switch ng-disabled="period.PeriodStatus == 'PERIOD_WAITING' || period.PeriodStatus == 'PERIOD_RECEIPTED'" style="margin-top: -7px;" ng-checked="period.PeriodStatus" ng-click="updatePeriod(period,IsSuccess)">
-                </md-switch>
+    <hr color=DDDDDD size=1>
+    <div layout="row" layout-wrap>
+        <div layout="row" layout-wrap ng-hide="vm.selectedProject.PeriodInfo.length == 0">
+            <h2><strong>Price:{{vm.selectedProject.BudgetInfo.Price | number}}</strong></h2>
+        </div>
+        <div>
+            <br>
+            <div ng-repeat="period in vm.selectedProject.PeriodInfo">
+                <div layout="row" layout-wrap>
+                    <div flex="60">
+                        <label> Period {{period.PeriodOrder}} : {{period.PeriodDesc}} {{period.PeriodAmout | number:0}}({{period.PeriodPercent}}%) </label>
+                    </div>
+                    <div flex="30">
+                        <md-button class="md-fab gry cot" ng-class="{'period-status-red' : period.PeriodStatus == 'PERIOD_SUCCESS' , 'period-status-yellow' : period.PeriodStatus == 'PERIOD_WAITING' ,'period-status-green' : period.PeriodStatus == 'PERIOD_RECEIPTED'}">
+                            <md-tooltip><span translate="PROJECT.{{period.PeriodStatus}}">Cancel</span></md-tooltip>
+                        </md-button>
+                    </div>
+                    <div flex="10">
+                        <md-switch ng-disabled="period.PeriodStatus == 'PERIOD_WAITING' || period.PeriodStatus == 'PERIOD_RECEIPTED'" style="margin-top: -7px;" ng-checked="period.PeriodStatus" ng-click="updatePeriod(period,IsSuccess)">
+                        </md-switch>
+                    </div>
+                </div>
+                <div layout="row" layout-wrap ng-show="period.PeriodStatus">
+                    <div flex="32">
+                        <div class="button">
+                            <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Service Invoice" ng-click="" translate="Service Invoice">Service Invoice
+                        </div>
+                    </div>
+                    <div flex="32">
+                        <div class="button">
+                            <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Appointment" ng-click="vm.UploadAppointment($event , period)" translate="Appointment">Appointment
+                        </div>
+                    </div>
+                    <div flex="32">
+                        <div class="button">
+                            <md-button class="md-raised" ng-disabled="period.PeriodStatus == 'PERIOD_SUCCESS'" style="background-color: rgb(EEEEEE);" aria-label="Tax Invoice" ng-click="taxInvoice(period)" translate="Tax Invoice">Tax Invoice
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div layout="row" layout-wrap ng-show="period.PeriodStatus">
-            <div flex="32">
-                <div class="button">
-                    <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Service Invoice" ng-click="" translate="Service Invoice">Service Invoice
-                </div>
-            </div>
-            <div flex="32">
-                <div class="button">
-                    <md-button class="md-raised" style="background-color: rgb(EEEEEE);" aria-label="Appointment" ng-click="vm.UploadAppointment($event , period)" translate="Appointment">Appointment
-                </div>
-            </div>
-            <div flex="32">
-                <div class="button">
-                    <md-button class="md-raised" ng-disabled="period.PeriodStatus == 'PERIOD_SUCCESS'" style="background-color: rgb(EEEEEE);" aria-label="Tax Invoice" ng-click="taxInvoice(period)" translate="Tax Invoice">Tax Invoice
-                </div>
-            </div>
-        </div>
-        <br>
-        <br>
     </div>
 </div>
 <div ng-show="documentStatus">
@@ -238,34 +244,21 @@
         <table class="simple md-whiteframe-2dp">
             <thead>
                 <tr style="background-color: #c5c5c5;">
-                    <th>Document</th>
-                    <th>Date</th>
-                    <th>File</th>
+                    <th class="text-center">Document</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">File</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <td class="text-center">Quotation</td>
-                    <td>01/01/16</td>
                     <td>
-                        <div class="text-left">
-                            <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
-                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
-                                <md-tooltip><span translate=""></span></md-tooltip>
-                            </md-button>
-                        </div>
+                        <label class="td-detail">Quotation</label>
                     </td>
-                </tr>
-                <tr>
-                    <td>Purchase Order</td>
-                    <td>12/06/16</td>
-                    <td>
-                        <div class="text-left">
-                            <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
-                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
-                                <md-tooltip><span translate=""></span></md-tooltip>
-                            </md-button>
-                        </div>
+                    <td class="text-center">01/01/16</td>
+                    <td class="text-center">
+                        <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
+                            <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                        </md-button>
                     </td>
                 </tr>
             </tfoot>
@@ -278,28 +271,28 @@
         <table class="simple md-whiteframe-2dp">
             <thead>
                 <tr style="background-color: #c5c5c5;">
-                    <th>Document</th>
-                    <th>Date</th>
-                    <th>File</th>
+                    <th class="text-center">Document</th>
+                    <th class="text-center">Date</th>
+                    <th class="text-center">File</th>
                 </tr>
             </thead>
             <tfoot>
                 <tr>
-                    <td>SRS</td>
-                    <td>22/04/16</td>
                     <td>
-                        <div class="text-left">
-                            <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
-                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
-                                <md-tooltip><span translate=""></span></md-tooltip>
-                            </md-button>
-                        </div>
+                        <label class="td-detail">Quotation</label>
+                    </td>
+                    <td class="text-center">01/01/16</td>
+                    <td class="text-center">
+                        <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
+                            <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                        </md-button>
                     </td>
                 </tr>
             </tfoot>
         </table>
     </div>
-    <div layout="row" class="text-right" layout-wrap>
+    <br>
+    <div layout="row" layout-wrap>
         <div class="compose-button">
             <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" ng-click="vm.UploadFiledialog($event)" aria-label="compose" translate="">Upload File
             </md-button>
