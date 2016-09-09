@@ -92,7 +92,7 @@
                             <md-input-container flex="30" class="input-project">
                                 <label translate="PROJECT.STATE">State</label>
                                 <md-select ng-model="vm.formWizard2.CustomerStateName">
-                                    <md-option ng-repeat="state in vm.states" value="{{state}}">
+                                    <md-option ng-repeat="state in states" value="{{state}}">
                                         {{state}}
                                     </md-option>
                                 </md-select>
@@ -152,11 +152,6 @@
                                             <th><strong>E-mail</strong></th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <td></td>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         <tr ng-repeat="atten in customerDetailInfo" ng-click="changeCustomerDetail(atten)">
                                             <td>{{atten.CustomerStateName}}</td>
@@ -256,7 +251,7 @@
             <md-button class="md-raised md-accent" ng-click="msWizard.nextStep();" ng-hide="msWizard.isLastStep()" ng-disabled="msWizard.currentStepInvalid()">
                 Next
             </md-button>
-            <md-button class="md-raised md-warn" ng-click="vm.sendProject()" ng-show="msWizard.isLastStep()" ng-disabled="msWizard.formsIncomplete()">
+            <md-button class="md-raised md-warn" ng-click="sendProject()" ng-show="msWizard.isLastStep()" ng-disabled="msWizard.formsIncomplete()">
                 Send
             </md-button>
         </div>

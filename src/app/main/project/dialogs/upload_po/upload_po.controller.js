@@ -11,16 +11,14 @@
         var select_project = selectedProject;
         var vm = this;
 
-        // Methods
         vm.closeDialog = closeDialog;
-
+        
         $scope.uploadData = {};
-
-        //////////
 
         function closeDialog() {
             $mdDialog.hide();
         }
+
         $scope.uploadPO = function() {
 
             var file = document.getElementById('fileInput').value;
@@ -33,7 +31,6 @@
             }, function(err) {
                 console.log('Put upload_po fail.');
             })
-
 
             closeDialog();
         }

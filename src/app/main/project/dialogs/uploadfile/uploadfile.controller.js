@@ -9,10 +9,8 @@
     function UploadFileController($scope, $mdDialog) {
        
         var vm = this;
-        // Methods
-        vm.closeDialog = closeDialog;
 
-        //////////
+        vm.closeDialog = closeDialog;
 
         function closeDialog() {
             $mdDialog.hide();

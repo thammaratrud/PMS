@@ -6,14 +6,13 @@
         .controller('receiptmoreController', receiptmoreController);
 
     /** @ngInject */
-    function receiptmoreController($scope, $mdDialog,receipt) {
+    function receiptmoreController($scope, $mdDialog, receipt) {
 
-$scope.receiptData = receipt;
+        $scope.receiptData = receipt;
+        
         var vm = this;
-
         vm.closeDialog = closeDialog;
 
-        //////////
 
         function closeDialog() {
             $mdDialog.hide();

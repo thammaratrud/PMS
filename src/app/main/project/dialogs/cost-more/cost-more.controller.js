@@ -6,9 +6,10 @@
         .controller('costmoreController', costmoreController);
 
     /** @ngInject */
-    function costmoreController($scope, $mdDialog,cost) {
+    function costmoreController($scope, $mdDialog, cost) {
 
-$scope.costData = cost;
+        $scope.costData = cost;
+        
         var vm = this;
 
         vm.closeDialog = closeDialog;

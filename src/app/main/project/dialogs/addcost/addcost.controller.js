@@ -7,9 +7,10 @@
 
     /** @ngInject */
     function AddcostController($scope, $rootScope, $mdDialog, selectedProject, projectService) {
+        
         var select_project = selectedProject;
         var vm = this;
-
+        var cost = select_project.CostInfo;
         // Methods
         vm.closeDialog = closeDialog;
         $scope.optionName = [{
@@ -21,10 +22,11 @@
             Name: 'Sarayut Kungsaranuwat'
 
         }];
+
         $scope.optionType = ['ค่าน้ำมัน', 'ค่าทางด่วน', 'ค่าจอดรถ'];
         $scope.selectName = {};
-        var cost = select_project.CostInfo;
         $scope.addCost = {};
+        $scope.message = 'false';
         //////////
 
         function closeDialog() {
@@ -38,7 +40,7 @@
             cb5: false
         };
 
-        $scope.message = 'false';
+        
 
         $scope.onChange = function(cbState) {
             $scope.message = cbState;

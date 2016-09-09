@@ -7,29 +7,24 @@
 
     /** @ngInject */
     function NewProjectController($scope, $rootScope, $mdDialog, projectData, projectService) {
+        
         var vm = this;
 
-        // Data
-        // Methods
         vm.closeDialog = closeDialog;
-        vm.sendProject = sendProject;
-
         vm.formWizard = {};
         vm.formWizard2 = {};
         vm.formWizard3 = {};
-        //////////
-        vm.states = ['Project Manager', 'Accounting'];
 
-
+        $scope.states = ['Project Manager', 'Accounting'];
         $scope.addAttenStatus = false;
         $scope.scopeOfWorkStatus = false;
-
         $scope.customerDetailInfo = [];
         $scope.scopeOfWorkInfo = [];
 
         function closeDialog() {
             $mdDialog.hide();
         }
+
         $scope.addAttention = function() {
             if ($scope.addAttenStatus == false) {
                 $scope.addAttenStatus = true;
@@ -40,8 +35,6 @@
             }
         }
 
-
-        // step2
         $scope.attention = function() {
             $scope.addAttenStatus = false;
             if (projectData) {
@@ -96,7 +89,7 @@
             vm.formWizard3 = {};
         }
 
-        function sendProject() {
+        $scope.sendProject = function() {
 
             if (projectData) {
 

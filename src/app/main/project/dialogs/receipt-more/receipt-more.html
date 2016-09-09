@@ -19,10 +19,10 @@
                     <th class="text-center">Percent</th>
                 </tr>
             </thead>
-            <tfoot ng-repeat="period in receiptData">
+            <tfoot ng-repeat="period in receiptData | orderBy:'-PeriodOrder'">
                 <tr>
                     <td class="text-left">
-                        <p>&nbsp; &nbsp; &nbsp; &nbsp;{{period.ReceiptDate | date:'dd/MM/yy'}}</p>
+                        <p>&nbsp; &nbsp; &nbsp;{{period.ReceiptDate | date:'dd/MM/yy'}}</p>
                     </td>
                     <td class="text-center">{{period.PeriodDesc}}</td>
                     <td class="text-center">{{period.PeriodAmout}} บาท&nbsp; &nbsp; &nbsp; &nbsp;</td>

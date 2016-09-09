@@ -21,7 +21,7 @@
                     <tfoot ng-repeat="cost in costData | orderBy:'CostDate'">
                         <tr>
                             <td class="text-left">
-                                <p>&nbsp; &nbsp; &nbsp; &nbsp;{{cost.CostDate | date:'dd/MM/yy'}}</p>
+                                <p>&nbsp; &nbsp; &nbsp;{{cost.CostDate | date:'dd/MM/yy'}}</p>
                             </td>
                             <td class="text-left">{{cost.CostDesc}}</td>
                             <td class="text-center">{{cost.CostAmount}} บาท&nbsp; &nbsp; &nbsp; &nbsp;</td>

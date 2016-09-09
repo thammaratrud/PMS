@@ -7,6 +7,7 @@
 
     /** @ngInject */
     function ProjectController($scope, $rootScope, $document, $timeout, $mdDialog, $mdMedia, $mdSidenav, projectService) {
+
         var vm = this;
 
         // Data
@@ -20,444 +21,43 @@
         };
 
         vm.person = [{
-                'id': 1,
-                'name': 'Sarayut Kungsaranuwat',
-                'nickname': 'Moo'
-            }, {
-                'id': 2,
-                'name': 'Nuttakrittra Phumsawai',
-                'nickname': 'TingTang'
-            }]
-            // vm.projectData = [{
-            //     "ProjectID": "3",
-            //     "ProjectCode": "Project COA",
-            //     "ProjectName": "Corporate Online Approve System",
-            //     "ProjectStatus": "Play",
-            //     "ProjectDuration": 90,
-            //     "ScopeInfo": [{
-            //         "ScopeID": 1,
-            //         "ProjectID": "3",
-            //         "Topic": "Ranking Search",
-            //         "Detail": "สามารถแสดงข้อมูล ranking"
-            //     }, {
-            //         "ScopeID": 2,
-            //         "ProjectID": "3",
-            //         "Topic": "Ranking Management",
-            //         "Detail": "สามารถแก้ไขชื่อลำดับและวันที่ข้ามอย่างเดียวในลำดับแรกและลำดับสุดท้าย"
-            //     }],
-            //     "CustomerInfo": {
-            //         "ProjectID": "3",
-            //         "CompanyID": "3",
-            //         "CompanyName": "บริษัท อ๊อปติมัส ซอฟต์ จำกัด (สำนักงานใหญ่)",
-            //         "CompanyAddress": "127/31 อาคารปัญจธานี ทาวเวอร์ ชั้น 26 ถนนนนทรี แขวงช่องนนทรี เขตยานนาวา กรุงเทพมหานคร 10120",
-            //         "CustomerDetailInfo": [{
-            //             "CustomerID": 1,
-            //             "CompanyID": "3",
-            //             "CustomerName": "คุณสมชาย ใจดี",
-            //             "CustomerTel": "0956601234",
-            //             "CustomerPosition": "Project Manager",
-            //             "StateInfo": {
-            //                 "CustomerID": 1,
-            //                 "StateID": "3",
-            //                 "StateName": "Project Manager",
-            //                 "StateValue": "3"
-            //             }
-            //         }, {
-            //             "CustomerID": 2,
-            //             "CompanyID": "3",
-            //             "CustomerName": "คุณสมร",
-            //             "CustomerTel": "0892349999",
-            //             "CustomerPosition": "ฝ่ายบัญชี",
-            //             "StateInfo": {
-            //                 "CustomerID": 1,
-            //                 "StateID": "4",
-            //                 "StateName": "Accounting",
-            //                 "StateValue": "4"
-            //             }
-            //         }]
-            //     },
-            //     "BudgetInfo": {
-            //         "ProjectID": "3",
-            //         "Price": 210000,
-            //         "Budget": 60000,
-            //         "IsIncludeVat": false
-            //     },
-            //     "PeriodInfo": [{
-            //         "PeriodID": 1,
-            //         "ProjectID": "3",
-            //         "PeriodOrder": 1,
-            //         "PeriodDesc": "SIT",
-            //         "PeriodPercent": 100,
-            //         "PeriodAmout": 224700,
-            //         "PeriodStatus": "wait",
-            //         "InvoiceNo": "",
-            //         "InvoiceDate": "",
-            //         "InvoiceFile": "",
-            //         "AppNo": "",
-            //         "AppDate": "",
-            //         "AppFile": "",
-            //         "ReceiptNo": "",
-            //         "ReceiptDate": "",
-            //         "ReceiptFile": ""
-            //     }],
-            //     "QuotationInfo": {
-            //         "ProjectID": "3",
-            //         "QuotationNo": "",
-            //         "QuotationDate": "",
-            //         "QuotationFile": ""
-            //     },
-            //     "PurchaseInfo": {
-            //         "ProjectID": "3",
-            //         "PurchaseNo": "",
-            //         "PurchaseDate": "",
-            //         "PurchaseFile": "",
-            //         "DrillDate": ""
-            //     },
-            //     "CostInfo": [{
-            //         "CostID": 1,
-            //         "ProjectID": "3",
-            //         "EmpID": "11",
-            //         "CostEmp": "ณัฐกฤษตรา พุ่มไสว",
-            //         "CostDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "CostDesc": "ค่าน้ำมัน",
-            //         "CostAmount": 500,
-            //         "CostFile": "",
-            //         "IsTax": false,
-            //         "CostName": "",
-            //         "CostNoTax": "",
-            //         "CostAdd": ""
-            //     }, {
-            //         "CostID": 1,
-            //         "ProjectID": "3",
-            //         "EmpID": "11",
-            //         "CostEmp": "ณัฐกฤษตรา พุ่มไสว",
-            //         "CostDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "CostDesc": "ค่าทางด่วน",
-            //         "CostAmount": 220,
-            //         "CostFile": "",
-            //         "IsTax": false,
-            //         "CostName": "",
-            //         "CostNoTax": "",
-            //         "CostAdd": ""
-            //     }],
-            //     "TaskInfo": [{
-            //         "TaskID": 1,
-            //         "ProjectID": "3",
-            //         "EmpID": "11",
-            //         "TaskEmp": "ณัฐกฤษตรา พุ่มไสว",
-            //         "Duration": 5,
-            //         "StartDate": "2016-08-29T10:27:20.6797001+07:00",
-            //         "FinishDate": "2016-09-29T10:27:20.6797001+07:00",
-            //         "IsStatus": false,
-            //         "Row": "",
-            //         "InPeriod": "",
-            //         "Ratio": 20,
-            //         "Issue": ""
-            //     }],
-            //     "DocumentInfo": [{
-            //         "DocID": 1,
-            //         "ProjectID": "sample string 2",
-            //         "DocName": "sample string 3",
-            //         "DocFile": "sample string 4",
-            //         "ObjectState": 0,
-            //         "Created": "2016-08-29T10:27:20.680701+07:00",
-            //         "CreatedBy": "sample string 5",
-            //         "Updated": "2016-08-29T10:27:20.680701+07:00",
-            //         "UpdatedBy": "sample string 6"
-            //     }, {
-            //         "DocID": 1,
-            //         "ProjectID": "sample string 2",
-            //         "DocName": "sample string 3",
-            //         "DocFile": "sample string 4",
-            //         "ObjectState": 0,
-            //         "Created": "2016-08-29T10:27:20.680701+07:00",
-            //         "CreatedBy": "sample string 5",
-            //         "Updated": "2016-08-29T10:27:20.680701+07:00",
-            //         "UpdatedBy": "sample string 6"
-            //     }]
-            // }, {
-            //     "ProjectID": "4",
-            //     "ProjectCode": "Project TTSM",
-            //     "ProjectName": "Trouble Ticket System Mobility",
-            //     "ProjectStatus": "Pass",
-            //     "ProjectDuration": 60,
-            //     "ScopeInfo": [{
-            //         "ScopeID": 1,
-            //         "ProjectID": "4",
-            //         "Topic": "เพิ่ม Field แสดง Product, Dealer ที่หน้า Monitoring",
-            //         "Detail": "เพิ่ม Field ใน db แล้วแสดงบนหน้าจอ"
-            //     }, {
-            //         "ScopeID": 2,
-            //         "ProjectID": "4",
-            //         "Topic": "Upload Lead Management",
-            //         "Detail": "สามารถ Upload และนำเข้าข้อมูลผ่าน excel ได้"
-            //     }],
-            //     "CustomerInfo": {
-            //         "ProjectID": "4",
-            //         "CompanyID": "3",
-            //         "CompanyName": "บริษัท อ๊อปติมัส ซอฟต์ จำกัด (สำนักงานใหญ่)",
-            //         "CompanyAddress": "127/31 อาคารปัญจธานี ทาวเวอร์ ชั้น 26 ถนนนนทรี แขวงช่องนนทรี เขตยานนาวา กรุงเทพมหานคร 10120",
-            //         "CustomerDetailInfo": [{
-            //             "CustomerID": 1,
-            //             "CompanyID": "3",
-            //             "CustomerName": "คุณศรราม เทพพิทักษ์",
-            //             "CustomerTel": "0956601234",
-            //             "CustomerPosition": "Project Manager",
-            //             "StateInfo": {
-            //                 "CustomerID": 1,
-            //                 "StateID": "3",
-            //                 "StateName": "Project Manager",
-            //                 "StateValue": "3"
-            //             }
-            //         }, {
-            //             "CustomerID": 2,
-            //             "CompanyID": "3",
-            //             "CustomerName": "คุณสมร",
-            //             "CustomerTel": "0892349999",
-            //             "CustomerPosition": "ฝ่ายบัญชี",
-            //             "StateInfo": {
-            //                 "CustomerID": 1,
-            //                 "StateID": "4",
-            //                 "StateName": "Accounting",
-            //                 "StateValue": "4"
-            //             }
-            //         }]
-            //     },
-            //     "BudgetInfo": {
-            //         "ProjectID": "4",
-            //         "Price": 280000,
-            //         "Budget": 90000,
-            //         "IsIncludeVat": false
-            //     },
-            //     "PeriodInfo": [{
-            //         "PeriodID": 1,
-            //         "ProjectID": "4",
-            //         "PeriodOrder": 1,
-            //         "PeriodDesc": "SRS",
-            //         "PeriodPercent": 50,
-            //         "PeriodAmout": 149800,
-            //         "PeriodStatus": "success",
-            //         "InvoiceNo": "",
-            //         "InvoiceDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "InvoiceFile": "",
-            //         "AppNo": "",
-            //         "AppDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "AppFile": "",
-            //         "ReceiptNo": "",
-            //         "ReceiptDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "ReceiptFile": ""
-            //     }, {
-            //         "PeriodID": 2,
-            //         "ProjectID": "4",
-            //         "PeriodOrder": 2,
-            //         "PeriodDesc": "SIT",
-            //         "PeriodPercent": 50,
-            //         "PeriodAmout": 149800,
-            //         "PeriodStatus": "ready",
-            //         "InvoiceNo": "",
-            //         "InvoiceDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "InvoiceFile": "",
-            //         "AppNo": "",
-            //         "AppDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "AppFile": "",
-            //         "ReceiptNo": "",
-            //         "ReceiptDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "ReceiptFile": ""
-            //     }],
-            //     "QuotationInfo": {
-            //         "ProjectID": "4",
-            //         "QuotationNo": "",
-            //         "QuotationDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "QuotationFile": ""
-            //     },
-            //     "PurchaseInfo": {
-            //         "ProjectID": "4",
-            //         "PurchaseNo": "",
-            //         "PurchaseDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "PurchaseFile": "",
-            //         "DrillDate": "2016-08-29T10:27:20.6786992+07:00"
-            //     },
-            //     "CostInfo": [{
-            //         "CostID": 1,
-            //         "ProjectID": "4",
-            //         "EmpID": "12",
-            //         "CostEmp": "สรายุทธ กังสรานุวัตถ์",
-            //         "CostDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "CostDesc": "ค่าน้ำมัน",
-            //         "CostAmount": 700,
-            //         "CostFile": "",
-            //         "IsTax": false,
-            //         "CostName": "",
-            //         "CostNoTax": "",
-            //         "CostAdd": ""
-            //     }],
-            //     "TaskInfo": [{
-            //         "TaskID": 1,
-            //         "ProjectID": "4",
-            //         "EmpID": "12",
-            //         "TaskEmp": "สรายุทธ กังสรานุวัตถ์",
-            //         "Duration": 3,
-            //         "StartDate": "2016-08-29T10:27:20.6797001+07:00",
-            //         "FinishDate": "2016-09-29T10:27:20.6797001+07:00",
-            //         "IsStatus": true,
-            //         "Row": "",
-            //         "InPeriod": "",
-            //         "Ratio": 35,
-            //         "Issue": ""
-            //     }],
-            //     "DocumentInfo": [{
-            //         "DocID": 1,
-            //         "ProjectID": "4",
-            //         "DocName": "PPS1",
-            //         "DocFile": ""
-            //     }, {
-            //         "DocID": 2,
-            //         "ProjectID": "4",
-            //         "DocName": "PPS2",
-            //         "DocFile": ""
-            //     }]
-            // }, {
-            //     "ProjectID": "5",
-            //     "ProjectCode": "Project TTSM2",
-            //     "ProjectName": "Trouble Ticket System Mobility",
-            //     "ProjectStatus": "Pass",
-            //     "ProjectDuration": 60,
-            //     "ScopeInfo": [{
-            //         "ScopeID": 1,
-            //         "ProjectID": "4",
-            //         "Topic": "เพิ่ม Field แสดง Product, Dealer ที่หน้า Monitoring",
-            //         "Detail": "เพิ่ม Field ใน db แล้วแสดงบนหน้าจอ"
-            //     }, {
-            //         "ScopeID": 2,
-            //         "ProjectID": "4",
-            //         "Topic": "Upload Lead Management",
-            //         "Detail": "สามารถ Upload และนำเข้าข้มูลผ่าน excel ได้"
-            //     }],
-            //     "CustomerInfo": {
-            //         "ProjectID": "4",
-            //         "CompanyID": "3",
-            //         "CompanyName": "บริษัท อ๊อปติมัส ซอฟต์ จำกัด (สำนักงานใหญ่)",
-            //         "CompanyAddress": "127/31 อาคารปัญจธานี ทาวเวอร์ ชั้น 26 ถนนนนทรี แขวงช่องนนทรี เขตยานนาวา กรุงเทพมหานคร 10120",
-            //         "CustomerDetailInfo": [{
-            //             "CustomerID": 1,
-            //             "CompanyID": "3",
-            //             "CustomerName": "คุณศรราม เทพพิทักษ์",
-            //             "CustomerTel": "0956601234",
-            //             "CustomerPosition": "Project Manager",
-            //             "StateInfo": {
-            //                 "CustomerID": 1,
-            //                 "StateID": "3",
-            //                 "StateName": "Project Manager",
-            //                 "StateValue": "3"
-            //             }
-            //         }, {
-            //             "CustomerID": 2,
-            //             "CompanyID": "3",
-            //             "CustomerName": "คุณสมร",
-            //             "CustomerTel": "0892349999",
-            //             "CustomerPosition": "ฝ่ายบัญชี",
-            //             "StateInfo": {
-            //                 "CustomerID": 1,
-            //                 "StateID": "4",
-            //                 "StateName": "Accounting",
-            //                 "StateValue": "4"
-            //             }
-            //         }]
-            //     },
-            //     "BudgetInfo": {
-            //         "ProjectID": "4",
-            //         "Price": 280000,
-            //         "Budget": 90000,
-            //         "IsIncludeVat": false
-            //     },
-            //     "PeriodInfo": [{
-            //         "PeriodID": 1,
-            //         "ProjectID": "4",
-            //         "PeriodOrder": 1,
-            //         "PeriodDesc": "SIT",
-            //         "PeriodPercent": 50,
-            //         "PeriodAmout": 149800,
-            //         "PeriodStatus": "success",
-            //         "InvoiceNo": "",
-            //         "InvoiceDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "InvoiceFile": "",
-            //         "AppNo": "",
-            //         "AppDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "AppFile": "",
-            //         "ReceiptNo": "",
-            //         "ReceiptDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "ReceiptFile": ""
-            //     }, {
-            //         "PeriodID": 2,
-            //         "ProjectID": "4",
-            //         "PeriodOrder": 2,
-            //         "PeriodDesc": "SIT",
-            //         "PeriodPercent": 50,
-            //         "PeriodAmout": 149800,
-            //         "PeriodStatus": "ready",
-            //         "InvoiceNo": "",
-            //         "InvoiceDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "InvoiceFile": "",
-            //         "AppNo": "",
-            //         "AppDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "AppFile": "",
-            //         "ReceiptNo": "",
-            //         "ReceiptDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "ReceiptFile": ""
-            //     }],
-            //     "QuotationInfo": {
-            //         "ProjectID": "4",
-            //         "QuotationNo": "",
-            //         "QuotationDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "QuotationFile": ""
-            //     },
-            //     "PurchaseInfo": {
-            //         "ProjectID": "4",
-            //         "PurchaseNo": "",
-            //         "PurchaseDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "PurchaseFile": "",
-            //         "DrillDate": "2016-08-29T10:27:20.6786992+07:00"
-            //     },
-            //     "CostInfo": [{
-            //         "CostID": 1,
-            //         "ProjectID": "4",
-            //         "EmpID": "12",
-            //         "CostEmp": "สรายุทธ กังสรานุวัตถ์",
-            //         "CostDate": "2016-08-29T10:27:20.6786992+07:00",
-            //         "CostDesc": "ค่าน้ำมัน",
-            //         "CostAmount": 700,
-            //         "CostFile": "",
-            //         "IsTax": false,
-            //         "CostName": "",
-            //         "CostNoTax": "",
-            //         "CostAdd": ""
-            //     }],
-            //     "TaskInfo": [{
-            //         "TaskID": 1,
-            //         "ProjectID": "4",
-            //         "EmpID": "12",
-            //         "TaskEmp": "สรายุทธ กังสรานุวัตถ์",
-            //         "Duration": 3,
-            //         "StartDate": "2016-08-29T10:27:20.6797001+07:00",
-            //         "FinishDate": "2016-09-29T10:27:20.6797001+07:00",
-            //         "IsStatus": true,
-            //         "Row": "",
-            //         "InPeriod": "",
-            //         "Ratio": 35,
-            //         "Issue": ""
-            //     }],
-            //     "DocumentInfo": [{
-            //         "DocID": 1,
-            //         "ProjectID": "4",
-            //         "DocName": "PPS1",
-            //         "DocFile": ""
-            //     }, {
-            //         "DocID": 2,
-            //         "ProjectID": "4",
-            //         "DocName": "PPS2",
-            //         "DocFile": ""
-            //     }]
-            // }]
+            'id': 1,
+            'name': 'Sarayut Kungsaranuwat',
+            'nickname': 'Moo'
+        }, {
+            'id': 2,
+            'name': 'Nuttakrittra Phumsawai',
+            'nickname': 'TingTang'
+        }]
+        vm.checked = [];
+        vm.colors = ['blue-bg', 'blue-grey-bg', 'orange-bg', 'pink-bg', 'purple-bg'];
+        vm.selectedAccount = 'project';
+        vm.selectedselectedProject = {};
+        vm.toggleSidenav = toggleSidenav;
+
+        vm.responsiveReadPane = undefined;
+        vm.activeMailPaneIndex = 0;
+        vm.dynamicHeight = false;
+
+        vm.scrollPos = 0;
+        vm.scrollEl = angular.element('#content');
+
+        // vm.inbox = Inbox.data;
+
+        vm.selectedMailShowDetails = false;
+
+        // Methods
+        vm.checkAll = checkAll;
+        vm.closeReadPane = closeReadPane;
+        vm.isChecked = isChecked;
+        vm.selectProject = selectProject;
+        vm.toggleStarred = toggleStarred;
+        vm.toggleCheck = toggleCheck;
+        
+
+        $scope.financeStatus = true;
+        $scope.documentStatus = false;
+        $scope.scopeOfWorkStatus = false;
 
         $scope.colorx = {
             coloursGood: ['#53e63f', '#b3fda9'],
@@ -511,9 +111,9 @@
             // console.log(o + ":" + n);
         }, true);
         $scope.$watch('filterStatus', function(n, o) {
-            // console.log(o + ":" + n);
+
         }, true);
-        // call Service
+
         $scope.costTotal = 0;
         $scope.doughnutChartBySelectProject = {
             labels: ['', ''],
@@ -691,53 +291,6 @@
             });
         }
 
-        // call Service end
-
-        vm.checked = [];
-        vm.colors = ['blue-bg', 'blue-grey-bg', 'orange-bg', 'pink-bg', 'purple-bg'];
-        vm.selectedAccount = 'project';
-        vm.selectedselectedProject = {};
-        vm.toggleSidenav = toggleSidenav;
-
-        vm.responsiveReadPane = undefined;
-        vm.activeMailPaneIndex = 0;
-        vm.dynamicHeight = false;
-
-        vm.scrollPos = 0;
-        vm.scrollEl = angular.element('#content');
-
-        // vm.inbox = Inbox.data;
-
-        vm.selectedMailShowDetails = false;
-
-        // Methods
-        vm.checkAll = checkAll;
-        vm.closeReadPane = closeReadPane;
-        vm.composeDialog = composeDialog;
-        vm.EstimateDialog = EstimateDialog;
-        vm.UploadpoDialog = UploadpoDialog;
-        vm.AddCostDialog = AddCostDialog;
-        vm.UploadAppointment = UploadAppointment;
-        vm.UploadFiledialog = UploadFiledialog;
-
-        vm.receiptmore = receiptmore;
-        vm.costmore = vm.costmore
-
-
-
-        vm.isChecked = isChecked;
-        vm.replyDialog = replyDialog;
-        vm.selectProject = selectProject;
-        vm.toggleStarred = toggleStarred;
-        vm.toggleCheck = toggleCheck;
-        vm.EditDialog = EditDialog;
-
-        $scope.financeStatus = true;
-        $scope.documentStatus = false;
-        $scope.scopeOfWorkStatus = false;
-        //////////
-
-
         $scope.finance = function() {
             $scope.financeStatus = true;
             $scope.documentStatus = false;
@@ -754,11 +307,6 @@
             $scope.documentStatus = false;
             $scope.scopeOfWorkStatus = true;
         }
-
-        // $scope.filterStatus = function(status) {
-        //     $scope.filterStatus = status;
-
-        // }
 
         $scope.showConfirm = function(ev, status) {
             var projectCode = "";
@@ -781,6 +329,7 @@
                     .targetEvent(ev)
                     .ok('OK')
                     .cancel('Cancel');
+
                 $mdDialog.show(confirm).then(function() {
                     console.log('You are sure :)');
                     angular.forEach(vm.checked, function(project) {
@@ -816,7 +365,8 @@
                 );
             }
 
-        };
+        }
+
         $scope.updatePeriod = function(period, e) {
 
             if (period.PeriodStatus == "" || period.PeriodStatus == "PERIOD_SUCCESS") {
@@ -1094,17 +644,17 @@
          * @param mail
          * @param event
          */
-        function toggleCheck(mail, event) {
+        function toggleCheck(project, event) {
             if (event) {
                 event.stopPropagation();
             }
 
-            var idx = vm.checked.indexOf(mail);
+            var idx = vm.checked.indexOf(project);
 
             if (idx > -1) {
                 vm.checked.splice(idx, 1);
             } else {
-                vm.checked.push(mail);
+                vm.checked.push(project);
             }
         }
 
@@ -1141,7 +691,7 @@
          *
          * @param ev
          */
-        function composeDialog(ev) {
+        $scope.composeDialog = function(ev) {
             $mdDialog.show({
                 controller: 'NewProjectController',
                 controllerAs: 'vm',
@@ -1155,8 +705,7 @@
             });
         }
 
-
-        function EstimateDialog(ev) {
+        $scope.EstimateDialog = function(ev) {
             $mdDialog.show({
                 controller: 'EstimateController',
                 controllerAs: 'vm',
@@ -1169,8 +718,6 @@
                 clickOutsideToClose: true
             });
         }
-
-
 
         function UploadFiledialog(ev) {
             $mdDialog.show({
@@ -1186,8 +733,7 @@
             });
         }
 
-
-        function receiptmore(ev, receipt) {
+        $scope.receiptmore = function(ev, receipt) {
             $mdDialog.show({
                 controller: 'receiptmoreController',
                 controllerAs: 'vm',
@@ -1201,10 +747,7 @@
             });
         }
 
-
-
-
-        function costmore(ev, cost) {
+        $scope.costmore = function(ev, cost) {
             $mdDialog.show({
                 controller: 'costmoreController',
                 controllerAs: 'vm',
@@ -1217,7 +760,6 @@
                 clickOutsideToClose: true
             });
         }
-
 
         $scope.costsMore = function(ev, cost) {
             $mdDialog.show({
@@ -1233,11 +775,7 @@
             });
         }
 
-
-
-
-
-        function UploadpoDialog(ev) {
+        $scope.UploadpoDialog = function(ev) {
             $mdDialog.show({
                 controller: 'Upload_PO_Controller',
                 controllerAs: 'vm',
@@ -1251,8 +789,7 @@
             });
         }
 
-
-        function AddCostDialog(ev) {
+        $scope.AddCostDialog = function(ev) {
             $mdDialog.show({
                 controller: 'AddcostController',
                 controllerAs: 'vm',
@@ -1266,21 +803,7 @@
             });
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        function EditDialog(ev) {
+        $scope.EditDialog = function(ev) {
             $mdDialog.show({
                 controller: 'EditController',
                 controllerAs: 'vm',
@@ -1294,9 +817,7 @@
             });
         }
 
-
-
-        function UploadAppointment(ev, period) {
+        $scope.UploadAppointment = function(ev, period) {
             $mdDialog.show({
                 controller: 'AppointmentController',
                 controllerAs: 'vm',
@@ -1311,54 +832,23 @@
             });
         }
 
-        // function EditProjectDialog(ev) {
+        // $scope.replyDialog = function(ev) {
         //     $mdDialog.show({
-        //         controller: 'EditProjectController',
+        //         controller: 'NewProjectController',
         //         controllerAs: 'vm',
         //         locals: {
-        //             selectedProject:  vm.projectData
+        //             selectedProject: vm.selectedselectedProject
         //         },
-        //         templateUrl: 'app/main/project/dialogs/EditProject/EditProject.html',
+        //         templateUrl: 'app/main/project/dialogs/new_project/new_project.html',
         //         parent: angular.element($document.body),
         //         targetEvent: ev,
         //         clickOutsideToClose: true
         //     });
         // }
 
-        /**
-         * Open reply dialog
-         *
-         * @param ev
-         */
-        function replyDialog(ev) {
-            $mdDialog.show({
-                controller: 'NewProjectController',
-                controllerAs: 'vm',
-                locals: {
-                    selectedProject: vm.selectedselectedProject
-                },
-                templateUrl: 'app/main/project/dialogs/new_project/new_project.html',
-                parent: angular.element($document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true
-            });
-        }
-
-
-
-
-
-        /**
-         * Toggle sidenav
-         *
-         * @param sidenavId
-         */
         function toggleSidenav(sidenavId) {
             $mdSidenav(sidenavId).toggle();
         }
-
-
-
 
     }
 })();

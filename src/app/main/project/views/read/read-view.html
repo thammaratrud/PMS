@@ -21,19 +21,19 @@
         </md-button>
         <md-menu-content width="3">
             <md-menu-item>
-                <md-button aria-label="Estimate" translate-aria-label="MAIL.REPLY" ng-click="vm.EstimateDialog($event)">
+                <md-button aria-label="Estimate" translate-aria-label="MAIL.REPLY" ng-click="EstimateDialog($event)">
                     <md-icon md-font-icon="icon-auto-fix"></md-icon>
                     <span translate="">Estimate</span>
                 </md-button>
             </md-menu-item>
             <md-menu-item>
-                <md-button aria-label="Archive" translate-aria-label="MAIL.ARCHIVE" ng-click="vm.composeDialog($event)">
+                <md-button aria-label="Archive" translate-aria-label="MAIL.ARCHIVE">
                     <md-icon md-font-icon="icon-file-document"></md-icon>
                     <span translate="">Quotation</span>
                 </md-button>
             </md-menu-item>
             <md-menu-item>
-                <md-button aria-label="Spam" translate-aria-label="MAIL.SPAM" ng-click="vm.UploadpoDialog($event)">
+                <md-button aria-label="Spam" translate-aria-label="MAIL.SPAM" ng-click="UploadpoDialog($event)">
                     <md-icon md-font-icon="icon-attachment"></md-icon>
                     <span translate="">Upload PO</span>
                 </md-button>
@@ -45,13 +45,13 @@
                 </md-button>
             </md-menu-item>
             <md-menu-item>
-                <md-button aria-label="Mark as unread" translate-aria-label="MAIL.MARK_AS_UNREAD" ng-click="vm.AddCostDialog($event)">
+                <md-button aria-label="Mark as unread" translate-aria-label="MAIL.MARK_AS_UNREAD" ng-click="AddCostDialog($event)">
                     <md-icon md-font-icon="icon-cash"></md-icon>
                     <span translate="">Cost</span>
                 </md-button>
             </md-menu-item>
             <md-menu-item>
-                <md-button aria-label="Mark as unread" translate-aria-label="" ng-click="vm.EditDialog($event)">
+                <md-button aria-label="Mark as unread" translate-aria-label="" ng-click="EditDialog($event)">
                     <md-icon md-font-icon="icon-border-color"></md-icon>
                     <span translate="">Edit Project</span>
                 </md-button>
@@ -88,14 +88,16 @@
     </md-button>
 </div>
 <hr color=DDDDDD size=1>
-<div flex="70">
-    <div layout="row" layout-wrap>
-        <a href="" ng-click="finance()">Finance</a>
-        <div class="divider-vertical"></div>
-        <a href="" ng-click="documents()">Document</a>
-        <div class="divider-vertical"></div>
-        <a href="" ng-click="scopeOfWork()">Scope of Work</a>
-        <br>
+<div layout="row" layout-wrap>
+    <div flex="70">
+        <div layout="row" layout-wrap>
+            <a href="" ng-click="finance()">Finance</a>
+            <div class="divider-vertical"></div>
+            <a href="" ng-click="documents()">Document</a>
+            <div class="divider-vertical"></div>
+            <a href="" ng-click="scopeOfWork()">Scope of Work</a>
+            <br>
+        </div>
     </div>
 </div>
 <div ng-show="financeStatus">
@@ -304,7 +306,6 @@
         </div>
     </div>
 </div>
-<br>
 <div ng-show="scopeOfWorkStatus">
     <br>
     <div ng-repeat="SOW in vm.selectedProject.ScopeInfo">

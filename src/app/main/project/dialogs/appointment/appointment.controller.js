@@ -10,6 +10,7 @@
 
         var select_project = selectedProject;
         var vm = this;
+        
         $scope.uploadApp = period;
         $scope.AppDate = new Date(period.AppDate);
         // Methods

@@ -10,7 +10,7 @@
         </md-toolbar>
         <md-dialog-content ms-scroll>
             <div layout="row" layout-wrap>
-                <div flex="45">
+                <div flex="50">
                     <md-input-container class="md-block input-project">
                         <label translate="">Service Invoice No.</label>
                         <input type="text" name="project_name" ng-model="InvoiceNo" required>
@@ -21,8 +21,7 @@
                         </div>
                     </md-input-container>
                 </div>
-                <div flex="10"></div>
-                <div flex="45">
+                <div flex="50">
                     <md-input-container class="md-block input-project">
                         <label translate="">Appointment No.</label>
                         <input type="text" ng-model="uploadApp.AppNo">
@@ -30,7 +29,6 @@
                 </div>
             </div>
             <div layout="row" layout-wrap>
-                <br>
                 <div flex="20">
                     <div class="form-chkbox">
                         <label translate="">Appointment Date:</label>
@@ -50,10 +48,10 @@
                     DONE
                 </md-button>
             </div>
-            <md-button class="md-icon-button" aria-label="Delete" translate-attr-aria-label="PROJECT.DELETE">
+<!--             <md-button class="md-icon-button" aria-label="Delete" translate-attr-aria-label="PROJECT.DELETE">
                 <md-icon md-font-icon="icon-delete"></md-icon>
                 <md-tooltip><span translate="PROJECT.DELETE"></span></md-tooltip>
-            </md-button>
+            </md-button> -->
         </md-dialog-actions>
     </form>
 </md-dialog>

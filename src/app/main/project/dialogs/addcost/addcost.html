@@ -20,22 +20,24 @@
                     </md-input-container>
                 </div>
             </div>
-            <br>
-            <strong translate="PROJECT.ADDCOST_DETAIL">Detail</strong>
+            <div layout="row" layout-wrap>
+                <div flex="100">
+                    <br>
+                    <strong translate="PROJECT.ADDCOST_DETAIL">Detail</strong>
+                </div>
+            </div>
             <div layout="row" layout-wrap>
                 <div flex="55">
                     <md-input-container class="md-block input-project ">
-                        <md-select ng-model="addCost.CostDesc
-">
+                        <md-select ng-model="addCost.CostDesc">
                             <md-option ng-repeat="type in optionType" value="{{type}}">
                                 {{type}}
                             </md-option>
                         </md-select>
                     </md-input-container>
                 </div>
-                &nbsp; &nbsp;&nbsp;
                 <div flex="10">
-                    <div class="form-chkbox">
+                    <div class="form-chkbox text-center">
                         <label translate="PROJECT.ADDCOST_DATE">Date</label>
                     </div>
                 </div>
@@ -52,7 +54,8 @@
                     </md-input-container>
                 </div>
                 <div flex="25">
-                    <div class="inset text-center switchdemoBasicUsage">หักภาษี ณ ที่จ่าย
+                    <div class="inset text-center switchdemoBasicUsage">
+                        <label>หักภาษี ณ ที่จ่าย</label>
                     </div>
                 </div>
                 <div flex="15">
@@ -92,16 +95,16 @@
         </md-dialog-content>
         <md-dialog-actions layout="row" layout-align="space-between center">
             <div layout="row" layout-align="start center">
-                <md-button ng-click="sendCost()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONENE">
+                <md-button ng-click="sendCost()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONE">
                     DONE
                 </md-button>
             </div>
-            <div layout="row">
+            <!--             <div layout="row">
                 <md-button class="md-icon-button" aria-label="Delete" translate-attr-aria-label="PROJECT.DELETE">
                     <md-icon md-font-icon="icon-delete"></md-icon>
                     <md-tooltip><span translate="PROJECT.DELETE"></span></md-tooltip>
                 </md-button>
-            </div>
+            </div> -->
         </md-dialog-actions>
     </form>
 </md-dialog>

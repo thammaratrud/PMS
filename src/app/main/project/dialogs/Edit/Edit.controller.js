@@ -9,27 +9,25 @@
     function EditController($scope, $mdDialog, selectedProject, projectService) {
 
         $scope.select_project = selectedProject;
-        var vm = this;
-        // Data
-        // Methods
-        vm.closeDialog = closeDialog;
-
-        vm.formWizard = {};
-        vm.formWizard2 = {};
-        vm.formWizard3 = {};
-        //////////
-        vm.states = ['Project Manager', 'Accounting'];
-
-
+        $scope.states = ['Project Manager', 'Accounting'];
         $scope.addAttenStatus = false;
         $scope.scopeOfWorkStatus = false;
-
         $scope.customerDetailInfo = $scope.select_project.CustomerInfo.CustomerDetailInfo;
         $scope.scopeOfWorkInfo = $scope.select_project.ScopeInfo;
+
+        var vm = this;
+
+        vm.closeDialog = closeDialog;
+        vm.formWizard = {}; // form project
+        vm.formWizard2 = {}; // form attention
+        vm.formWizard3 = {}; // form scope of work
+
+
 
         function closeDialog() {
             $mdDialog.hide();
         }
+        
         $scope.addAttention = function() {
             if ($scope.addAttenStatus == false) {
                 $scope.addAttenStatus = true;
@@ -40,8 +38,6 @@
             }
         }
 
-
-        // step2
         $scope.attention = function() {
             $scope.addAttenStatus = false;
 
