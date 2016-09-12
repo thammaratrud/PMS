@@ -62,19 +62,19 @@
 <div layout="row" layout-wrap>
     <!-- ปุ่ม -->
     <div flax="100">
-        <md-button class="md-icon-button" aria-label="" translate translate-attr-aria-label="PROJECT.PLAY">
+        <md-button class="md-icon-button" aria-label="" translate translate-attr-aria-label="PROJECT.PLAY" ng-click="changeStatusByProject($event,'Play')">
             <md-icon md-font-icon="icon-play-circle" ng-class="{'icon-green' : vm.selectedProject.ProjectStatus == 'Play'}"></md-icon>
             <md-tooltip><span translate="PROJECT.PLAY">Play</span></md-tooltip>
         </md-button>
-        <md-button class="md-icon-button" aria-label="" translate translate-attr-aria-label="PROJECT.PAUSE">
+        <md-button class="md-icon-button" aria-label="" translate translate-attr-aria-label="PROJECT.PAUSE" ng-click="changeStatusByProject($event,'Pause')">
             <md-icon md-font-icon="icon-pause-circle" ng-class="{'icon-yellow' : vm.selectedProject.ProjectStatus == 'Pause'}"></md-icon>
             <md-tooltip><span translate="PROJECT.PAUSE">Pause</span></md-tooltip>
         </md-button>
-        <md-button class="md-icon-button" aria-label="" translate translate-attr-aria-label="PROJECT.PASS">
+        <md-button class="md-icon-button" aria-label="" translate translate-attr-aria-label="PROJECT.PASS" ng-click="changeStatusByProject($event,'Pass')">
             <md-icon md-font-icon="icon-checkbox-marked-circle" ng-class="{'icon-clam' : vm.selectedProject.ProjectStatus == 'Pass'}"></md-icon>
             <md-tooltip><span translate="PROJECT.PASS">Pass</span></md-tooltip>
         </md-button>
-        <md-button class="md-icon-button" aria-label="" translate translate-attr-aria-label="PROJECT.CANCEL">
+        <md-button class="md-icon-button" aria-label="" translate translate-attr-aria-label="PROJECT.CANCEL" ng-click="changeStatusByProject($event,'Cancel')">
             <md-icon md-font-icon="icon-cancel" ng-class="{'icon-red' : vm.selectedProject.ProjectStatus == 'Cancel'}"></md-icon>
             <md-tooltip><span translate="PROJECT.CANCEL">Cancel</span></md-tooltip>
         </md-button>
@@ -158,7 +158,7 @@
         <div flex="70">
             <ul>
                 <li>Price:{{vm.selectedProject.BudgetInfo.Price | number}}</li>
-                <li>Receipt:{{receiptTotal}}</li>
+                <li>Receipt:{{receiptTotal | number}}</li>
             </ul>
         </div>
     </div>
@@ -188,7 +188,7 @@
     <br>
     <div layout="row" class="text-right" layout-wrap>
         <div class="compose-button">
-            <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" aria-label="compose" translate="More" ng-click="vm.receiptmore(event,vm.selectedProject.PeriodInfo)">More
+            <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" aria-label="compose" translate="More" ng-click="receiptmore(event,vm.selectedProject.PeriodInfo)">More
             </md-button>
         </div>
     </div>
@@ -257,7 +257,7 @@
                     <td class="text-center">01/01/16</td>
                     <td class="text-center">
                         <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
-                            <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                            <md-icon md-font-icon="icon-download"></md-icon>
                         </md-button>
                     </td>
                 </tr>
@@ -284,7 +284,7 @@
                     <td class="text-center">01/01/16</td>
                     <td class="text-center">
                         <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
-                            <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                            <md-icon md-font-icon="icon-download"></md-icon>
                         </md-button>
                     </td>
                 </tr>
@@ -294,7 +294,7 @@
     <br>
     <div layout="row" layout-wrap>
         <div class="compose-button">
-            <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" ng-click="vm.UploadFiledialog($event)" aria-label="compose" translate="">Upload File
+            <md-button class="md-accent md-raised" style="background-color: rgb(83, 230, 63);" ng-click="UploadFiledialog($event)" aria-label="compose" translate="">Upload File
             </md-button>
         </div>
     </div>

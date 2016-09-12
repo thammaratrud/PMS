@@ -8,12 +8,14 @@
     /** @ngInject */
     function EditController($scope, $mdDialog, selectedProject, projectService) {
 
-        $scope.select_project = selectedProject;
+        $scope.select_project_original = selectedProject;
+        $scope.select_project = angular.copy($scope.select_project_original);
         $scope.states = ['Project Manager', 'Accounting'];
         $scope.addAttenStatus = false;
         $scope.scopeOfWorkStatus = false;
         $scope.customerDetailInfo = $scope.select_project.CustomerInfo.CustomerDetailInfo;
         $scope.scopeOfWorkInfo = $scope.select_project.ScopeInfo;
+
 
         var vm = this;
 
@@ -26,6 +28,7 @@
 
         function closeDialog() {
             $mdDialog.hide();
+            $scope.select_project = $scope.select_project_original;
         }
         
         $scope.addAttention = function() {

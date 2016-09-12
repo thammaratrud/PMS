@@ -53,7 +53,7 @@
         vm.selectProject = selectProject;
         vm.toggleStarred = toggleStarred;
         vm.toggleCheck = toggleCheck;
-        
+
 
         $scope.financeStatus = true;
         $scope.documentStatus = false;
@@ -137,8 +137,10 @@
             $scope.costPercent = 0;
             $scope.useDays = 0;
             $scope.lefts = 0;
+            $scope.receiptTotal = 0;
             $scope.colorxCart;
             $scope.statusCart;
+            $scope.colorxReceipt;
             projectService.getProject().then(function(data) {
                 console.log('Call Service Success ');
                 vm.projectData = data;
@@ -167,13 +169,21 @@
                     angular.forEach(vm.selectedProject.PeriodInfo, function(period) {
                         if (period.PeriodStatus == 'PERIOD_RECEIPTED') {
                             periodPercentAmount += period.PeriodPercent;
+                            $scope.receiptTotal += period.PeriodAmout;
                         }
                     })
+                    if (periodPercentAmount < 30) {
+                        $scope.colorxReceipt = $scope.colorx.coloursBad;
+                    } else if (periodPercentAmount < 70) {
+                        $scope.colorxReceipt = $scope.colorx.coloursNormal;
+                    } else {
+                        $scope.colorxReceipt = $scope.colorx.coloursGood;
+                    }
                     periodPercentleft = periodPercentleft - periodPercentAmount;
                     $scope.receiptChartBySelectProject = {
                         labels: ['', ''],
                         data: [periodPercentAmount, periodPercentleft],
-                        color: $scope.colorx.coloursBad
+                        color: $scope.colorxReceipt
                     }
                     $scope.progressChartBySelectProject = {
                         labels: ['', ''],
@@ -366,7 +376,35 @@
             }
 
         }
+        $scope.changeStatusByProject = function(ev, status) {
 
+            var confirm = $mdDialog.confirm()
+                .title('Are you sure for change status?')
+                .textContent(vm.selectedProject.ProjectCode + ' change status to be "' + status + '"')
+                .ariaLabel('confirm change status project')
+                .targetEvent(ev)
+                .ok('OK')
+                .cancel('Cancel');
+
+            $mdDialog.show(confirm).then(function() {
+                console.log('You are sure :)');
+
+
+                vm.selectedProject.ProjectStatus = status;
+
+                projectService.putProject(vm.selectedProject).then(function() {
+                    console.log('update status by project success');
+
+                    vm.checked = [];
+                }, function(err) {
+                    console.log('update status by project fail' + err);
+                })
+
+                // $rootScope.getProjectData();
+            }, function() {
+                console.log('You are  not sure :(');
+            });
+        }
         $scope.updatePeriod = function(period, e) {
 
             if (period.PeriodStatus == "" || period.PeriodStatus == "PERIOD_SUCCESS") {
@@ -448,11 +486,18 @@
                             $scope.receiptTotal += period.PeriodAmout;
                         }
                     })
+                    if (periodPercentAmount < 30) {
+                        $scope.colorxReceipt = $scope.colorx.coloursBad;
+                    } else if (periodPercentAmount < 70) {
+                        $scope.colorxReceipt = $scope.colorx.coloursNormal;
+                    } else {
+                        $scope.colorxReceipt = $scope.colorx.coloursGood;
+                    }
                     periodPercentleft = periodPercentleft - periodPercentAmount;
                     $scope.receiptChartBySelectProject = {
                         labels: ['Price(%)', 'Receipt(%)'],
                         data: [periodPercentAmount, periodPercentleft],
-                        color: $scope.colorx.coloursBad
+                        color: $scope.colorxReceipt
                     }
                     $scope.progressChartBySelectProject = {
                         labels: ['', ''],
@@ -575,11 +620,18 @@
                         $scope.receiptTotal += period.PeriodAmout;
                     }
                 })
+                if (periodPercentAmount < 30) {
+                    $scope.colorxReceipt = $scope.colorx.coloursBad;
+                } else if (periodPercentAmount < 70) {
+                    $scope.colorxReceipt = $scope.colorx.coloursNormal;
+                } else {
+                    $scope.colorxReceipt = $scope.colorx.coloursGood;
+                }
                 periodPercentleft = periodPercentleft - periodPercentAmount;
                 $scope.receiptChartBySelectProject = {
                     labels: ['Price(%)', 'Receipt(%)'],
                     data: [periodPercentAmount, periodPercentleft],
-                    color: $scope.colorx.coloursBad
+                    color: $scope.colorxReceipt
                 }
                 $scope.progressChartBySelectProject = {
                     labels: ['', ''],
@@ -719,7 +771,7 @@
             });
         }
 
-        function UploadFiledialog(ev) {
+        $scope.UploadFiledialog = function(ev) {
             $mdDialog.show({
                 controller: 'UploadFileController',
                 controllerAs: 'vm',
