@@ -50,7 +50,12 @@
                 <div flex="30">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.ADDCOST_AMOUNT">Amount</label>
-                        <input type="number" ng-model="addCost.CostAmount">
+                        <input type="number" name="addCost_CostAmount" ng-model="addCost.CostAmount" required>
+                        <div ng-messages="addCost_CostAmount.$error" role="alert">
+                            <div ng-show="!addCost.CostAmount">
+                                <span translate="PROJECT.PROJECT_ERR">Amount field is required.</span>
+                            </div>
+                        </div>
                     </md-input-container>
                 </div>
                 <div flex="25">
@@ -95,7 +100,7 @@
         </md-dialog-content>
         <md-dialog-actions layout="row" layout-align="space-between center">
             <div layout="row" layout-align="start center">
-                <md-button ng-click="sendCost()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONE">
+                <md-button ng-click="sendCost()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONE" ng-disabled="addCost.CostAmount <= 0 || !addCost.CostAmount">
                     DONE
                 </md-button>
             </div>

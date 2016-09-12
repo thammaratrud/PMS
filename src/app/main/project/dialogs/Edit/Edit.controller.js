@@ -106,8 +106,9 @@
             console.log($scope.select_project);
             projectService.putProject($scope.select_project).then(function(response) {
                 console.log('edit project success.');
-                $rootScope.chart_progress();
+                selectedProject.ProjectDuration = $scope.select_project.ProjectDuration;
                 closeDialog();
+                $rootScope.chart_progress();
             }, function(err) {
                 console.log('edit project fail : ' + JSON.stringify(err));
             })
