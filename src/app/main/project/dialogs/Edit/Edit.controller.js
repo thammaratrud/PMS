@@ -6,7 +6,7 @@
         .controller('EditController', EditController);
 
     /** @ngInject */
-    function EditController($scope, $mdDialog, selectedProject, projectService) {
+    function EditController($scope, $rootScope, $mdDialog, selectedProject, projectService) {
 
         $scope.select_project_original = selectedProject;
         $scope.select_project = angular.copy($scope.select_project_original);
@@ -30,7 +30,7 @@
             $mdDialog.hide();
             $scope.select_project = $scope.select_project_original;
         }
-        
+
         $scope.addAttention = function() {
             if ($scope.addAttenStatus == false) {
                 $scope.addAttenStatus = true;

@@ -13,7 +13,10 @@
 
         vm.closeDialog = closeDialog;
         
-        $scope.uploadData = {};
+        $scope.uploadData = {
+            PurchaseDate : new Date(),
+            DrillDate : new Date()
+        };
 
         function closeDialog() {
             $mdDialog.hide();

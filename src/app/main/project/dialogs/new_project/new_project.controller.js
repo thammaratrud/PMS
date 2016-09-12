@@ -7,7 +7,7 @@
 
     /** @ngInject */
     function NewProjectController($scope, $rootScope, $mdDialog, projectData, projectService) {
-        
+
         var vm = this;
 
         vm.closeDialog = closeDialog;
@@ -36,6 +36,13 @@
         }
 
         $scope.attention = function() {
+
+            var remove = $scope.customerDetailInfo.indexOf(vm.formWizard2);
+
+            if (remove > -1) {
+                $scope.customerDetailInfo.splice(remove, 1);
+            }
+
             $scope.addAttenStatus = false;
             if (projectData) {
                 var project_id = projectData.length + 1;
@@ -79,6 +86,13 @@
         }
 
         $scope.scopeOfWork = function() {
+
+            var remove = $scope.scopeOfWorkInfo.indexOf(vm.formWizard3);
+
+            if (remove > -1) {
+                $scope.scopeOfWorkInfo.splice(remove, 1);
+            }
+
             $scope.scopeOfWorkStatus = false;
 
             var scope_id = $scope.scopeOfWorkInfo.length + 1;

@@ -10,6 +10,9 @@
 
         var vm = this;
         var selected_project = selectedProject;
+        $scope.checkPeriod = 0;
+
+
         $scope.budgetData = {
             "ProjectID": selected_project.BudgetInfo.ProjectID,
             "Price": selected_project.BudgetInfo.Price,
@@ -18,10 +21,23 @@
         };
         // Methods
         vm.closeDialog = closeDialog;
+        $scope.checkPeriodPercent = false;
         $scope.estimateStatus = false;
+        $scope.modeEdit = false;
         $scope.periodInfo = {};
         $scope.periodOriginal = selected_project.PeriodInfo;
         $scope.periodData = angular.copy($scope.periodOriginal);
+
+        angular.forEach($scope.periodData, function(period) {
+            $scope.checkPeriod += period.PeriodPercent;
+        });
+        if ($scope.checkPeriod >= 100) {
+            $scope.checkPeriodPercent = false;
+            $scope.checkPeriod = 0;
+        } else {
+            $scope.checkPeriodPercent = true;
+            $scope.checkPeriod = 0;
+        }
         //////////
         $scope.calculateAmout = function() {
             var checkAmout = 0;
@@ -30,14 +46,27 @@
                 checkAmout += period.PeriodPercent;
 
             })
-            if ((checkAmout + $scope.periodInfo.PeriodPercent) <= 100) {
-                var newAmout = ($scope.budgetData.Price * $scope.periodInfo.PeriodPercent) / 100;
-                $scope.periodInfo.PeriodAmout = parseInt(newAmout);
-            }else{
-                $scope.periodInfo.PeriodPercent = 100 - checkAmout;
-                var newAmout = ($scope.budgetData.Price * $scope.periodInfo.PeriodPercent) / 100;
-                $scope.periodInfo.PeriodAmout = parseInt(newAmout);
+            if ($scope.modeEdit == true) {
+                if (checkAmout <= 100) {
+                    var newAmout = ($scope.budgetData.Price * $scope.periodInfo.PeriodPercent) / 100;
+                    $scope.periodInfo.PeriodAmout = parseInt(newAmout);
+                } else {
+                    $scope.periodInfo.PeriodPercent = $scope.periodInfo.PeriodPercent + (100 - checkAmout);
+                    var newAmout = ($scope.budgetData.Price * $scope.periodInfo.PeriodPercent) / 100;
+                    $scope.periodInfo.PeriodAmout = parseInt(newAmout);
+                }
+
+            } else {
+                if ((checkAmout + $scope.periodInfo.PeriodPercent) <= 100) {
+                    var newAmout = ($scope.budgetData.Price * $scope.periodInfo.PeriodPercent) / 100;
+                    $scope.periodInfo.PeriodAmout = parseInt(newAmout);
+                } else {
+                    $scope.periodInfo.PeriodPercent = 100 - checkAmout;
+                    var newAmout = ($scope.budgetData.Price * $scope.periodInfo.PeriodPercent) / 100;
+                    $scope.periodInfo.PeriodAmout = parseInt(newAmout);
+                }
             }
+
 
 
         }
@@ -99,8 +128,19 @@
 
 
             $scope.periodData.push($scope.periodInfo);
+            angular.forEach($scope.periodData, function(period) {
+                $scope.checkPeriod += period.PeriodPercent;
+            });
+            if ($scope.checkPeriod >= 100) {
+                $scope.checkPeriodPercent = false;
+                $scope.checkPeriod = 0;
+            } else {
+                $scope.checkPeriodPercent = true;
+                $scope.checkPeriod = 0;
+            }
             $scope.periodInfo = {};
             $scope.estimateStatus = false;
+            $scope.modeEdit = false;
 
             // "PeriodID": 1,
 
@@ -113,6 +153,7 @@
                 $scope.periodData.splice(remove, 1);
             }
             $scope.periodInfo = {};
+            $scope.modeEdit = true;
         }
 
         //swith//
@@ -122,9 +163,16 @@
 
         //swith//
 
-        $scope.changePeriodItem = function(periodItem) {
-            $scope.estimateStatus = true;
-            $scope.periodInfo = periodItem;
+        $scope.changePeriodItem = function(periodItem, periodStatus, edit) {
+            if (periodStatus != 'PERIOD_RECEIPTED') {
+                $scope.estimateStatus = true;
+                $scope.periodInfo = periodItem;
+            }
+
+            if (edit == 'edit') {
+                $scope.modeEdit = true;
+            }
+
         }
 
         $scope.sendEstimate = function() {

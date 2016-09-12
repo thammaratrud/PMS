@@ -39,7 +39,7 @@
                 <strong translate="PROJECT.PERIOD">Period</strong>
             </div>
             <div layout="column" layout-gt-xs="row">
-                <div flex="100" class="text-right" style="margin-top: -70px;">
+                <div flex="100" class="text-right" style="margin-top: -70px;" ng-show="checkPeriodPercent == true">
                     <md-button class="add-file-button md-fab md-warn" ng-click="addEstimate()">
                         <md-icon md-font-icon="icon-plus"></md-icon>
                     </md-button>
@@ -91,7 +91,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="periodItem in periodData | orderBy : 'PeriodOrder'" ng-click="changePeriodItem(periodItem)">
+                            <tr ng-repeat="periodItem in periodData | orderBy : 'PeriodOrder'" ng-click="changePeriodItem(periodItem,periodItem.PeriodStatus,'edit')" ng-class="{'color-disabled' : periodItem.PeriodStatus == 'PERIOD_RECEIPTED'}">
                                 <td>{{periodItem.PeriodOrder}}</td>
                                 <td>{{periodItem.PeriodDesc}}</td>
                                 <td>{{periodItem.PeriodPercent}}</td>

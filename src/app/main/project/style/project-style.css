@@ -239,3 +239,9 @@ a:active {
 .td-detail{
     margin-left: 19px !important;
 }
+.period-3btn{
+   margin-top: 10px !important;
+}
+.color-disabled{
+   color: #bbbbbb !important;
+}

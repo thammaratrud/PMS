@@ -82,7 +82,8 @@
                     <div layout="column" layout-gt-xs="row">
                         <div flex="100" class="text-right">
                             <md-button class="add-file-button md-fab md-warn" ng-click="addAttention()">
-                                <md-icon md-font-icon="icon-plus"></md-icon>
+                                <md-icon md-font-icon="icon-plus" ng-hide="addAttenStatus"></md-icon>
+                                <md-icon md-font-icon="icon-minus" ng-show="addAttenStatus"></md-icon>
                             </md-button>
                         </div>
                     </div>
@@ -182,7 +183,8 @@
                     <div layout="column" layout-gt-xs="row">
                         <div flex="100" class="text-right">
                             <md-button class="add-file-button md-fab md-warn" ng-click="addScopeOfWork()">
-                                <md-icon md-font-icon="icon-plus"></md-icon>
+                                <md-icon md-font-icon="icon-plus" ng-hide="scopeOfWorkStatus"></md-icon>
+                                <md-icon md-font-icon="icon-minus" ng-show="scopeOfWorkStatus"></md-icon>
                             </md-button>
                         </div>
                     </div>
@@ -204,12 +206,12 @@
                             </md-input-container>
                             <md-input-container flex="10" class="input-project">
                                 <md-button class="md-icon-button">
-                                    <md-icon md-font-icon="icon-account-remove" class="icon-remove" ng-click="removeScope()"></md-icon>
+                                    <md-icon md-font-icon="icon-close-circle-outline" class="icon-remove" ng-click="removeScope()"></md-icon>
                                 </md-button>
                             </md-input-container>
                             <md-input-container flex="10" class="input-project">
                                 <md-button class="md-icon-button" ng-click="scopeOfWork()">
-                                    <md-icon md-font-icon="icon-account-check" class="icon-add"></md-icon>
+                                    <md-icon md-font-icon="icon-plus-circle-outline" class="icon-add"></md-icon>
                                 </md-button>
                             </md-input-container>
                         </div>
