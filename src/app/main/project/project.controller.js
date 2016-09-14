@@ -34,6 +34,8 @@
         vm.selectedAccount = 'project';
         vm.selectedselectedProject = {};
         vm.toggleSidenav = toggleSidenav;
+      
+        
 
         vm.responsiveReadPane = undefined;
         vm.activeMailPaneIndex = 0;
@@ -53,6 +55,8 @@
         vm.selectProject = selectProject;
         vm.toggleStarred = toggleStarred;
         vm.toggleCheck = toggleCheck;
+         
+        
 
 
         $scope.financeStatus = true;
@@ -820,19 +824,35 @@
             });
         }
 
-        $scope.costsMore = function(ev, cost) {
-            $mdDialog.show({
-                controller: 'costmoreController',
-                controllerAs: 'vm',
-                locals: {
-                    cost: cost
-                },
-                templateUrl: 'app/main/project/dialogs/cost-more/cost-more.html',
-                parent: angular.element($document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true
-            });
-        }
+        // $scope.costsMore = function(ev, cost) {
+        //     $mdDialog.show({
+        //         controller: 'costmoreController',
+        //         controllerAs: 'vm',
+        //         locals: {
+        //             cost: cost
+        //         },
+        //         templateUrl: 'app/main/project/dialogs/cost-more/cost-more.html',
+        //         parent: angular.element($document.body),
+        //         targetEvent: ev,
+        //         clickOutsideToClose: true
+        //     });
+        // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         $scope.UploadpoDialog = function(ev) {
             $mdDialog.show({
@@ -885,6 +905,22 @@
                     period: period
                 },
                 templateUrl: 'app/main/project/dialogs/appointment/appointment.html',
+                parent: angular.element($document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            });
+        }
+
+
+         $scope.customerdialog = function(ev) {
+            $mdDialog.show({
+                controller: 'customerController',
+                controllerAs: 'vm',
+                locals: {
+                    selectedProject: vm.selectedProject,
+                    // period: period
+                },
+                templateUrl: 'app/main/project/dialogs/customer/customer.html',
                 parent: angular.element($document.body),
                 targetEvent: ev,
                 clickOutsideToClose: true
