@@ -12,7 +12,8 @@
             'ngMaterial',
             'chart.js',
             'pascalprecht.translate',
-            'ui.router'
+            'ui.router',
+            'lfNgMdFileInput'
 
         ]);
 })();

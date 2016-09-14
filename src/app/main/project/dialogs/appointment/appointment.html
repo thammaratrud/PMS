@@ -37,8 +37,17 @@
                 <div flex="30">
                     <md-datepicker ng-model="AppDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
-                <div flex="50">
+                <!--                 <div flex="50">
                     <input id="fileInput" type="file">
+                </div> -->
+            </div>
+            <div layout="row" layout-wrap>
+                <div flex="100">
+                    <!--                             <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add" ngf-select="upload($file)">
+                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                            </md-button> -->
+                    <!-- <input id="fileInput" type="file"> -->
+                    <lf-ng-md-file-input lf-files="files"></lf-ng-md-file-input>
                 </div>
             </div>
         </md-dialog-content>
@@ -48,7 +57,7 @@
                     DONE
                 </md-button>
             </div>
-<!--             <md-button class="md-icon-button" aria-label="Delete" translate-attr-aria-label="PROJECT.DELETE">
+            <!--             <md-button class="md-icon-button" aria-label="Delete" translate-attr-aria-label="PROJECT.DELETE">
                 <md-icon md-font-icon="icon-delete"></md-icon>
                 <md-tooltip><span translate="PROJECT.DELETE"></span></md-tooltip>
             </md-button> -->

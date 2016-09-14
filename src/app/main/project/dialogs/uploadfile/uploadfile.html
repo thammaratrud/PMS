@@ -10,19 +10,20 @@
         </md-toolbar>
         <md-dialog-content ms-scroll>
             <div layout="row" layout-wrap>
-                <div flex="80">
+                <div flex="100">
                     <md-input-container class="md-block input-project">
                         <label translate="">File Name</label>
                         <input type="text">
                     </md-input-container>
                 </div>
-                <div flex="20">
-                    <div class="text-left">
-                        <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add">
-                            <md-icon md-font-icon="icon-folder-outline"></md-icon>
-                            <!-- <md-tooltip><span translate=""></span></md-tooltip> -->
-                        </md-button>
-                    </div>
+            </div>
+            <div layout="row" layout-wrap>
+                <div flex="100">
+                    <!--                             <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add" ngf-select="upload($file)">
+                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                            </md-button> -->
+                    <!-- <input id="fileInput" type="file"> -->
+                    <lf-ng-md-file-input lf-files="files"></lf-ng-md-file-input>
                 </div>
             </div>
         </md-dialog-content>
@@ -32,7 +33,7 @@
                     DONE
                 </md-button>
             </div>
-<!--             <div layout="row">
+            <!--             <div layout="row">
                 <md-button class="md-icon-button" aria-label="Delete" translate-attr-aria-label="PROJECT.DELETE">
                     <md-icon md-font-icon="icon-delete"></md-icon>
                     <md-tooltip><span translate="PROJECT.DELETE"></span></md-tooltip>
