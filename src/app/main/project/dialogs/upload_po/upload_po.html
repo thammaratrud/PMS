@@ -10,21 +10,11 @@
         </md-toolbar>
         <md-dialog-content ms-scroll>
             <div layout="row" layout-wrap>
-                <div flex="50">
+                <div flex="100">
                     <md-input-container class="md-block input-project">
                         <label translate="PROJECT.UPLOADPO_PURCHASEORDERNO">Purchase Order No.</label>
                         <input type="text" ng-model="uploadData.PurchaseNo">
                     </md-input-container>
-                </div>
-                <div flex="50">
-                    <div layout="row">
-                        <div class="text-left">
-                            <!--                             <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add" ngf-select="upload($file)">
-                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
-                            </md-button> -->
-                            <input id="fileInput" type="file">
-                        </div>
-                    </div>
                 </div>
             </div>
             <div layout="row" layout-wrap>
@@ -48,6 +38,15 @@
                     <md-datepicker ng-model="uploadData.DrillDate" md-placeholder="Enter date"></md-datepicker>
                 </div>
             </div>
+            <div layout="row" layout-wrap>
+                <div flex="100">
+                    <!--                             <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add" ngf-select="upload($file)">
+                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                            </md-button> -->
+                    <!-- <input id="fileInput" type="file"> -->
+                    <lf-ng-md-file-input lf-files="files"></lf-ng-md-file-input>
+                </div>
+            </div>
         </md-dialog-content>
         <md-dialog-actions layout="row" layout-align="space-between center">
             <div layout="row" layout-align="start center">
@@ -55,12 +54,12 @@
                     DONE
                 </md-button>
             </div>
-            <div layout="row">
+<!--             <div layout="row">
                 <md-button class="md-icon-button" aria-label="Delete" translate-attr-aria-label="PROJECT.DELETE">
                     <md-icon md-font-icon="icon-delete"></md-icon>
                     <md-tooltip><span translate="PROJECT.DELETE"></span></md-tooltip>
                 </md-button>
-            </div>
+            </div> -->
         </md-dialog-actions>
     </form>
 </md-dialog>

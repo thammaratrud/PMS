@@ -67,11 +67,11 @@
                     <md-switch style="margin-top: 7px;" ng-model="addCost.IsTax">
                     </md-switch>
                 </div>
-                <div flex="30">
+                <!--                 <div flex="30">
                     <div class="text-left">
                         <input id="fileInput" type="file">
                     </div>
-                </div>
+                </div> -->
             </div>
             <div ng-show="addCost.IsTax">
                 <div layout="row" layout-wrap>
@@ -95,6 +95,15 @@
                             <input type="text" ng-model="addCost.CostAdd">
                         </md-input-container>
                     </div>
+                </div>
+            </div>
+            <div layout="row" layout-wrap>
+                <div flex="100">
+                    <!--                             <md-button class="md-icon-button" aria-label="" translate-attr-aria-label="PROJECT.add" ngf-select="upload($file)">
+                                <md-icon md-font-icon="icon-folder-outline"></md-icon>
+                            </md-button> -->
+                    <!-- <input id="fileInput" type="file"> -->
+                    <lf-ng-md-file-input lf-files="files"></lf-ng-md-file-input>
                 </div>
             </div>
         </md-dialog-content>
