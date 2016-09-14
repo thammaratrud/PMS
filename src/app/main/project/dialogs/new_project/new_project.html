@@ -26,8 +26,13 @@
                             <md-input-container flex="100" class="input-project">
                                 <label translate="PROJECT.PROJECT_NAME">Project Name</label>
                                 <input type="text" name="project_name" ng-model="vm.formWizard.project_name" required>
-                                <div ng-messages="wizardStep1.project_name.$error" role="alert">
+                                <!--                                <div ng-messages="wizardStep1.project_name.$error" role="alert">
                                     <div ng-message="required">
+                                        <span translate="PROJECT.PROJECT_NAME_ERR">Project Name field is required.</span>
+                                    </div>
+                                </div> -->
+                                <div ng-messages="addCost_CostAmount.$error" role="alert">
+                                    <div ng-show="!vm.formWizard.project_name">
                                         <span translate="PROJECT.PROJECT_NAME_ERR">Project Name field is required.</span>
                                     </div>
                                 </div>
