@@ -493,6 +493,7 @@
                 $rootScope.chart_progress();
 
                 if (vm.selectedProject.PeriodInfo.length > 0) {
+                    $scope.periodPercentAmount = 0;
                     angular.forEach(vm.selectedProject.PeriodInfo, function(period) {
                         if (period.PeriodStatus == 'PERIOD_RECEIPTED') {
                             $scope.periodPercentAmount += period.PeriodPercent;

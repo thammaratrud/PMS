@@ -37,7 +37,8 @@
         function closeDialog() {
             $mdDialog.hide();
         }
-
+        // "application/pdf"
+        // "image/jpeg"
         $scope.uploadAppointment = function() {
 
             var fileName = "";
@@ -45,7 +46,7 @@
             angular.forEach($scope.files, function(obj) {
                 var fileType = obj.lfFile.name.split('.');
                 var type = fileType[fileType.length - 1];
-                fileName = select_project.ProjectCode + "_Appointment." + type;
+                fileName = select_project.ProjectCode + "_Appointment-" + $scope.uploadApp.AppNo + "." + type;
                 formData.append('files[]', obj.lfFile, fileName);
             });
 

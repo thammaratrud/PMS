@@ -6,7 +6,7 @@
         .controller('Upload_PO_Controller', Upload_PO_Controller);
 
     /** @ngInject */
-    function Upload_PO_Controller($scope,$rootScope, $mdDialog, selectedProject, projectService) {
+    function Upload_PO_Controller($scope, $rootScope, $mdDialog, selectedProject, projectService) {
 
         var select_project = selectedProject;
         var vm = this;
@@ -47,7 +47,7 @@
             angular.forEach($scope.files, function(obj) {
                 var fileType = obj.lfFile.name.split('.');
                 var type = fileType[fileType.length - 1];
-                fileName = select_project.ProjectCode + "_PurchaseOrder." + type;
+                fileName = select_project.ProjectCode + "_PurchaseOrder-" + $scope.uploadData.PurchaseNo + "." + type;
                 formData.append('files[]', obj.lfFile, fileName);
             });
 

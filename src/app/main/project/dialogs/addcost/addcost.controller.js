@@ -63,6 +63,24 @@
             $scope.message = cbState;
 
         };
+        $scope.checkCost = function() {
+
+            var costTotal = 0;
+            if (select_project.CostInfo.length > 0) {
+                angular.forEach(select_project.CostInfo, function(cost) {
+                    costTotal += cost.CostAmount;
+                });
+                if (($scope.addCost.CostAmount + costTotal) > select_project.BudgetInfo.Budget) {
+                    $scope.addCost.CostAmount = select_project.BudgetInfo.Budget - costTotal;
+                }
+            } else {
+                if ($scope.addCost.CostAmount > select_project.BudgetInfo.Budget) {
+                    $scope.addCost.CostAmount = select_project.BudgetInfo.Budget;
+                }
+            }
+
+        }
+
         $scope.sendCost = function() {
 
             var fileName = "";
