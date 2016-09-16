@@ -11,7 +11,7 @@
     {
         $locationProvider.html5Mode(true);
 
-        $urlRouterProvider.otherwise('/project');
+        $urlRouterProvider.otherwise('/login-v2');
 
         /**
          * Layout Style Switcher

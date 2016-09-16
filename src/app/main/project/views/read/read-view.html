@@ -241,7 +241,7 @@
     </div>
 </div>
 <div ng-show="documentStatus">
-    <div layout="row" layout-wrap>
+    <div layout="row" layout-wrap ng-hide="fileList.length == 0">
         <h2><strong><label >Finance Document</label></strong></h2>
     </div>
     <div layout="row" layout-wrap ng-hide="fileList.length == 0">
@@ -266,7 +266,7 @@
             </tbody>
         </table>
     </div>
-    <div layout="row" layout-wrap>
+    <div layout="row" layout-wrap ng-hide="fileListPD.length == 0">
         <h2><strong><label>Project Document</label></strong></h2>
     </div>
     <div layout="row" layout-wrap ng-hide="fileListPD.length == 0">

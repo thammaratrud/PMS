@@ -5,7 +5,7 @@
 # include project-style.css inside index.html
 =======================================================
 
-# bower install angular-charts-js#0.8.8 in your project.
+# bower install angular-charts-js#0.8.8 --save in your project.
 
 # include index.html
 	<script src="bower_components/Chart.js/Chart.js"></script>
@@ -22,4 +22,17 @@
 	<script src="bower_components/lf-ng-md-file-input/dist/lf-ng-md-file-input.js"></script>
 
 # dependency injection 'lfNgMdFileInput' in folder core > core.module.js
+
+-------------------------------------------------------
+
+# login 
+
+# copy app/lib/angular-local-storage.min.js
+
+# include index.html
+
+	<script src="app/lib/angular-local-storage.min.js"></script>
+
+
+
 # Enjoy :)

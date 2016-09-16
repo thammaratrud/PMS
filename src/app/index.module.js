@@ -21,8 +21,11 @@
             'app.quick-panel',
 
             // Sample
-            'app.sample',
+            // 'app.sample',
 
-            'app.project'
+            'app.project',
+            'app.login-v2',
+            'app.register-v2',
+            'LocalStorageModule'
         ]);
 })();
