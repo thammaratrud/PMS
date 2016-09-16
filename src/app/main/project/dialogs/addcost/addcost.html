@@ -49,11 +49,11 @@
             <div layout="row" layout-wrap>
                 <div flex="30">
                     <md-input-container class="md-block input-project">
-                        <label translate="PROJECT.ADDCOST_AMOUNT">Amount</label>
+                        <label translate="PROJECT.ADDCOST_AMOUNT">Amount*</label>
                         <input type="number" name="addCost_CostAmount" ng-model="addCost.CostAmount" required>
                         <div ng-messages="addCost_CostAmount.$error" role="alert">
-                            <div ng-show="!addCost.CostAmount">
-                                <span translate="PROJECT.PROJECT_ERR">Amount field is required.</span>
+                            <div ng-message="required">
+<!--                                 <span translate="PROJECT.PROJECT_ERR">Amount field is required.</span> -->
                             </div>
                         </div>
                     </md-input-container>
@@ -106,10 +106,11 @@
                     <lf-ng-md-file-input lf-files="files"></lf-ng-md-file-input>
                 </div>
             </div>
+            <label ng-class="{'file-size' : checkFileSize == true}">Attachments larger than 25MB.</label>
         </md-dialog-content>
         <md-dialog-actions layout="row" layout-align="space-between center">
             <div layout="row" layout-align="start center">
-                <md-button ng-click="sendCost()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONE" ng-disabled="addCost.CostAmount <= 0 || !addCost.CostAmount">
+                <md-button ng-click="sendCost()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONE" ng-disabled="addCost.CostAmount <= 0 || !addCost.CostAmount || checkFileSize">
                     DONE
                 </md-button>
             </div>

@@ -10,7 +10,7 @@
 
         $scope.select_project_original = selectedProject;
         $scope.select_project = angular.copy($scope.select_project_original);
-        $scope.states = ['Project Manager', 'Accounting'];
+        $scope.states = ['Offering', 'Buyiny','Aftersale'];
         $scope.addAttenStatus = false;
         $scope.scopeOfWorkStatus = false;
         $scope.customerDetailInfo = $scope.select_project.CustomerInfo.CustomerDetailInfo;

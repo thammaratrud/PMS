@@ -77,15 +77,28 @@
                 chachedPercent += period.PeriodAmout;
 
             })
+            if ($scope.modeEdit == true) {
+                if (chachedPercent <= $scope.budgetData.Price) {
+                    var newPercent = ($scope.periodInfo.PeriodAmout / $scope.budgetData.Price) * 100;
+                    $scope.periodInfo.PeriodPercent = parseInt(newPercent);
+                } else {
+                    $scope.periodInfo.PeriodAmout =  $scope.periodInfo.PeriodAmout + ($scope.budgetData.Price - chachedPercent);
+                    var newPercent = ($scope.periodInfo.PeriodAmout / $scope.budgetData.Price) * 100;
+                    $scope.periodInfo.PeriodPercent = parseInt(newPercent);
+                }
 
-            if ((chachedPercent + $scope.periodInfo.PeriodAmout) <= $scope.budgetData.Price) {
-                var newPercent = ($scope.periodInfo.PeriodAmout / $scope.budgetData.Price) * 100;
-                $scope.periodInfo.PeriodPercent = parseInt(newPercent);
             } else {
-                $scope.periodInfo.PeriodAmout = $scope.budgetData.Price - chachedPercent;
-                var newPercent = ($scope.periodInfo.PeriodAmout / $scope.budgetData.Price) * 100;
-                $scope.periodInfo.PeriodPercent = parseInt(newPercent);
+                if ((chachedPercent + $scope.periodInfo.PeriodAmout) <= $scope.budgetData.Price) {
+                    var newPercent = ($scope.periodInfo.PeriodAmout / $scope.budgetData.Price) * 100;
+                    $scope.periodInfo.PeriodPercent = parseInt(newPercent);
+                } else {
+                    $scope.periodInfo.PeriodAmout = $scope.budgetData.Price - chachedPercent;
+                    var newPercent = ($scope.periodInfo.PeriodAmout / $scope.budgetData.Price) * 100;
+                    $scope.periodInfo.PeriodPercent = parseInt(newPercent);
+                }
             }
+
+
 
         }
 

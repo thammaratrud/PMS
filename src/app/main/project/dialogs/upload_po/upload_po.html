@@ -47,10 +47,11 @@
                     <lf-ng-md-file-input lf-files="files"></lf-ng-md-file-input>
                 </div>
             </div>
+            <label ng-class="{'file-size' : checkFileSize == true}">Attachments larger than 25MB.</label>
         </md-dialog-content>
         <md-dialog-actions layout="row" layout-align="space-between center">
             <div layout="row" layout-align="start center">
-                <md-button ng-click="uploadPO()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONENE">
+                <md-button ng-click="uploadPO()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONENE" ng-disabled="checkFileSize">
                     DONE
                 </md-button>
             </div>

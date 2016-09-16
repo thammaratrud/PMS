@@ -79,7 +79,7 @@
         "ADDCOST_DESCRIPTION": "Description",
 
         "ADDCOST_VAT": "หักภาษี ณ ที่จ่าย",
-        "ADDCOST_AMOUNT": "Amount",
+        "ADDCOST_AMOUNT": "Amount*",
         "ADDCOST_NAME": "Name",
         "ADDCOST_NO": "No.",
         "ADDCOST_ADDRESS": "Address",

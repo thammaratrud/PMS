@@ -63,10 +63,67 @@
 
         };
 
+        var _upLoadFile = function(formData) {
+
+            var deferred = $q.defer();
+
+            $http.post(serviceBase + 'api/Upload', formData, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            }).then(function(result) {
+                // do sometingh
+                deferred.resolve(result);
+            }, function(err) {
+                // do sometingh
+
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+
+        };
+
+        var _getFileList = function(projectCode) {
+
+            var deferred = $q.defer();
+
+            $http.get(serviceBase + 'api/GetFileList?projectCode=' + projectCode).then(function(result) {
+                // do sometingh
+                deferred.resolve(result);
+            }, function(err) {
+                // do sometingh
+
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+
+        };
+
+        var _downloadFile = function(filename) {
+
+            var deferred = $q.defer();
+
+            $http.get(serviceBase + 'api/Download?fileName=' + filename).then(function(result) {
+                // do sometingh
+                deferred.resolve(result);
+            }, function(err) {
+                // do sometingh
+
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
+
+        };
+
 
         projectServiceFactory.getProject = _getProject;
         projectServiceFactory.postProject = _postProject;
         projectServiceFactory.putProject = _putProject;
+        projectServiceFactory.upLoadFile = _upLoadFile;
+        projectServiceFactory.getFileList = _getFileList;
+        projectServiceFactory.downloadFile = _downloadFile;
 
         return projectServiceFactory;
     }

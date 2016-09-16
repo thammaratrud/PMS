@@ -233,6 +233,9 @@ a:active {
 .period-status-yellow {
     background-color: #ffeb3b !important;
 }
+.period-status-yellow2 {
+    background-color: #ffeb3b !important;
+}
 .period-status-green {
     background-color: #53e63f !important;
 }
@@ -244,4 +247,7 @@ a:active {
 }
 .color-disabled{
    color: #bbbbbb !important;
+}
+.file-size{
+    color: #F44336;
 }

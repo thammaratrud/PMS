@@ -6,7 +6,7 @@
         .controller('ProjectController', ProjectController);
 
     /** @ngInject */
-    function ProjectController($scope, $rootScope, $document, $timeout, $mdDialog, $mdMedia, $mdSidenav, projectService) {
+    function ProjectController($scope, $rootScope, $location, $document, $timeout, $mdDialog, $mdMedia, $mdSidenav, projectService) {
 
         var vm = this;
 
@@ -34,8 +34,8 @@
         vm.selectedAccount = 'project';
         vm.selectedselectedProject = {};
         vm.toggleSidenav = toggleSidenav;
-      
-        
+
+
 
         vm.responsiveReadPane = undefined;
         vm.activeMailPaneIndex = 0;
@@ -55,8 +55,8 @@
         vm.selectProject = selectProject;
         vm.toggleStarred = toggleStarred;
         vm.toggleCheck = toggleCheck;
-         
-        
+
+
 
 
         $scope.financeStatus = true;
@@ -149,54 +149,56 @@
                 console.log('Call Service Success ');
                 vm.projectData = data;
                 vm.selectedProject = vm.projectData[0];
-                if (vm.selectedProject.CostInfo.length > 0) {
-                    angular.forEach(vm.selectedProject.CostInfo, function(cost) {
-                        $scope.costTotal += cost.CostAmount;
-                    })
-                    $scope.costPercent = ($scope.costTotal / vm.selectedProject.BudgetInfo.Budget) * 100;
-                    $scope.leftCostPercent = 100 - parseInt($scope.costPercent);
+                if (vm.projectData.length > 0) {
+                    if (vm.selectedProject.CostInfo.length > 0) {
+                        angular.forEach(vm.selectedProject.CostInfo, function(cost) {
+                            $scope.costTotal += cost.CostAmount;
+                        })
+                        $scope.costPercent = ($scope.costTotal / vm.selectedProject.BudgetInfo.Budget) * 100;
+                        $scope.leftCostPercent = 100 - parseInt($scope.costPercent);
 
-                    if ($scope.costPercent < 30) {
-                        $scope.colorxCart = $scope.colorx.coloursGood;
-                    } else if ($scope.costPercent < 70) {
-                        $scope.colorxCart = $scope.colorx.coloursNormal;
-                    } else {
-                        $scope.colorxCart = $scope.colorx.coloursBad;
-                    }
-                    $scope.doughnutChartBySelectProject = {
-                        labels: ['Cost(%)', 'Budget(%)'],
-                        data: [parseInt($scope.costPercent), $scope.leftCostPercent],
-                        color: $scope.colorxCart
-                    }
-                }
-                if (vm.selectedProject.PeriodInfo.length > 0) {
-                    angular.forEach(vm.selectedProject.PeriodInfo, function(period) {
-                        if (period.PeriodStatus == 'PERIOD_RECEIPTED') {
-                            $scope.periodPercentAmount += period.PeriodPercent;
-                            $scope.receiptTotal += period.PeriodAmout;
+                        if ($scope.costPercent < 30) {
+                            $scope.colorxCart = $scope.colorx.coloursGood;
+                        } else if ($scope.costPercent < 70) {
+                            $scope.colorxCart = $scope.colorx.coloursNormal;
+                        } else {
+                            $scope.colorxCart = $scope.colorx.coloursBad;
                         }
-                    })
-                    if ($scope.periodPercentAmount < 30) {
-                        $scope.colorxReceipt = $scope.colorx.coloursBad;
-                    } else if ($scope.periodPercentAmount < 70) {
-                        $scope.colorxReceipt = $scope.colorx.coloursNormal;
-                    } else {
-                        $scope.colorxReceipt = $scope.colorx.coloursGood;
+                        $scope.doughnutChartBySelectProject = {
+                            labels: ['Cost(%)', 'Budget(%)'],
+                            data: [parseInt($scope.costPercent), $scope.leftCostPercent],
+                            color: $scope.colorxCart
+                        }
                     }
-                    periodPercentleft = periodPercentleft - $scope.periodPercentAmount;
-                    $scope.receiptChartBySelectProject = {
-                        labels: ['', ''],
-                        data: [$scope.periodPercentAmount, periodPercentleft],
-                        color: $scope.colorxReceipt
+                    if (vm.selectedProject.PeriodInfo.length > 0) {
+                        angular.forEach(vm.selectedProject.PeriodInfo, function(period) {
+                            if (period.PeriodStatus == 'PERIOD_RECEIPTED') {
+                                $scope.periodPercentAmount += period.PeriodPercent;
+                                $scope.receiptTotal += period.PeriodAmout;
+                            }
+                        })
+                        if ($scope.periodPercentAmount < 30) {
+                            $scope.colorxReceipt = $scope.colorx.coloursBad;
+                        } else if ($scope.periodPercentAmount < 70) {
+                            $scope.colorxReceipt = $scope.colorx.coloursNormal;
+                        } else {
+                            $scope.colorxReceipt = $scope.colorx.coloursGood;
+                        }
+                        periodPercentleft = periodPercentleft - $scope.periodPercentAmount;
+                        $scope.receiptChartBySelectProject = {
+                            labels: ['', ''],
+                            data: [$scope.periodPercentAmount, periodPercentleft],
+                            color: $scope.colorxReceipt
+                        }
+                        $scope.progressChartBySelectProject = {
+                            labels: ['', ''],
+                            data: [$scope.periodPercentAmount, periodPercentleft],
+                            color: $scope.colorx.coloursDefault
+                        }
                     }
-                    $scope.progressChartBySelectProject = {
-                        labels: ['', ''],
-                        data: [$scope.periodPercentAmount, periodPercentleft],
-                        color: $scope.colorx.coloursDefault
-                    }
+                    $rootScope.chart_progress();
+                    $rootScope.getFileList();
                 }
-
-                $rootScope.chart_progress();
 
             }, function(err) {
                 console.log('Call Service Fail');
@@ -589,6 +591,7 @@
 
         function selectProject(project) {
 
+
             vm.selectedProject = project;
 
             $scope.periodPercentAmount = 0;
@@ -675,6 +678,7 @@
                 // Scroll to the top
                 vm.scrollEl.scrollTop(0);
             });
+            $rootScope.getFileList();
         }
 
         /**
@@ -749,11 +753,47 @@
             }
         }
 
-        /**
-         * Open compose dialog
-         *
-         * @param ev
-         */
+        $rootScope.getFileList = function() {
+            $scope.fileList = [];
+            $scope.fileListPD = [];
+            projectService.getFileList(vm.selectedProject.ProjectCode).then(function(response) {
+                angular.forEach(response.data, function(data) {
+                    var dontCost = data.split("_");
+                    if (dontCost[dontCost.length - 1].substr(0, 4) != "Cost" && dontCost[1] != "PD") {
+                        $scope.fileList.push(data);
+                    } else if (dontCost[1] == "PD") {
+                        $scope.fileListPD.push(data);
+                    } else {
+
+                    }
+                })
+
+            }, function(err) {
+
+            })
+        }
+        $scope.downloadFile = function(file) {
+            projectService.downloadFile(file).then(function(response) {
+                window.location.assign(response.config.url);
+            }, function(err) {
+
+            })
+        }
+
+        $scope.serviceInvoice = function(period) {
+                period.PeriodStatus = "PERIOD_WAITING";
+                projectService.putProject(vm.selectedProject).then(function() {
+                    console.log('Update statue success.');
+
+                }, function(err) {
+                    console.log('Update statue fail.');
+                })
+            }
+            /**
+             * Open compose dialog
+             *
+             * @param ev
+             */
         $scope.composeDialog = function(ev) {
             $mdDialog.show({
                 controller: 'NewProjectController',
@@ -787,7 +827,7 @@
                 controller: 'UploadFileController',
                 controllerAs: 'vm',
                 locals: {
-                    selectedProject: undefined
+                    selectedProject: vm.selectedProject
                 },
                 templateUrl: 'app/main/project/dialogs/UploadFile/uploadFile.html',
                 parent: angular.element($document.body),
@@ -810,7 +850,7 @@
             });
         }
 
-        $scope.costmore = function(ev, cost) {
+        $scope.costsMore = function(ev, cost) {
             $mdDialog.show({
                 controller: 'costmoreController',
                 controllerAs: 'vm',
@@ -823,36 +863,6 @@
                 clickOutsideToClose: true
             });
         }
-
-        // $scope.costsMore = function(ev, cost) {
-        //     $mdDialog.show({
-        //         controller: 'costmoreController',
-        //         controllerAs: 'vm',
-        //         locals: {
-        //             cost: cost
-        //         },
-        //         templateUrl: 'app/main/project/dialogs/cost-more/cost-more.html',
-        //         parent: angular.element($document.body),
-        //         targetEvent: ev,
-        //         clickOutsideToClose: true
-        //     });
-        // }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         $scope.UploadpoDialog = function(ev) {
             $mdDialog.show({
@@ -912,7 +922,7 @@
         }
 
 
-         $scope.customerdialog = function(ev) {
+        $scope.customerdialog = function(ev) {
             $mdDialog.show({
                 controller: 'customerController',
                 controllerAs: 'vm',

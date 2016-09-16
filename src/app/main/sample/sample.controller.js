@@ -6,7 +6,7 @@
         .controller('SampleController', SampleController);
 
     /** @ngInject */
-    function SampleController(SampleData, sampleService) {
+    function SampleController($scope, SampleData) {
         var vm = this;
 
         // Data
@@ -15,13 +15,9 @@
         // Methods
 
         //////////
+        $scope.genPDF = function() {
 
-        sampleService.getProject().then(function(response) {
-                console.log("getProject : Success." + response);
-            },
-            function(err) {
-                console.log("getProject : Fail.");
-            });
+        }
 
     }
 })();

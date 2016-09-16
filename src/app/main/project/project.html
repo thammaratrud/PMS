@@ -90,7 +90,7 @@
             </div>
             <!-- / CONTENT TOOLBAR -->
             <!-- CONTENT WRAPPER -->
-            <div class="content-wrapper" layout="row" flex>
+            <div class="content-wrapper" layout="row" flex ng-hide="vm.projectData.length == 0">
                 <md-tabs md-selected="vm.activeMailPaneIndex" class="mail-tabs" md-dynamic-height="{{vm.dynamicHeight}}" flex>
                     <md-tab>
                         <md-tab-label>Mails</md-tab-label>

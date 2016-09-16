@@ -6,12 +6,14 @@
         .controller('Upload_PO_Controller', Upload_PO_Controller);
 
     /** @ngInject */
-    function Upload_PO_Controller($scope, $http, $mdDialog, selectedProject, projectService) {
+    function Upload_PO_Controller($scope,$rootScope, $mdDialog, selectedProject, projectService) {
 
         var select_project = selectedProject;
         var vm = this;
 
         vm.closeDialog = closeDialog;
+
+        $scope.checkFileSize = false;
 
         $scope.uploadData = {
             PurchaseDate: new Date(),
@@ -22,9 +24,22 @@
             $mdDialog.hide();
         }
         $scope.files;
+
         $scope.$watch('files.length', function(newVal, oldVal) {
-            console.log($scope.files);
+
+            if ($scope.files != undefined) {
+                if ($scope.files.length > 0) {
+                    if ($scope.files[0].lfFile.size > 25600000) {
+                        $scope.checkFileSize = true;
+                    } else {
+                        $scope.checkFileSize = false;
+                    }
+                }
+            }
+
         });
+
+
         $scope.uploadPO = function() {
 
             var fileName = "";
@@ -35,28 +50,26 @@
                 fileName = select_project.ProjectCode + "_PurchaseOrder." + type;
                 formData.append('files[]', obj.lfFile, fileName);
             });
-            $http.post('http://localhost:5145/api/Upload', formData, {
-                transformRequest: angular.identity,
-                headers: { 'Content-Type': undefined }
-            }).then(function(result) {
-                // do sometingh
-                console.log('upload success.' + JSON.stringify(result));
+
+            projectService.upLoadFile(formData).then(function(response) {
+
+                console.log('upload success.' + JSON.stringify(response));
+
+                var file = fileName;
+                $scope.uploadData.ProjectID = select_project.ProjectID;
+                $scope.uploadData.PurchaseFile = file;
+                select_project.PurchaseInfo = $scope.uploadData;
+
+                projectService.putProject(select_project).then(function() {
+                    console.log('Update po success.');
+                    $rootScope.getFileList();
+                }, function(err) {
+                    console.log('Update po fail.');
+                })
             }, function(err) {
-                // do sometingh
                 console.log('upload error.' + JSON.stringify(err));
-            });
-
-            // var file = document.getElementById('fileInput').value;
-            var file = fileName;
-            $scope.uploadData.ProjectID = select_project.ProjectID;
-            $scope.uploadData.PurchaseFile = file;
-            select_project.PurchaseInfo = $scope.uploadData;
-
-            projectService.putProject(select_project).then(function() {
-                console.log('Put upload_po success.');
-            }, function(err) {
-                console.log('Put upload_po fail.');
             })
+
 
             closeDialog();
         }

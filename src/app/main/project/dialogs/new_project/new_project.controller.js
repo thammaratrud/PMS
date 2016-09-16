@@ -15,7 +15,7 @@
         vm.formWizard2 = {};
         vm.formWizard3 = {};
 
-        $scope.states = ['Project Manager', 'Accounting'];
+        $scope.states = ['Offering', 'Buyiny','Aftersale'];
         $scope.addAttenStatus = false;
         $scope.scopeOfWorkStatus = false;
         $scope.customerDetailInfo = [];
