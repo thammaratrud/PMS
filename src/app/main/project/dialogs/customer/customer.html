@@ -10,78 +10,29 @@
         </md-toolbar>
         <md-dialog-content ms-scroll>
             <div layout="row" layout-wrap>
-                <h3><strong>Client Company:</strong></h3>
+                <h3><strong>Client Company: {{select_project.CustomerInfo.CompanyName}}</strong></h3>
             </div>
             <div layout="row" layout-wrap>
-                <h3><strong>Company Address:</strong></h3>
+                <h3><strong>Company Address: {{select_project.CustomerInfo.CompanyAddress}}</strong></h3>
             </div>
             <br>
             <div layout="row" layout-wrap>
                 <table class="simple md-whiteframe-2dp">
-                  <thead style="background-color: #c5c5c5;">
-                    <tr>
-                        <th>State</th>
-                        <th>Name</th>
-                        <th>Position</th>
-                        <th>Tel</th>
-                        <th>E-mail</th>
-                    </tr>
-                     </thead>
-                    <tr>
-                        <td>Mexico</td>
-                        <td>John</td>
-                        <td>IT</td>
-                        <td>02-9000000</td>
-                        <td>Francisco@mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Mexico</td>
-                        <td>John</td>
-                        <td>IT</td>
-                        <td>02-9000000</td>
-                        <td>Francisco@mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Mexico</td>
-                        <td>John</td>
-                        <td>IT</td>
-                        <td>02-9000000</td>
-                        <td>Francisco@mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Mexico</td>
-                        <td>John</td>
-                        <td>IT</td>
-                        <td>02-9000000</td>
-                        <td>Francisco@mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Mexico</td>
-                        <td>John</td>
-                        <td>IT</td>
-                        <td>02-9000000</td>
-                        <td>Francisco@mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Mexico</td>
-                        <td>John</td>
-                        <td>IT</td>
-                        <td>02-9000000</td>
-                        <td>Francisco@mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Mexico</td>
-                        <td>John</td>
-                        <td>IT</td>
-                        <td>02-9000000</td>
-                        <td>Francisco@mail.com</td>
-                    </tr>
-                    <tr>
-                        <td>Mexico</td>
-                        <td>John</td>
-                        <td>IT</td>
-                        <td>02-9000000</td>
-                        <td>Francisco@mail.com</td>
+                    <thead style="background-color: #c5c5c5;">
+                        <tr>
+                            <th>State</th>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Tel</th>
+                            <th>E-mail</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="list in select_project.CustomerInfo.CustomerDetailInfo">
+                        <td>{{list.CustomerStateName}}</td>
+                        <td>{{list.CustomerName}}</td>
+                        <td>{{list.CustomerPosition}}</td>
+                        <td>{{list.CustomerTel}}</td>
+                        <td>{{list.CustomerEmail}}</td>
                     </tr>
                 </table>
             </div>

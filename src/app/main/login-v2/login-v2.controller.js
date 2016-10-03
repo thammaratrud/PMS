@@ -6,7 +6,7 @@
         .controller('LoginV2Controller', LoginV2Controller);
 
     /** @ngInject */
-    function LoginV2Controller($scope, api, authService, $location) {
+    function LoginV2Controller($scope, api, authService, $location,localStorageService) {
         
         $scope.form = {};
 
@@ -19,6 +19,7 @@
             };
 
             authService.login($scope.loginData).then(function(response) {
+                    var local = localStorageService.get('authorizationData');
                     $location.path('/project');
                 },
                 function(err) {

@@ -20,15 +20,25 @@
 
         $scope.files;
 
+        var warningType = $rootScope.warningType;
         $scope.$watch('files.length', function(newVal, oldVal) {
-
+            $scope.checkFileSize = false;
+            $scope.checkFileType = false;
             if ($scope.files != undefined) {
                 if ($scope.files.length > 0) {
-                    if ($scope.files[0].lfFile.size > 25600000) {
-                        $scope.checkFileSize = true;
-                    } else {
-                        $scope.checkFileSize = false;
-                    }
+                    var fileType = $scope.files[0].lfFile.name.split('.');
+                    $scope.types = fileType[fileType.length - 1];
+                    angular.forEach(warningType, function(e) {
+                        if ($scope.types == e) {
+                            $scope.checkFileType = true;
+                        } else {
+                            if ($scope.files[0].lfFile.size > 25600000) {
+                                $scope.checkFileSize = true;
+                            } else {
+                                $scope.checkFileSize = false;
+                            }
+                        }
+                    })
                 }
             }
 

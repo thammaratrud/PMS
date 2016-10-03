@@ -15,7 +15,7 @@
         vm.formWizard2 = {};
         vm.formWizard3 = {};
 
-        $scope.states = ['Offering', 'Buyiny','Aftersale'];
+        $scope.states = ['Offering', 'Buyiny', 'Aftersale'];
         $scope.addAttenStatus = false;
         $scope.scopeOfWorkStatus = false;
         $scope.customerDetailInfo = [];
@@ -117,8 +117,10 @@
                 "ProjectCode": vm.formWizard.project_code,
                 "ProjectName": vm.formWizard.project_name,
                 "ProjectStatus": "Pause",
+                "ProjectDay": 0,
                 "ProjectDuration": vm.formWizard.duration,
                 "ScopeInfo": $scope.scopeOfWorkInfo,
+                "ProjectDateTime": new Date(),
                 "CustomerInfo": {
                     "ProjectID": project_id,
                     "CompanyID": "1-" + project_id,
@@ -169,6 +171,29 @@
             $scope.scopeOfWorkStatus = true;
             vm.formWizard3 = atten;
         }
+        var number = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+        $scope.$watch('vm.formWizard2.CustomerTel', function(news, old) {
+
+            var newNumber = vm.formWizard2.CustomerTel;
+            if (vm.formWizard2.CustomerTel != null) {
+                
+                for (var i = vm.formWizard2.CustomerTel.length - 1; i >= 0; i--) {
+                    for (var ii = number.length - 1; ii >= 0; ii--) {
+                        var e = false;
+                        if (vm.formWizard2.CustomerTel[i] == number[ii]) {
+                            e = true;
+                            break;
+                        }
+                    };
+
+                    if (!e) {
+                        newNumber = newNumber.replace(vm.formWizard2.CustomerTel[i], "");
+                    }
+                };
+            }
+            vm.formWizard2.CustomerTel = newNumber;
+            // console.log(vm.formWizard2.CustomerTel ,newNumber);
+        });
 
     }
 })();

@@ -29,14 +29,14 @@
         
 
         // Navigation
-        msNavigationServiceProvider.saveItem('fuse.project', {
+        msNavigationServiceProvider.saveItem('project', {
             title : 'Project',
             icon  : 'icon-email',
             state : 'app.project',
-            badge : {
-                content: 25,
-                color  : '#F44336'
-            },
+            // badge : {
+            //     content: 25,
+            //     color  : '#F44336'
+            // },
             weight: 0
         });
     }

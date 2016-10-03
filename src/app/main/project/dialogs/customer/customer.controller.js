@@ -6,9 +6,9 @@
         .controller('customerController', customerController);
 
     /** @ngInject */
-    function customerController($scope, $mdDialog) {
+    function customerController($scope, $mdDialog, selectedProject) {
 
-        // var select_project = selectedProject;
+        $scope.select_project = selectedProject;
         var vm = this;
         
         // $scope.uploadApp = period;

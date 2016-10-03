@@ -57,8 +57,9 @@
         vm.toggleCheck = toggleCheck;
 
 
-
-
+        // file type not upload
+        $rootScope.warningType = ["exe", "apk", "msi", "iso", "sys", "bat", "cmd", "amr", "mp2", "mp3", "mp4", "zip", "rar", "tgz"];
+        // 
         $scope.financeStatus = true;
         $scope.documentStatus = false;
         $scope.scopeOfWorkStatus = false;
@@ -208,46 +209,59 @@
         $rootScope.getProjectData();
 
         $rootScope.chart_progress = function() {
+
             vm.doughnutChartTime = [];
             $scope.doughnutChartProcess = [];
             $scope.costProgress = [];
             $scope.receiptProgress = [];
+
             angular.forEach(vm.projectData, function(project) {
                 $scope.useDays = 0;
                 $scope.lefts = 0;
-                if (project.ProjectDuration > 0) {
-                    $scope.useDays = parseInt((new Date() - new Date(project.Created)) / 86400000);
-                    $scope.lefts = project.ProjectDuration - $scope.useDays;
-                    $scope.persenDays = ($scope.useDays / project.ProjectDuration) * 100;
-                    if ($scope.persenDays < 30) {
-                        $scope.colorxCart = $scope.colorx.coloursGood;
-                        $scope.statusCart = 'Good';
-                    } else if ($scope.persenDays < 70) {
-                        $scope.colorxCart = $scope.colorx.coloursNormal;
-                        $scope.statusCart = 'Normal';
+                if (project.ProjectStatus == "Play") {
+                    if (project.ProjectDuration > 0) {
+                        $scope.useDays = parseInt((new Date() - new Date(project.ProjectDateTime)) / 86400000 + project.ProjectDays);
+                        $scope.lefts = project.ProjectDuration - $scope.useDays;
+                        $scope.persenDays = ($scope.useDays / project.ProjectDuration) * 100;
+                        if ($scope.persenDays < 30) {
+                            $scope.colorxCart = $scope.colorx.coloursGood;
+                            $scope.statusCart = 'Good';
+                        } else if ($scope.persenDays < 70) {
+                            $scope.colorxCart = $scope.colorx.coloursNormal;
+                            $scope.statusCart = 'Normal';
+                        } else {
+                            $scope.colorxCart = $scope.colorx.coloursBad;
+                            $scope.statusCart = 'Bad';
+                        }
                     } else {
+                        $scope.useDays = 0;
+                        $scope.lefts = 0;
                         $scope.colorxCart = $scope.colorx.coloursBad;
                         $scope.statusCart = 'Bad';
                     }
-                } else {
-                    $scope.useDays = 0;
-                    $scope.lefts = 0;
-                    $scope.colorxCart = $scope.colorx.coloursBad;
-                    $scope.statusCart = 'Bad';
-                }
 
-                var costTotal = 0;
-                $scope.costPercent = 0;
-                if (project.CostInfo.length > 0) {
-                    angular.forEach(project.CostInfo, function(cost) {
-                        costTotal += cost.CostAmount;
-                    })
-                    $scope.costPercent = (costTotal / project.BudgetInfo.Budget) * 100;
+                } else {
+                    if (project.ProjectDuration > 0) {
+                        $scope.useDays = project.ProjectDays
+                        $scope.lefts = project.ProjectDuration - $scope.useDays;
+                        $scope.persenDays = ($scope.useDays / project.ProjectDuration) * 100;
+                        if ($scope.persenDays < 30) {
+                            $scope.colorxCart = $scope.colorx.coloursGood;
+                            $scope.statusCart = 'Good';
+                        } else if ($scope.persenDays < 70) {
+                            $scope.colorxCart = $scope.colorx.coloursNormal;
+                            $scope.statusCart = 'Normal';
+                        } else {
+                            $scope.colorxCart = $scope.colorx.coloursBad;
+                            $scope.statusCart = 'Bad';
+                        }
+                    } else {
+                        $scope.useDays = 0;
+                        $scope.lefts = 0;
+                        $scope.colorxCart = $scope.colorx.coloursBad;
+                        $scope.statusCart = 'Bad';
+                    }
                 }
-                $scope.costProgress.push({
-                    name: project.ProjectCode,
-                    progress: $scope.costPercent
-                })
 
                 vm.doughnutChartTime.push({
                     name: project.ProjectCode,
@@ -257,7 +271,20 @@
                     status: $scope.statusCart
                 })
 
-                // Progress Chart
+                // Cost Progress
+                var costTotal = 0;
+                $scope.costPercent = 0;
+                if (project.CostInfo.length > 0) {
+                    angular.forEach(project.CostInfo, function(cost) {
+                        costTotal += cost.CostAmount;
+                    })
+                    $scope.costPercent = (costTotal / project.BudgetInfo.Budget) * 100;
+                }
+                $scope.costProgress.push({
+                        name: project.ProjectCode,
+                        progress: $scope.costPercent
+                    })
+                    // Progress Chart
 
                 // vm.doughnutChartProcess.push({
                 //         name: project.ProjectCode,
@@ -331,18 +358,23 @@
             $scope.scopeOfWorkStatus = true;
         }
 
-        $scope.showConfirm = function(ev, status) {
+        $scope.showConfirmChangeStatus = function(ev, status) {
+
             var projectCode = "";
+            var bool = true;
             if (vm.checked.length > 0) {
                 // Appending dialog to document.body to cover sidenav in docs app
                 for (var i = vm.checked.length - 1; i >= 0; i--) {
-                    if (projectCode == "") {
-                        projectCode = vm.checked[i].ProjectCode + projectCode;
-                    } else if (i == vm.checked.length - 2) {
-                        projectCode = vm.checked[i].ProjectCode + " and " + projectCode;
-                    } else {
-                        projectCode = vm.checked[i].ProjectCode + " , " + projectCode;
+                    if (status != vm.checked[i].ProjectStatus) {
+                        if (projectCode == "") {
+                            projectCode = vm.checked[i].ProjectCode + projectCode;
+                        } else if (i == vm.checked.length - 2) {
+                            projectCode = vm.checked[i].ProjectCode + " and " + projectCode;
+                        } else {
+                            projectCode = vm.checked[i].ProjectCode + " , " + projectCode;
+                        }
                     }
+
                 };
 
                 var confirm = $mdDialog.confirm()
@@ -354,28 +386,98 @@
                     .cancel('Cancel');
 
                 $mdDialog.show(confirm).then(function() {
+
                     console.log('You are sure :)');
-                    angular.forEach(vm.checked, function(project) {
 
-                            project.ProjectStatus = status;
+                    if (status == "Play") {
+                        // vm.selectedProject.ProjectDateTime = new Date('09-15-2016');
+                        vm.selectedProject.ProjectDateTime = new Date();
+                    } else if (vm.selectedProject.ProjectStatus == "Play") {
+                        vm.selectedProject.ProjectDays = parseInt((new Date() - new Date(vm.selectedProject.ProjectDateTime)) / 86400000 + vm.selectedProject.ProjectDays);
+                    }
 
-                            projectService.putProject(project).then(function() {
-                                console.log('update status success');
+                    if (status == "Pass") {
+                        angular.forEach(vm.checked, function(project) {
 
-                                vm.checked = [];
-                            }, function(err) {
-                                console.log('update status fail' + err);
-                            })
+                            if (project.PeriodInfo.length > 0) {
+                                angular.forEach(project.PeriodInfo, function(data) {
+                                    if (data.PeriodStatus != "PERIOD_RECEIPTED") {
+                                        bool = false;
+                                    }
+                                })
+                            } else {
+                                $mdDialog.show(
+                                    $mdDialog.alert()
+                                    // .parent(angular.element(document.querySelector('')))
+                                    .clickOutsideToClose(true)
+                                    .title('Warning!')
+                                    .textContent(project.ProjectCode + 'โปรเจคนี้ยังไม่มีงวดงาน')
+                                    .ariaLabel('Alert Dialog Demo')
+                                    .ok('OK')
+                                    .targetEvent(ev)
+                                );
+
+                                return false;
+                            }
+
+                            if (bool == true) {
+                                project.ProjectStatus = status;
+
+                                projectService.putProject(project).then(function() {
+                                    console.log('update status success');
+
+                                    vm.checked = [];
+                                }, function(err) {
+                                    console.log('update status fail' + err);
+                                })
+                            } else {
+                                $mdDialog.show(
+                                    $mdDialog.alert()
+                                    // .parent(angular.element(document.querySelector('')))
+                                    .clickOutsideToClose(true)
+                                    .title('Warning!')
+                                    .textContent(project.ProjectCode + 'โปรเจคนี้ยังไม่สมบูรณ์')
+                                    .ariaLabel('Alert Dialog Demo')
+                                    .ok('OK')
+                                    .targetEvent(ev)
+                                );
+                            }
                         })
-                        // $rootScope.getProjectData();
+                    } else {
+                        angular.forEach(vm.checked, function(project) {
+
+                            if (bool == true) {
+                                project.ProjectStatus = status;
+
+                                projectService.putProject(project).then(function() {
+                                    console.log('update status success');
+
+                                    vm.checked = [];
+                                }, function(err) {
+                                    console.log('update status fail' + err);
+                                })
+                            } else {
+                                $mdDialog.show(
+                                    $mdDialog.alert()
+                                    // .parent(angular.element(document.querySelector('')))
+                                    .clickOutsideToClose(true)
+                                    .title('Warning!')
+                                    .textContent(project.ProjectCode + 'โปรเจคนี้ยังไม่สมบูรณ์')
+                                    .ariaLabel('Alert Dialog Demo')
+                                    .ok('OK')
+                                    .targetEvent(ev)
+                                );
+                            }
+                        })
+                    }
+
+                    // $rootScope.getProjectData();
                 }, function() {
                     console.log('You are  not sure :(');
                 });
 
             } else {
-                // Appending dialog to document.body to cover sidenav in docs app
-                // Modal dialogs should fully cover application
-                // to prevent interaction outside of dialog
+
                 $mdDialog.show(
                     $mdDialog.alert()
                     // .parent(angular.element(document.querySelector('')))
@@ -389,35 +491,116 @@
             }
 
         }
+
         $scope.changeStatusByProject = function(ev, status) {
 
-            var confirm = $mdDialog.confirm()
-                .title('Are you sure for change status?')
-                .textContent(vm.selectedProject.ProjectCode + ' change status to be "' + status + '"')
-                .ariaLabel('confirm change status project')
-                .targetEvent(ev)
-                .ok('OK')
-                .cancel('Cancel');
+            var checkAllPeriod = true;
+            var PeriodNoSuccess = " ";
+            if (vm.selectedProject.ProjectStatus != status) {
+                if (status == "Pass") {
+                    if (vm.selectedProject.PeriodInfo.length > 0) {
+                        angular.forEach(vm.selectedProject.PeriodInfo, function(period) {
+                            if (period.PeriodStatus != "PERIOD_RECEIPTED") {
+                                checkAllPeriod = false;
+                                PeriodNoSuccess += period.PeriodDesc + ",";
+                            }
+                        });
+                    } else {
+                        $mdDialog.show(
+                            $mdDialog.alert()
+                            // .parent(angular.element(document.querySelector('')))
+                            .clickOutsideToClose(true)
+                            .title('Warning!')
+                            .textContent('โปรเจคนี้ยังไม่มีงวดงาน')
+                            .ariaLabel('Check pass project')
+                            .ok('OK')
+                            .targetEvent(ev)
+                        );
+                        return false;
+                    }
 
-            $mdDialog.show(confirm).then(function() {
-                console.log('You are sure :)');
+                    if (checkAllPeriod == true) {
+                        var confirm = $mdDialog.confirm()
+                            .title('Are you sure for change status?')
+                            .textContent(vm.selectedProject.ProjectCode + ' change status to be "' + status + '"')
+                            .ariaLabel('confirm change status project')
+                            .targetEvent(ev)
+                            .ok('OK')
+                            .cancel('Cancel');
+
+                        $mdDialog.show(confirm).then(function() {
+                            console.log('You are sure :)');
 
 
-                vm.selectedProject.ProjectStatus = status;
+                            vm.selectedProject.ProjectStatus = status;
 
-                projectService.putProject(vm.selectedProject).then(function() {
-                    console.log('update status by project success');
+                            projectService.putProject(vm.selectedProject).then(function() {
+                                console.log('update status by project success');
 
-                    vm.checked = [];
-                }, function(err) {
-                    console.log('update status by project fail' + err);
-                })
+                                vm.checked = [];
+                            }, function(err) {
+                                console.log('update status by project fail' + err);
+                            })
 
-                // $rootScope.getProjectData();
-            }, function() {
-                console.log('You are  not sure :(');
-            });
+                        }, function() {
+                            console.log('You are  not sure :(');
+                        });
+                    } else {
+                        $mdDialog.show(
+                            $mdDialog.alert()
+                            // .parent(angular.element(document.querySelector('')))
+                            .clickOutsideToClose(true)
+                            .title('Warning!')
+                            .textContent('โปรเจคนี้ยังไม่สมบูรณ์ มีงวดงานค้างดังนี้ ' + PeriodNoSuccess)
+                            .ariaLabel('Check pass project')
+                            .ok('OK')
+                            .targetEvent(ev)
+                        );
+                        return false;
+                    }
+
+                } else {
+
+                    var confirm = $mdDialog.confirm()
+                        .title('Are you sure for change status?')
+                        .textContent(vm.selectedProject.ProjectCode + ' change status to be "' + status + '"')
+                        .ariaLabel('confirm change status project')
+                        .targetEvent(ev)
+                        .ok('OK')
+                        .cancel('Cancel');
+
+                    $mdDialog.show(confirm).then(function() {
+                        console.log('You are sure :)');
+
+
+
+
+                        if (status == "Play") {
+                            // vm.selectedProject.ProjectDateTime = new Date('09-15-2016');
+                            vm.selectedProject.ProjectDateTime = new Date();
+                        } else if (vm.selectedProject.ProjectStatus == "Play") {
+                            vm.selectedProject.ProjectDays = parseInt((new Date() - new Date(vm.selectedProject.ProjectDateTime)) / 86400000 + vm.selectedProject.ProjectDays);
+                        }
+
+                        vm.selectedProject.ProjectStatus = status;
+
+                        projectService.putProject(vm.selectedProject).then(function() {
+                            console.log('update status by project success');
+
+                            vm.checked = [];
+                        }, function(err) {
+                            console.log('update status by project fail' + err);
+                        })
+
+                    }, function() {
+                        console.log('You are  not sure :(');
+                    });
+                }
+            }
+
+
         }
+
         $scope.updatePeriod = function(period, e) {
 
             if (period.PeriodStatus == "" || period.PeriodStatus == "PERIOD_SUCCESS") {
@@ -591,7 +774,6 @@
         }
 
         function selectProject(project) {
-
 
             vm.selectedProject = project;
 
@@ -773,6 +955,7 @@
 
             })
         }
+
         $scope.downloadFile = function(file) {
             projectService.downloadFile(file).then(function(response) {
                 window.location.assign(response.config.url);
@@ -937,20 +1120,6 @@
                 clickOutsideToClose: true
             });
         }
-
-        // $scope.replyDialog = function(ev) {
-        //     $mdDialog.show({
-        //         controller: 'NewProjectController',
-        //         controllerAs: 'vm',
-        //         locals: {
-        //             selectedProject: vm.selectedselectedProject
-        //         },
-        //         templateUrl: 'app/main/project/dialogs/new_project/new_project.html',
-        //         parent: angular.element($document.body),
-        //         targetEvent: ev,
-        //         clickOutsideToClose: true
-        //     });
-        // }
 
         function toggleSidenav(sidenavId) {
             $mdSidenav(sidenavId).toggle();

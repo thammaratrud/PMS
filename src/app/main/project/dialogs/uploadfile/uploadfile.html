@@ -27,10 +27,12 @@
                 </div>
             </div>
             <label ng-class="{'file-size' : checkFileSize == true}">Attachments larger than 25MB.</label>
+            <br>
+            <label ng-class="{'file-size' : checkFileType == true}" ng-show="checkFileType">".{{types}} " files are not uploaded.</label>
         </md-dialog-content>
         <md-dialog-actions layout="row" layout-align="space-between center">
             <div layout="row" layout-align="start center">
-                <md-button ng-click="uploadFile()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONENE" ng-disabled="checkFileSize">
+                <md-button ng-click="uploadFile()" class="send-button md-accent md-raised" aria-label="PROJECT.DONE" translate="PROJECT.DONE" translate-attr-aria-label="DPROJECT.DONENE" ng-disabled="checkFileSize || checkFileType">
                     DONE
                 </md-button>
             </div>
