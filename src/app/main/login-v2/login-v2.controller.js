@@ -11,21 +11,21 @@
         $scope.form = {};
 
         $scope.logIn = function() {
+            $location.path('/project');
+            // $scope.loginData = {
+            //     userName: $scope.form.email,
+            //     password: $scope.form.password,
+            //     useRefreshTokens: false
+            // };
 
-            $scope.loginData = {
-                userName: $scope.form.email,
-                password: $scope.form.password,
-                useRefreshTokens: false
-            };
-
-            authService.login($scope.loginData).then(function(response) {
-                    var local = localStorageService.get('authorizationData');
-                    $location.path('/project');
-                },
-                function(err) {
-                    $scope.message = err.error_description;
-                    console.log($scope.message);
-                });
+            // authService.login($scope.loginData).then(function(response) {
+            //         var local = localStorageService.get('authorizationData');
+            //         $location.path('/project');
+            //     },
+            //     function(err) {
+            //         $scope.message = err.error_description;
+            //         console.log($scope.message);
+            //     });
 
         }
     }

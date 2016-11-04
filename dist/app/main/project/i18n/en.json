@@ -7,6 +7,7 @@
         "TEL_ERR": "Tel field is required.",
         "EMAIL_ERR": "Email field is required",
         "EMAIL_VALID": "Email must be a valid e-mail address",
+        "PROJECT_ERR" : "field is required.",
 
         "SEARCH_PLACEHOLDER": "Search for Project",
 
@@ -76,9 +77,10 @@
         "ADDCOST_DATE": "Date",
         "ADDCOST_DETAIL": "Detail",
         "ADDCOST_DESCRIPTION": "Description",
+        "ADDCOST_EMP": "Employee",
 
         "ADDCOST_VAT": "หักภาษี ณ ที่จ่าย",
-        "ADDCOST_AMOUNT": "Amount",
+        "ADDCOST_AMOUNT": "Amount*",
         "ADDCOST_NAME": "Name",
         "ADDCOST_NO": "No.",
         "ADDCOST_ADDRESS": "Address",

@@ -117,7 +117,7 @@
                 "ProjectCode": vm.formWizard.project_code,
                 "ProjectName": vm.formWizard.project_name,
                 "ProjectStatus": "Pause",
-                "ProjectDay": 0,
+                "ProjectDays": 0,
                 "ProjectDuration": vm.formWizard.duration,
                 "ScopeInfo": $scope.scopeOfWorkInfo,
                 "ProjectDateTime": new Date(),

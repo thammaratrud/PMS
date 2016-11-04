@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     angular
@@ -18,10 +18,10 @@
             Name: 'Kanitthakan Jaidee'
 
         }, {
-            EmpID: 2,
-            Name: 'Sarayut Kungsaranuwat'
+                EmpID: 2,
+                Name: 'Sarayut Kungsaranuwat'
 
-        }];
+            }];
 
         $scope.optionType = ['ค่าน้ำมัน', 'ค่าทางด่วน', 'ค่าจอดรถ'];
         $scope.selectName = {};
@@ -33,14 +33,14 @@
         $scope.files;
 
         var warningType = $rootScope.warningType;
-        $scope.$watch('files.length', function(newVal, oldVal) {
+        $scope.$watch('files.length', function (newVal, oldVal) {
             $scope.checkFileSize = false;
             $scope.checkFileType = false;
             if ($scope.files != undefined) {
                 if ($scope.files.length > 0) {
                     var fileType = $scope.files[0].lfFile.name.split('.');
                     $scope.types = fileType[fileType.length - 1];
-                    angular.forEach(warningType, function(e) {
+                    angular.forEach(warningType, function (e) {
                         if ($scope.types == e) {
                             $scope.checkFileType = true;
                         } else {
@@ -69,15 +69,15 @@
 
 
 
-        $scope.onChange = function(cbState) {
+        $scope.onChange = function (cbState) {
             $scope.message = cbState;
 
         };
-        $scope.checkCost = function() {
+        $scope.checkCost = function () {
 
             var costTotal = 0;
             if (select_project.CostInfo.length > 0) {
-                angular.forEach(select_project.CostInfo, function(cost) {
+                angular.forEach(select_project.CostInfo, function (cost) {
                     costTotal += cost.CostAmount;
                 });
                 if (($scope.addCost.CostAmount + costTotal) > select_project.BudgetInfo.Budget) {
@@ -91,43 +91,62 @@
 
         }
 
-        $scope.sendCost = function() {
+        $scope.sendCost = function () {
 
             var fileName = "";
             var formData = new FormData();
             var dateCost = moment($scope.addCost.CostDate).format('YYYYMMDD');
-            angular.forEach($scope.files, function(obj) {
+            angular.forEach($scope.files, function (obj) {
                 var fileType = obj.lfFile.name.split('.');
                 var type = fileType[fileType.length - 1];
                 fileName = select_project.ProjectCode + "_Cost" + dateCost + "(" + angular.fromJson($scope.selectName).EmpID + ")." + type;
                 formData.append('files[]', obj.lfFile, fileName);
             });
 
-            projectService.upLoadFile(formData).then(function(response) {
+            // projectService.upLoadFile(formData).then(function(response) {
 
-                console.log('upload success.' + JSON.stringify(response));
+            //     console.log('upload success.' + JSON.stringify(response));
 
-                var file = fileName;
-                $scope.addCost.ProjectID = select_project.ProjectID;
-                $scope.addCost.CostEmp = angular.fromJson($scope.selectName).Name;
-                $scope.addCost.EmpID = angular.fromJson($scope.selectName).EmpID;
-                $scope.addCost.CostFile = file;
-                $scope.addCost.Created = new Date();
+            //     var file = fileName;
+            //     $scope.addCost.ProjectID = select_project.ProjectID;
+            //     $scope.addCost.CostEmp = angular.fromJson($scope.selectName).Name;
+            //     $scope.addCost.EmpID = angular.fromJson($scope.selectName).EmpID;
+            //     $scope.addCost.CostFile = file;
+            //     $scope.addCost.Created = new Date();
 
-                cost.push($scope.addCost);
+            //     cost.push($scope.addCost);
 
-                select_project.CostInfo = cost;
+            //     select_project.CostInfo = cost;
 
-                projectService.putProject(select_project).then(function() {
-                    console.log('Update cost success.');
-                    $rootScope.chart_progress();
-                    $rootScope.reloadCost();
-                    $rootScope.getFileList();
-                }, function(err) {
-                    console.log('Update cost fail.');
-                })
-            }, function(err) {
-                console.log('upload error.' + JSON.stringify(err));
+            //     projectService.putProject(select_project).then(function() {
+            //         console.log('Update cost success.');
+            //         $rootScope.chart_progress();
+            //         $rootScope.reloadCost();
+            //         $rootScope.getFileList();
+            //     }, function(err) {
+            //         console.log('Update cost fail.');
+            //     })
+            // }, function(err) {
+            //     console.log('upload error.' + JSON.stringify(err));
+            // })
+
+            $scope.addCost.ProjectID = select_project.ProjectID;
+            $scope.addCost.CostEmp = angular.fromJson($scope.selectName).Name;
+            $scope.addCost.EmpID = angular.fromJson($scope.selectName).EmpID;
+            // $scope.addCost.CostFile = file;
+            $scope.addCost.Created = new Date();
+
+            cost.push($scope.addCost);
+
+            select_project.CostInfo = cost;
+
+            projectService.putProject(select_project).then(function () {
+                console.log('Update cost success.');
+                $rootScope.chart_progress();
+                $rootScope.reloadCost();
+                $rootScope.getFileList();
+            }, function (err) {
+                console.log('Update cost fail.');
             })
 
             $scope.selectName = {};

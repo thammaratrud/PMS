@@ -178,8 +178,8 @@
         var api = {};
 
         // Base Url
-        api.baseUrl = 'http://localhost:5145/';
-
+        // api.baseUrl = 'http://localhost:5145/';
+        api.baseUrl = 'http://localhost:2020/';
         // api.sample = $resource(api.baseUrl + 'sample/sample.json');
 
         return api;

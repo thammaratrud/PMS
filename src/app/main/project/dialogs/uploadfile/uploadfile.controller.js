@@ -56,17 +56,19 @@
 
             });
 
-            projectService.upLoadFile(formData).then(function(response) {
+            // projectService.upLoadFile(formData).then(function(response) {
 
-                console.log('upload success.' + JSON.stringify(response));
-                $rootScope.getFileList();
-                closeDialog();
+            //     console.log('upload success.' + JSON.stringify(response));
+            //     $rootScope.getFileList();
+            //     closeDialog();
 
-            }, function(err) {
+            // }, function(err) {
 
-                console.log('upload error.' + JSON.stringify(err));
+            //     console.log('upload error.' + JSON.stringify(err));
 
-            })
+            // })
+
+            closeDialog();
 
 
         }
